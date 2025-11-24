@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Essentials Hub</title>
+  <style>
+    :root{
+      --bg1:#0d111b;
+      --bg2:#0b1526;
+      --card:#111827;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --accent:#6366f1;
+      --accent2:#4cc1ff;
+      --radius:12px;
+      font-family:Inter, system-ui, sans-serif;
+    }
+    body{
+      margin:0;
+      padding:0;
+      background: radial-gradient(900px 600px at 80% 10%, rgba(76,193,255,0.08), transparent),
+                  linear-gradient(180deg, var(--bg1), var(--bg2));
+      color:var(--text);
+    }
+    header{
+      background:rgba(255,255,255,0.02);
+      backdrop-filter:blur(8px);
+      color:var(--text);
+      text-align:center;
+      padding:22px;
+      font-size:28px;
+      font-weight:700;
+      border-bottom:1px solid rgba(255,255,255,0.05);
+    }
+    .tagline{text-align:center;font-size:18px;margin-top:5px;color:var(--muted);}
+
+    section{padding:20px;max-width:900px;margin:auto;}
+    h2{color:var(--accent2);border-left:4px solid var(--accent2);padding-left:10px;}
+
+    .pricing-table,.order-box{
+      background:var(--card);
+      padding:20px;
+      border-radius:var(--radius);
+      box-shadow:0 0 25px rgba(0,0,0,0.35);
+      border:1px solid rgba(255,255,255,0.05);
+    }
+
+    .service-list p,.pricing-table p{margin:6px 0;color:var(--muted)}
+
+    label{font-weight:600;color:var(--text);}    
+
+    input,select,textarea{
+      width:100%;padding:10px;margin-top:8px;margin-bottom:14px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.08);
+      color:var(--text);
+      border-radius:8px;
+    }
+
+    button{
+      width:100%;padding:12px;border-radius:8px;border:none;
+      background:linear-gradient(90deg,var(--accent),#5f7bff);
+      color:white;font-weight:700;font-size:16px;cursor:pointer;
+      box-shadow:0 4px 15px rgba(99,102,241,0.4);
+    }
+    button:hover{opacity:0.92;}
+
+    .total-row{display:flex;gap:12px;align-items:center}
+    .total-row .label{color:var(--muted)}
+    .total-amount{font-size:1.6rem;font-weight:800;color:var(--text)}
+
+    footer{
+      text-align:center;padding:22px;margin-top:20px;color:var(--muted);
+      border-top:1px solid rgba(255,255,255,0.05);
+      background:rgba(255,255,255,0.02);
+      backdrop-filter:blur(6px);
+    }
+  </style>
+</head>
+<body>
+  <header>✨Essentials Hub • NewVerse Services✨</header>
+  <p class="tagline">Your One‑Stop for Printing, Coding, and Project Help! Affordable Services for College Students.</p>
+
+  <section>
+    <h2>Our Services</h2>
+    <div class="service-list">
+      <p>🖨️ <b>Printing Services:</b> B/W Print, Color Print, Binding, Lamination, etc.</p>
+      <p>💻 <b>Coding Help:</b> Quick Fixes, Guidance, Code Cleanup.</p>
+      <p>📦 <b>Project Kits:</b> Mini to Full Bundles with Code, PPT, and Reports.</p>
+      <p>📝 <b>Assignment Support:</b> Formatting, PDF Conversion, Scanning.</p>
+      <p>🚚 <b>Delivery:</b> On-Campus Delivery Available.</p>
+    </div>
+
+    <h2>Pricing</h2>
+    <div class="pricing-table">
+      <h3>Printing Services</h3>
+      <p>B/W Print (Single): ₹2/page</p>
+      <p>B/W Print (Double): ₹3/sheet</p>
+      <p>Color Print: ₹10/page</p>
+      <p>Spiral Binding: ₹40</p>
+      <p>Lamination: ₹20</p>
+      <p>Formatting: ₹20–₹50</p>
+      <p>Scanning: ₹5/page</p>
+
+      <h3>Coding Help</h3>
+      <p>Quick Fix: ₹30–₹50</p>
+      <p>30‑Min Guidance: ₹50</p>
+      <p>1 Hour Coding Support: ₹100</p>
+      <p>Code Cleanup: ₹50–₹150</p>
+
+      <h3>Project Kits</h3>
+      <p>Mini Project: ₹200–₹300</p>
+      <p>Intermediate: ₹400–₹600</p>
+      <p>Full Bundle: ₹800–₹1200</p>
+      <p>Report Typing: ₹80–₹150</p>
+      <p>PPT: ₹50–₹100</p>
+
+      <h3>Assignment Support</h3>
+      <p>Formatting: ₹20–₹50</p>
+      <p>PDF Conversion: ₹10</p>
+      <p>Scanning: ₹5/page</p>
+
+      <h3>Delivery</h3>
+      <p>On‑Campus: ₹10–₹20</p>
+    </div>
+
+
+<div class="order-box">
+      <h2>Order Now - Select Your Options</h2>
+      <label>Select Service:</label>
+      <select id="service">
+        <option value="">Choose...</option>
+        
+        <option value="bw_single" data-type="per_page" data-min="2" data-max="2">B/W Print (Single) — ₹2/page</option>
+        <option value="bw_double" data-type="per_page" data-min="3" data-max="3">B/W Print (Double) — ₹3/sheet</option>
+        <option value="color_print" data-type="per_page" data-min="10" data-max="10">Color Print — ₹10/page</option>
+        <option value="spiral" data-type="flat" data-min="40" data-max="40">Spiral Binding — ₹40</option>
+        <option value="lamination" data-type="flat" data-min="20" data-max="20">Lamination — ₹20</option>
+        <option value="formatting_print" data-type="per_page" data-min="20" data-max="50">Formatting — ₹20–₹50</option>
+        <option value="scanning_print" data-type="per_page" data-min="5" data-max="5">Scanning — ₹5/page</option>
+
+        <option value="quick_fix" data-type="flat" data-min="30" data-max="50">Quick Fix — ₹30–₹50</option>
+        <option value="guidance_30" data-type="flat" data-min="50" data-max="50">30‑Min Guidance — ₹50</option>
+        <option value="coding_1hr" data-type="flat" data-min="100" data-max="100">1 Hour Coding Support — ₹100</option>
+        <option value="code_cleanup" data-type="flat" data-min="50" data-max="150">Code Cleanup — ₹50–₹150</option>
+
+        <option value="mini_project" data-type="flat" data-min="200" data-max="300">Mini Project — ₹200–₹300</option>
+        <option value="intermediate_project" data-type="flat" data-min="400" data-max="600">Intermediate — ₹400–₹600</option>
+        <option value="full_bundle" data-type="flat" data-min="800" data-max="1200">Full Bundle — ₹800–₹1200</option>
+        <option value="report_typing" data-type="per_page" data-min="80" data-max="150">Report Typing — ₹80–₹150</option>
+        <option value="ppt" data-type="flat" data-min="50" data-max="100">PPT — ₹50–₹100</option>
+
+        <option value="assign_formatting" data-type="per_page" data-min="20" data-max="50">Formatting — ₹20–₹50</option>
+        <option value="pdf_conversion" data-type="flat" data-min="10" data-max="10">PDF Conversion — ₹10</option>
+        <option value="assign_scanning" data-type="per_page" data-min="5" data-max="5">Scanning — ₹5/page</option>
+
+        <option value="delivery" data-type="flat" data-min="10" data-max="20">On‑Campus Delivery — ₹10–₹20</option>
+      </select>
+
+      <label>Quantity/Pages/Hours:</label>
+      <input type="number" id="quantity" value="1" min="1" />
+
+      <label>Additional Notes (e.g., language for coding):</label>
+      <textarea id="notes" placeholder="Optional"></textarea>
+
+      <div class="total-row">
+        <div class="label">Estimated total:</div>
+        <div class="total-amount">₹<span id="total">0</span></div>
+      </div>
+
+      <button id="calcBtn">Calculate Total</button>
+      <br><br>
+      <button id="waOrder">Order via WhatsApp</button>
+</div>
+
+<h2>Contact Us</h2>
+    <p><b>Phone:</b> +91 99786 51150 | +91 91040 63798 | +91 85113 67564</p>
+    <p>For direct orders: <b>WhatsApp Us</b></p>
+  </section>
+
+  <footer>© 2025 Essentials Hub</footer>
+
+  <script>
+    // Price calculation respecting min/max ranges and per_page vs flat
+    const serviceEl = document.getElementById('service');
+    const qtyEl = document.getElementById('quantity');
+    const totalEl = document.getElementById('total');
+    const notesEl = document.getElementById('notes');
+    const calcBtn = document.getElementById('calcBtn');
+    const waBtn = document.getElementById('waOrder');
+
+    function calculate(){
+      const opt = serviceEl.selectedOptions[0];
+      if(!opt || !opt.value) return {min:0,max:0};
+
+      const min = Number(opt.dataset.min||0);
+      const max = Number(opt.dataset.max||min);
+      const type = opt.dataset.type || 'flat';
+      let qty = Number(qtyEl.value) || 1;
+      if(qty<1) qty=1;
+
+      let minTotal = 0, maxTotal = 0;
+      if(type === 'per_page'){
+        minTotal = min * qty;
+        maxTotal = max * qty;
+      } else {
+        // flat item; qty multiplies if user selects multiple
+        minTotal = min * qty;
+        maxTotal = max * qty;
+      }
+      return {min: minTotal, max: maxTotal};
+    }
+
+    function displayTotal(){
+      const t = calculate();
+      if(t.min === t.max){
+        totalEl.textContent = t.min;
+      } else {
+        totalEl.textContent = `${t.min} – ${t.max}`;
+      }
+      return t;
+    }
+
+    calcBtn.addEventListener('click', (e)=>{ e.preventDefault(); displayTotal(); });
+    [serviceEl, qtyEl].forEach(el => el.addEventListener('change', displayTotal));
+
+    // Helper to open URL with fallback
+    function openUrlFallback(url){
+      try{
+        const win = window.open(url, '_blank');
+        // some browsers may return null or block—use href fallback
+        if(!win){ window.location.href = url; }
+      } catch(e){ window.location.href = url; }
+    }
+
+    waBtn.addEventListener('click',(e)=>{
+      e.preventDefault();
+      const t = calculate();
+      if(t.min===0 && t.max===0){ alert('Please select a service'); return; }
+      const opt = serviceEl.selectedOptions[0].textContent.trim();
+      const qty = qtyEl.value;
+      const notes = (notesEl.value || 'None').trim();
+      const totalText = (t.min===t.max) ? `₹${t.min}` : `₹${t.min} – ₹${t.max}`;
+
+      // Build plain message then encode
+      const plainMsg = `Hello Student Essentials Hub,
+I want to place an order:
+- Service: ${opt}
+- Quantity/Pages/Hours: ${qty}
+- Notes: ${notes}
+- Estimated Total: ${totalText}
+
+Please confirm next steps.`;
+      const encoded = encodeURIComponent(plainMsg);
+
+      // Use the preferred WhatsApp number (choose whichever you want)
+      const phone = '918511367564'; // fallback primary
+
+      // Two URL formats for compatibility
+      const url1 = `https://wa.me/${phone}?text=${encoded}`;
+      const url2 = `https://api.whatsapp.com/send?phone=${phone}&text=${encoded}`;
+
+      // Try opening one; if it fails browser will handle fallback to href
+      openUrlFallback(url1);
+
+      // As an extra safety: if after 1.2s we're still on the same page, try the api endpoint
+      setTimeout(()=>{
+        // If current URL still same origin (user didn't navigate), try second link
+        if(window.location.href.indexOf('wa.me') === -1 && window.location.href.indexOf('api.whatsapp.com') === -1){
+          openUrlFallback(url2);
+        }
+      },1200);
+    });
+
+    // initial calc
+    displayTotal();
+  </script>
+</body>
+</html>
