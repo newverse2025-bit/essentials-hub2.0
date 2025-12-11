@@ -9,7 +9,6 @@
   --bg1:#0d111b; --bg2:#0b1526; --card:#0f1724;
   --text:#e5e7eb; --muted:#9ca3af; --accent:#6366f1; --accent2:#4cc1ff;
   --radius:12px; font-family:Inter, system-ui, sans-serif;
-  --delivery-fee:15; /* change this to change delivery checkbox fee */
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -96,6 +95,7 @@ button{ display:inline-block; padding:10px 14px; border-radius:10px; border:0; c
 @media (max-width:720px){ .row-inline{ flex-direction:column; align-items:flex-start } }
 
 footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; border-top:1px solid rgba(255,255,255,0.04); }
+.small-muted{ font-size:12px; color:var(--muted); margin-top:6px; }
 </style>
 </head>
 <body>
@@ -154,7 +154,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
         <p><strong>Data Entry / Excel Work: ₹200/hour</strong><br><span class="small-note">Data cleaning, sheet preparation.</span></p>
         <p><strong>Form Filling / College Forms: ₹100</strong><br><span class="small-note">Help filling application forms correctly.</span></p>
         <p><strong>MCQ / Small Assignment Help: ₹100</strong><br><span class="small-note">Solution assistance for small assignment pieces (tutoring style).</span></p>
-        <p><strong>On-Campus Delivery: ₹10–₹20</strong><br><span class="small-note">Fast delivery within campus. (Checkbox used for requests; free for printing orders ≥ 20 pages)</span></p>
+        <p class="small-muted">Delivery fees: Printing orders — ₹5 (free if pages ≥ 20). Flat services — ₹15 (free for students from Government Polytechnic Ahmedabad).</p>
       </div>
     </div>
   </div>
@@ -227,23 +227,18 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
 
       <div>
         <input id="addDelivery" type="checkbox" style="width:18px;height:18px;cursor:pointer;">
-        <label for="addDelivery" style="margin:0;cursor:pointer;">On-Campus Delivery (₹<span id="deliveryFeeDisplay"></span> — FREE for printing orders ≥ 20 pages)</label>
+        <label for="addDelivery" style="margin:0;cursor:pointer;">
+          On-Campus Delivery (Printing fee ₹5 — FREE if pages ≥ 20; Flat services ₹15 — FREE for Government Polytechnic Ahmedabad)
+        </label>
       </div>
     </div>
-    <p class="small-note" id="extras-note">Extras are available for printing/report-typing/scanning services. Check delivery to request on-campus delivery (fee auto-waived for printing orders ≥ 20 pages).</p>
+    <p class="small-note" id="extras-note">Check delivery, then type your college name below. The special college name grants free delivery for flat services.</p>
 
-    <!-- College selector (hidden until delivery checked) -->
+    <!-- College text input (shown only when delivery checkbox checked) -->
     <div id="collegeBlock" style="display:none; margin-top:8px;">
-      <label for="collegeSelect">Which college are you in?</label>
-      <select id="collegeSelect">
-        <option value="">Select your college...</option>
-        <option>College of Engineering</option>
-        <option>Government Arts & Science</option>
-        <option>Commerce College</option>
-        <option>Institute of Technology</option>
-        <option value="Other">Other (type below)</option>
-      </select>
-      <input id="collegeOther" type="text" placeholder="If Other — type your college name here" style="display:none;" />
+      <label for="collegeName">Type your college name</label>
+      <input id="collegeName" type="text" placeholder="e.g., Government Polytechnic Ahmedabad" />
+      <div class="small-note">Tip: For free-flat-service rule type exactly "Government Polytechnic Ahmedabad" (case-insensitive).</div>
     </div>
 
     <label for="notes">Additional Notes</label>
@@ -271,7 +266,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
 
 <script>
 (() => {
-  // elems
+  // elements
   const serviceEl = document.getElementById('service');
   const qtyEl = document.getElementById('quantity');
   const totalEl = document.getElementById('total');
@@ -285,14 +280,15 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
   const orderIdNote = document.getElementById('order-id-note');
   const errorBanner = document.getElementById('errorBanner');
   const collegeBlock = document.getElementById('collegeBlock');
-  const collegeSelect = document.getElementById('collegeSelect');
-  const collegeOther = document.getElementById('collegeOther');
-  const deliveryFeeDisplay = document.getElementById('deliveryFeeDisplay');
+  const collegeNameInput = document.getElementById('collegeName');
   const yearEl = document.getElementById('year');
   if(yearEl) yearEl.textContent = new Date().getFullYear();
 
-  const DELIVERY_FEE = Number(getComputedStyle(document.documentElement).getPropertyValue('--delivery-fee')) || 15;
-  if(deliveryFeeDisplay) deliveryFeeDisplay.textContent = DELIVERY_FEE;
+  // fees & rules
+  const PRINT_DELIVERY_FEE = 5;   // printing delivery when not free
+  const FLAT_DELIVERY_FEE = 15;   // flat services delivery default
+  const FREE_PRINT_THRESHOLD = 20; // printing pages >= this => delivery free
+  const SPECIAL_COLLEGE = 'government polytechnic ahmedabad'; // lowercase for comparison
 
   function safeNumber(x, fallback=0){
     const n = Number(x);
@@ -311,7 +307,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
   }
   function clearError(){ if(errorBanner) errorBanner.style.display = 'none'; }
 
-  // enable/disable extras (spiral/folder) for non-print services
+  // enable/disable extras depending on selected service
   function updateExtrasAvailability(){
     const opt = getSelectedOption();
     const printing = isPrintingService(opt);
@@ -321,29 +317,31 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
     if(note) note.style.opacity = printing ? '1' : '0.95';
   }
 
-  // show college block when delivery requested
+  // show/hide college text input when delivery selected
   function updateCollegeBlock(){
     if(deliveryBox && deliveryBox.checked){
       collegeBlock.style.display = 'block';
     } else {
       collegeBlock.style.display = 'none';
-      if(collegeSelect) collegeSelect.value = '';
-      if(collegeOther){ collegeOther.value = ''; collegeOther.style.display = 'none'; }
+      if(collegeNameInput) collegeNameInput.value = '';
     }
   }
-  if(collegeSelect){
-    collegeSelect.addEventListener('change', () => {
-      if(collegeSelect.value === 'Other'){ collegeOther.style.display = 'block'; collegeOther.focus(); }
-      else { collegeOther.style.display = 'none'; }
-    });
+
+  // get typed college name (lowercase trimmed)
+  function getEnteredCollegeLower(){
+    if(!collegeNameInput) return '';
+    return (collegeNameInput.value || '').trim().toLowerCase();
+  }
+  function isSpecialCollege(colLower){
+    return String(colLower || '').trim().toLowerCase() === SPECIAL_COLLEGE;
   }
 
-  // core calculation (delivery free if printing service AND qty >= 20 AND delivery checkbox checked)
+  // calculate totals and delivery fee logic
   function calculate(){
     try{
       clearError();
       const opt = getSelectedOption();
-      if(!opt || !opt.value) return {min:0,max:0,violatesMinQty:false};
+      if(!opt || !opt.value) return {min:0,max:0,violatesMinQty:false,deliveryFee:0,freeDelivery:false};
 
       const dmin = opt.dataset.min ?? opt.getAttribute('data-min') ?? '0';
       const dmax = opt.dataset.max ?? opt.getAttribute('data-max') ?? dmin;
@@ -358,38 +356,60 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
         if(type === 'per_page') qty = Math.floor(qty);
       }
 
-      // enforce min qty if provided
+      // min-qty enforcement
       const rawMinQty = opt.dataset.minQty ?? opt.getAttribute('data-min-qty') ?? opt.dataset.minqty ?? opt.getAttribute('data-minqty');
       const minQty = (rawMinQty !== undefined && rawMinQty !== null) ? Math.max(1, Math.floor(safeNumber(rawMinQty,1))) : 1;
       if(qty < minQty){
-        return {min:0, max:0, violatesMinQty:true, minQtyRequired:minQty};
+        return {min:0, max:0, violatesMinQty:true, minQtyRequired:minQty, deliveryFee:0, freeDelivery:false};
       }
 
       let minTotal = (type === 'per_page') ? min * qty : min * qty;
       let maxTotal = (type === 'per_page') ? max * qty : max * qty;
 
+      // extras
       if(spiralBox && spiralBox.checked){ minTotal += 20; maxTotal += 20; }
       if(folderBox && folderBox.checked){ minTotal += 30; maxTotal += 30; }
 
-      // Delivery logic (Option A): FREE if printing service AND qty >= 20
-      const printing = isPrintingService(opt);
-      const qualifiesForFreeDelivery = printing && qty >= 20;
+      // delivery logic:
+      // if delivery box not checked => deliveryFee 0
+      // if checked:
+      // - printing service: free if qty >= FREE_PRINT_THRESHOLD, else PRINT_DELIVERY_FEE
+      // - flat service: free if typed college matches special, else FLAT_DELIVERY_FEE
+      let deliveryFee = 0;
+      let freeDelivery = false;
       if(deliveryBox && deliveryBox.checked){
-        if(!qualifiesForFreeDelivery){
-          minTotal += DELIVERY_FEE;
-          maxTotal += DELIVERY_FEE;
+        const printing = isPrintingService(opt);
+        const collegeLower = getEnteredCollegeLower();
+        const special = isSpecialCollege(collegeLower);
+
+        if(printing){
+          if(qty >= FREE_PRINT_THRESHOLD){
+            deliveryFee = 0;
+            freeDelivery = true;
+          } else {
+            deliveryFee = PRINT_DELIVERY_FEE;
+          }
         } else {
-          // free → add 0
+          if(special){
+            deliveryFee = 0;
+            freeDelivery = true;
+          } else {
+            deliveryFee = FLAT_DELIVERY_FEE;
+          }
         }
       }
 
+      minTotal += deliveryFee;
+      maxTotal += deliveryFee;
+
       minTotal = safeNumber(minTotal, 0);
       maxTotal = safeNumber(maxTotal, minTotal);
-      return {min:minTotal, max:maxTotal, violatesMinQty:false, freeDelivery: qualifiesForFreeDelivery};
+
+      return {min:minTotal, max:maxTotal, violatesMinQty:false, deliveryFee, freeDelivery};
     } catch(err){
       console.error('Calculation error', err);
       showError('An unexpected error occurred while calculating. Try reloading the page.');
-      return {min:0,max:0,violatesMinQty:false, freeDelivery:false};
+      return {min:0,max:0,violatesMinQty:false,deliveryFee:0,freeDelivery:false};
     }
   }
 
@@ -426,6 +446,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
   if(spiralBox) spiralBox.addEventListener('change', () => { displayTotal(); });
   if(folderBox) folderBox.addEventListener('change', () => { displayTotal(); });
   if(deliveryBox) deliveryBox.addEventListener('change', () => { updateCollegeBlock(); displayTotal(); });
+  if(collegeNameInput) collegeNameInput.addEventListener('input', () => { displayTotal(); });
 
   function openUrlFallback(url){
     try{
@@ -452,19 +473,15 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
       }
 
       // delivery college validation
-      let collegeText = '';
+      let collegeTextDisplay = '';
       if(deliveryBox && deliveryBox.checked){
-        if(collegeSelect && !collegeSelect.value){
-          alert('Please select your college for on-campus delivery.');
-          collegeSelect.focus();
+        const typed = (collegeNameInput && collegeNameInput.value) ? collegeNameInput.value.trim() : '';
+        if(!typed){
+          alert('Please type your college name for on-campus delivery.');
+          collegeNameInput.focus();
           return;
         }
-        collegeText = (collegeSelect.value === 'Other') ? (collegeOther.value || '').trim() : collegeSelect.value;
-        if(!collegeText){
-          alert('Please type your college name in the "Other" field.');
-          collegeOther.focus();
-          return;
-        }
+        collegeTextDisplay = typed;
       }
 
       const orderId = generateOrderId();
@@ -474,7 +491,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
       const spiral = (spiralBox && spiralBox.checked) ? 'Yes' : 'No';
       const folder = (folderBox && folderBox.checked) ? 'Yes' : 'No';
       const deliveryChecked = (deliveryBox && deliveryBox.checked) ? 'Yes' : 'No';
-      const deliveryStatusText = (t.freeDelivery && deliveryChecked) ? 'FREE' : (deliveryChecked ? `₹${DELIVERY_FEE}` : 'No');
+      const deliveryStatusText = (t.freeDelivery && deliveryChecked) ? 'FREE' : (deliveryChecked ? `₹${t.deliveryFee}` : 'No');
       const totalText = (t.min === t.max) ? `₹${formatINR(t.min)}` : `₹${formatINR(t.min)} – ₹${formatINR(t.max)}`;
 
       const plainMsg = [
@@ -486,7 +503,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
         `- Spiral Binding: ${spiral}`,
         `- File / Folder: ${folder}`,
         `- On-Campus Delivery (checkbox): ${deliveryChecked} (${deliveryStatusText})`,
-        `- College: ${collegeText || '—'}`,
+        `- College: ${collegeTextDisplay || '—'}`,
         `- Notes: ${notes}`,
         `- Estimated Total: ${totalText}`,
         '',
@@ -506,7 +523,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
     }
   });
 
-  // invoice generator (reflects FREE if eligible)
+  // invoice
   if(downloadBtn) downloadBtn.addEventListener('click', (e) => {
     e.preventDefault();
     try{
@@ -522,19 +539,15 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
       }
 
       // delivery validation
-      let collegeText = '';
+      let collegeTextDisplay = '';
       if(deliveryBox && deliveryBox.checked){
-        if(collegeSelect && !collegeSelect.value){
-          alert('Please select your college for on-campus delivery.');
-          collegeSelect.focus();
+        const typed = (collegeNameInput && collegeNameInput.value) ? collegeNameInput.value.trim() : '';
+        if(!typed){
+          alert('Please type your college name for on-campus delivery.');
+          collegeNameInput.focus();
           return;
         }
-        collegeText = (collegeSelect.value === 'Other') ? (collegeOther.value || '').trim() : collegeSelect.value;
-        if(!collegeText){
-          alert('Please type your college name in the "Other" field.');
-          collegeOther.focus();
-          return;
-        }
+        collegeTextDisplay = typed;
       }
 
       const orderId = generateOrderId();
@@ -544,7 +557,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
       const spiral = (spiralBox && spiralBox.checked) ? 'Yes' : 'No';
       const folder = (folderBox && folderBox.checked) ? 'Yes' : 'No';
       const deliveryChecked = (deliveryBox && deliveryBox.checked) ? 'Yes' : 'No';
-      const deliveryStatusText = (t.freeDelivery && deliveryChecked) ? 'FREE' : (deliveryChecked ? `₹${DELIVERY_FEE}` : '₹0');
+      const deliveryStatusText = (t.freeDelivery && deliveryChecked) ? 'FREE' : (deliveryChecked ? `₹${t.deliveryFee}` : '₹0');
       const totalText = (t.min === t.max) ? `₹${formatINR(t.min)}` : `₹${formatINR(t.min)} – ₹${formatINR(t.max)}`;
 
       const invoiceHtml = `
@@ -564,7 +577,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
       <tr><td>On-Campus Delivery</td><td>${deliveryChecked === 'Yes' ? 1 : 0}</td><td>${deliveryStatusText}</td></tr>
       </tbody></table>
       <div class="total">Estimated Total: <span>${totalText}</span></div>
-      <div class="small">College: ${collegeText || '—'}</div>
+      <div class="small">College: ${collegeTextDisplay || '—'}</div>
       <div class="small">Notes: ${notes}</div>
       <div class="center"><button onclick="window.print()">Print / Save PDF</button></div>
       </div></body></html>
