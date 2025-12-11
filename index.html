@@ -43,6 +43,8 @@ button{ display:inline-block; padding:10px 14px; border-radius:10px; border:0; c
 .total-amount{ font-size:1.2rem; font-weight:800; color:var(--text); }
 .error-banner{ background:#2b0a0a; color:#ffd6d6; padding:10px; border-radius:8px; margin-bottom:12px; display:none; }
 footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; border-top:1px solid rgba(255,255,255,0.04); }
+.table-grid{ display:grid; grid-template-columns:1fr; gap:8px; }
+@media(min-width:880px){ .table-grid{ grid-template-columns:repeat(2,1fr); } }
 @media (max-width:720px){ .row-inline{ flex-direction:column; align-items:flex-start } }
 </style>
 </head>
@@ -54,9 +56,62 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
   <div id="errorBanner" class="error-banner" role="alert"></div>
 
   <div class="pricing-table">
-    <h2>Pricing (Highlights)</h2>
-    <p>B/W Single: ₹3/page · B/W Double: ₹4/sheet · Color: ₹10/page</p>
-    <p>Spiral binding (add-on): ₹20 · File/Folder (add-on): ₹30 · Lamination: ₹20</p>
+    <h2>Pricing (Complete list with short descriptions)</h2>
+    <div class="table-grid">
+      <!-- Printing -->
+      <div>
+        <h3>Printing & Binding</h3>
+        <p><strong>B/W Print (Single): ₹3/page</strong><br><span class="small-note">Standard single-sided black & white printing (min 6 pages).</span></p>
+        <p><strong>B/W Print (Double): ₹4/sheet</strong><br><span class="small-note">Double-sided economical printing (min 6 sheets).</span></p>
+        <p><strong>Color Print: ₹10/page</strong><br><span class="small-note">Full-color pages for reports, posters or images.</span></p>
+        <p><strong>Poster Printing: ₹20/page</strong><br><span class="small-note">Large-format poster prints (A3+ style).</span></p>
+        <p><strong>Spiral Binding (add-on): ₹20</strong><br><span class="small-note">Neat spiral binding for reports and notes (flat add-on).</span></p>
+        <p><strong>Folder / Cover: ₹30</strong><br><span class="small-note">Cardboard soft cover for project submissions.</span></p>
+      </div>
+
+      <!-- Digital / Small services -->
+      <div>
+        <h3>Digital & Small Services</h3>
+        <p><strong>Resume / CV Design: ₹150</strong><br><span class="small-note">Formatted, professional resume in Word & PDF.</span></p>
+        <p><strong>Notes PDF (digital): ₹30</strong><br><span class="small-note">Well-formatted notes in PDF (per topic/file).</span></p>
+        <p><strong>USB Transfer: ₹50</strong><br><span class="small-note">Copy files to USB / collect files from USB.</span></p>
+        <p><strong>ID Card Printing: ₹15/unit</strong><br><span class="small-note">Single-sided ID card prints with lamination.</span></p>
+      </div>
+
+      <!-- Design & media -->
+      <div>
+        <h3>Design & Media</h3>
+        <p><strong>Social Post Design: ₹200</strong><br><span class="small-note">Instagram/Facebook post design (1 design).</span></p>
+        <p><strong>Logo Design: ₹500</strong><br><span class="small-note">Simple logo concepts and 1 round of revision.</span></p>
+        <p><strong>Project Explanation Video: ₹1000</strong><br><span class="small-note">Short recorded explanation/demo video for projects.</span></p>
+      </div>
+
+      <!-- Coding / Projects -->
+      <div>
+        <h3>Coding & Project Kits</h3>
+        <p><strong>Quick Fix: ₹30–₹50</strong><br><span class="small-note">Small bug fixes or debugging help.</span></p>
+        <p><strong>30-Min Guidance: ₹50</strong><br><span class="small-note">Short mentoring session (30 minutes).</span></p>
+        <p><strong>1 Hour Coding Support: ₹100</strong><br><span class="small-note">Hands-on coding help / tutoring.</span></p>
+        <p><strong>Code Cleanup: ₹50–₹150</strong><br><span class="small-note">Refactor & comment code for clarity.</span></p>
+        <p><strong>Mini Project: ₹200–₹300</strong><br><span class="small-note">Small project deliverable with code + report.</span></p>
+        <p><strong>Intermediate Project: ₹400–₹600</strong></p>
+        <p><strong>Full Bundle: ₹800–₹1200</strong><br><span class="small-note">Complete package: code, PPT and report.</span></p>
+      </div>
+
+      <!-- Assignments & other -->
+      <div>
+        <h3>Assignment & Support</h3>
+        <p><strong>Report Typing: ₹80–₹150</strong><br><span class="small-note">Typing long reports, formatting, headers/TOC.</span></p>
+        <p><strong>PPT Creation: ₹50–₹100</strong><br><span class="small-note">Slide deck from notes or report.</span></p>
+        <p><strong>Assignment Formatting: ₹20–₹50</strong><br><span class="small-note">Formatting to college template.</span></p>
+        <p><strong>PDF Conversion: ₹10</strong><br><span class="small-note">Word → PDF / Scanned images → PDF.</span></p>
+        <p><strong>Scanning: ₹5/page</strong><br><span class="small-note">High-quality scanned pages.</span></p>
+        <p><strong>Data Entry / Excel Work: ₹200/hour</strong><br><span class="small-note">Data cleaning, sheet preparation.</span></p>
+        <p><strong>Form Filling / College Forms: ₹100</strong><br><span class="small-note">Help filling application forms correctly.</span></p>
+        <p><strong>MCQ / Small Assignment Help: ₹100</strong><br><span class="small-note">Solution assistance for small assignment pieces (tutoring style).</span></p>
+        <p><strong>On-Campus Delivery: ₹10–₹20</strong><br><span class="small-note">Fast delivery within campus.</span></p>
+      </div>
+    </div>
   </div>
 
   <div class="order-box">
@@ -72,7 +127,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
       <option value="color_print" data-type="per_page" data-min="10" data-max="10">Color Print — ₹10/page</option>
       <option value="poster_print" data-type="per_page" data-min="20" data-max="20">Poster Printing — ₹20/page</option>
       <option value="id_card" data-type="flat" data-min="15" data-max="15">ID Card Printing — ₹15/unit</option>
-      <!-- FOLDER REMOVED from dropdown -->
+      <!-- removed folder option from dropdown on purpose -->
 
       <!-- Digital / Design -->
       <option value="notes_pdf" data-type="flat" data-min="30" data-max="30">Notes PDF (digital) — ₹30</option>
@@ -204,6 +259,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
       const opt = getSelectedOption();
       if(!opt || !opt.value) return {min:0,max:0,violatesMinQty:false};
 
+      // parse min/max
       const dmin = opt.dataset.min ?? opt.getAttribute('data-min') ?? '0';
       const dmax = opt.dataset.max ?? opt.getAttribute('data-max') ?? dmin;
       const min = Math.max(0, safeNumber(String(dmin).replace(/[^0-9.-]/g,''), 0));
@@ -217,6 +273,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
         if(type === 'per_page') qty = Math.floor(qty);
       }
 
+      // min-qty enforcement
       const rawMinQty = opt.dataset.minQty ?? opt.getAttribute('data-min-qty') ?? opt.dataset.minqty ?? opt.getAttribute('data-minqty');
       const minQty = (rawMinQty !== undefined && rawMinQty !== null) ? Math.max(1, Math.floor(safeNumber(rawMinQty,1))) : 1;
       if(qty < minQty){
@@ -274,16 +331,27 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
   if(folderBox) folderBox.addEventListener('change', () => { displayTotal(); });
 
   function openUrlFallback(url){
-    try{ const win = window.open(url, '_blank'); if(!win) window.location.href = url; } catch(e){ window.location.href = url; }
+    try{
+      const win = window.open(url, '_blank');
+      if(!win) window.location.href = url;
+    } catch(e){
+      window.location.href = url;
+    }
   }
 
   if(waBtn) waBtn.addEventListener('click', (e) => {
     e.preventDefault();
     try{
       const t = calculate();
-      if(t.violatesMinQty){ alert(`Minimum ${t.minQtyRequired} pages required for the selected service.`); qtyEl.focus(); return; }
-      if(t.min === 0 && t.max === 0){ alert('Please select a service.'); return; }
-
+      if(t.violatesMinQty){
+        alert(`Minimum ${t.minQtyRequired} pages required for the selected service.`);
+        qtyEl.focus();
+        return;
+      }
+      if(t.min === 0 && t.max === 0){
+        alert('Please select a service.');
+        return;
+      }
       const orderId = generateOrderId();
       const optText = (getSelectedOption() ? getSelectedOption().textContent.trim() : '—');
       const qty = (qtyEl ? (Number(qtyEl.value) || 1) : 1);
@@ -299,7 +367,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
         `- Service: ${optText}`,
         `- Quantity/Pages/Hours: ${qty}`,
         `- Spiral Binding: ${spiral}`,
-        `- File/Folder: ${folder}`,
+        `- File / Folder: ${folder}`,
         `- Notes: ${notes}`,
         `- Estimated Total: ${totalText}`,
         '',
@@ -323,9 +391,15 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
     e.preventDefault();
     try{
       const t = calculate();
-      if(t.violatesMinQty){ alert(`Minimum ${t.minQtyRequired} pages required for the selected service.`); qtyEl.focus(); return; }
-      if(t.min === 0 && t.max === 0){ alert('Please select a service before downloading invoice.'); return; }
-
+      if(t.violatesMinQty){
+        alert(`Minimum ${t.minQtyRequired} pages required for the selected service.`);
+        qtyEl.focus();
+        return;
+      }
+      if(t.min === 0 && t.max === 0){
+        alert('Please select a service before downloading invoice.');
+        return;
+      }
       const orderId = generateOrderId();
       const optText = (getSelectedOption() ? getSelectedOption().textContent.trim() : '—');
       const qty = (qtyEl ? (Number(qtyEl.value) || 1) : 1);
