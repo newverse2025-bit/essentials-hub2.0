@@ -70,6 +70,8 @@
     .total-row .label{color:var(--muted)}
     .total-amount{font-size:1.6rem;font-weight:800;color:var(--text)}
 
+    .small-note{font-size:13px;color:var(--muted);margin-top:-8px;margin-bottom:8px}
+
     footer{
       text-align:center;padding:22px;margin-top:20px;color:var(--muted);
       border-top:1px solid rgba(255,255,255,0.05);
@@ -79,7 +81,7 @@
   </style>
 </head>
 <body>
-  <header>✨Essentials Hub✨</header>
+  <header>✨Essentials Hub • NewVerse Services✨</header>
   <p class="tagline">Your One‑Stop for Printing, Coding, and Project Help! Affordable Services for College Students.</p>
 
   <section>
@@ -89,16 +91,19 @@
       <p>💻 <b>Coding Help:</b> Quick Fixes, Guidance, Code Cleanup.</p>
       <p>📦 <b>Project Kits:</b> Mini to Full Bundles with Code, PPT, and Reports.</p>
       <p>📝 <b>Assignment Support:</b> Formatting, PDF Conversion, Scanning.</p>
+      <p>🚚 <b>Delivery:</b> On-Campus Delivery Available.</p>
     </div>
 
     <h2>Pricing</h2>
     <div class="pricing-table">
       <h3>Printing Services</h3>
-      <p>B/W Print (Single): ₹2/page</p>
+      <p>B/W Print (Single): ₹3/page</p>
+      <p>B/W Print (Double): ₹4/sheet</p>
       <p>Color Print: ₹10/page</p>
       <p>Spiral Binding: ₹40</p>
       <p>Lamination: ₹20</p>
-
+      <p>Formatting: ₹20–₹50</p>
+      <p>Scanning: ₹5/page</p>
 
       <h3>Coding Help</h3>
       <p>Quick Fix: ₹30–₹50</p>
@@ -118,6 +123,8 @@
       <p>PDF Conversion: ₹10</p>
       <p>Scanning: ₹5/page</p>
 
+      <h3>Delivery</h3>
+      <p>On‑Campus: ₹10–₹20</p>
     </div>
 
 
@@ -127,11 +134,13 @@
       <select id="service">
         <option value="">Choose...</option>
         
-        <option value="bw_single" data-type="per_page" data-min-qty="5" data-max="2">B/W Print (Single) — ₹2/page</option>
+        <option value="bw_single" data-type="per_page" data-min="3" data-max="3" data-min-qty="6">B/W Print (Single) — ₹3/page</option>
+        <option value="bw_double" data-type="per_page" data-min="4" data-max="4" data-min-qty="6">B/W Print (Double) — ₹4/sheet</option>
         <option value="color_print" data-type="per_page" data-min="10" data-max="10">Color Print — ₹10/page</option>
-        <option value="spiral" data-type="flat" data-min="40" data-max="40">Spiral Binding — ₹40</option>
+        
         <option value="lamination" data-type="flat" data-min="20" data-max="20">Lamination — ₹20</option>
-
+        <option value="formatting_print" data-type="per_page" data-min="20" data-max="50">Formatting — ₹20–₹50</option>
+        <option value="scanning_print" data-type="per_page" data-min="5" data-max="5">Scanning — ₹5/page</option>
 
         <option value="quick_fix" data-type="flat" data-min="30" data-max="50">Quick Fix — ₹30–₹50</option>
         <option value="guidance_30" data-type="flat" data-min="50" data-max="50">30‑Min Guidance — ₹50</option>
@@ -148,11 +157,14 @@
         <option value="pdf_conversion" data-type="flat" data-min="10" data-max="10">PDF Conversion — ₹10</option>
         <option value="assign_scanning" data-type="per_page" data-min="5" data-max="5">Scanning — ₹5/page</option>
 
-       
+        <option value="delivery" data-type="flat" data-min="10" data-max="20">On‑Campus Delivery — ₹10–₹20</option>
       </select>
 
       <label>Quantity/Pages/Hours:</label>
       <input type="number" id="quantity" value="1" min="1" />
+
+      <label><input type="checkbox" id="addSpiral" /> Add Spiral Binding (₹20)</label>
+      <p class="small-note">Select spiral if you want binding on this order (adds ₹20 flat).</p>
 
       <label>Additional Notes (e.g., language for coding):</label>
       <textarea id="notes" placeholder="Optional"></textarea>
@@ -202,6 +214,14 @@
         minTotal = min * qty;
         maxTotal = max * qty;
       }
+
+      // add spiral cost if checked
+      const spiralBox = document.getElementById('addSpiral');
+      if(spiralBox && spiralBox.checked){
+        minTotal += 20;
+        maxTotal += 20;
+      }
+
       return {min: minTotal, max: maxTotal};
     }
 
@@ -217,6 +237,7 @@
 
     calcBtn.addEventListener('click', (e)=>{ e.preventDefault(); displayTotal(); });
     [serviceEl, qtyEl].forEach(el => el.addEventListener('change', displayTotal));
+    document.getElementById('addSpiral')?.addEventListener('change', displayTotal);
 
     // Helper to open URL with fallback
     function openUrlFallback(url){
@@ -234,13 +255,15 @@
       const opt = serviceEl.selectedOptions[0].textContent.trim();
       const qty = qtyEl.value;
       const notes = (notesEl.value || 'None').trim();
+      const spiral = document.getElementById('addSpiral')?.checked ? 'Yes' : 'No';
       const totalText = (t.min===t.max) ? `₹${t.min}` : `₹${t.min} – ₹${t.max}`;
 
       // Build plain message then encode
-      const plainMsg = `Hello Essentials Hub,
+      const plainMsg = `Hello Student Essentials Hub,
 I want to place an order:
 - Service: ${opt}
 - Quantity/Pages/Hours: ${qty}
+- Spiral Binding: ${spiral}
 - Notes: ${notes}
 - Estimated Total: ${totalText}
 
