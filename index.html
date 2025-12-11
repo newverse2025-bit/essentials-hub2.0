@@ -21,7 +21,7 @@ header{ background:rgba(255,255,255,0.02); backdrop-filter:blur(8px); color:var(
   text-align:center; padding:20px; font-size:26px; font-weight:700; border-bottom:1px solid rgba(255,255,255,0.05);
 }
 .tagline{ text-align:center; font-size:13px; color:var(--muted); margin-top:6px; }
-section{ padding:20px; max-width:920px; margin:22px auto; }
+section{ padding:20px; max-width:980px; margin:22px auto; }
 h2{ color:var(--accent2); border-left:4px solid var(--accent2); padding-left:10px; }
 .pricing-table, .order-box{
   background:var(--card); padding:16px; border-radius:var(--radius);
@@ -43,24 +43,79 @@ button{ display:inline-block; padding:10px 14px; border-radius:10px; border:0; c
 .total-amount{ font-size:1.2rem; font-weight:800; color:var(--text); }
 .error-banner{ background:#2b0a0a; color:#ffd6d6; padding:10px; border-radius:8px; margin-bottom:12px; display:none; }
 footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; border-top:1px solid rgba(255,255,255,0.04); }
+.table-grid{ display:grid; grid-template-columns:1fr; gap:8px; }
+@media(min-width:880px){ .table-grid{ grid-template-columns:repeat(2,1fr); } }
 @media (max-width:720px){ .row-inline{ flex-direction:column; align-items:flex-start } }
 </style>
 </head>
 <body>
 <header>✨Essentials Hub</header>
-<p class="tagline">Printing, Coding, Project Kits & Assignment Help — fast, affordable.</p>
+<p class="tagline">Printing, Coding, Project Kits & Assignment Help — fast, affordable, student-friendly.</p>
 
 <section>
   <div id="errorBanner" class="error-banner" role="alert"></div>
 
   <div class="pricing-table">
-    <h2>Pricing Quick</h2>
-    <p>B/W Single: ₹3/page · B/W Double: ₹4/sheet · Color: ₹10/page</p>
-    <p>Spiral binding (add-on): ₹20 · Lamination: ₹20 · Scanning: ₹5/page</p>
+    <h2>Pricing (Complete list with short descriptions)</h2>
+    <div class="table-grid">
+      <!-- Printing -->
+      <div>
+        <h3>Printing & Binding</h3>
+        <p><strong>B/W Print (Single): ₹3/page</strong><br><span class="small-note">Standard single-sided black & white printing (min 6 pages).</span></p>
+        <p><strong>B/W Print (Double): ₹4/sheet</strong><br><span class="small-note">Double-sided economical printing (min 6 sheets).</span></p>
+        <p><strong>Color Print: ₹10/page</strong><br><span class="small-note">Full-color pages for reports, posters or images.</span></p>
+        <p><strong>Poster Printing: ₹20/page</strong><br><span class="small-note">Large-format poster prints (A3+ style).</span></p>
+        <p><strong>Spiral Binding (add-on): ₹20</strong><br><span class="small-note">Neat spiral binding for reports and notes (flat add-on).</span></p>
+        <p><strong>Folder / Cover: ₹30</strong><br><span class="small-note">Cardboard soft cover for project submissions.</span></p>
+      </div>
+
+      <!-- Digital / Small services -->
+      <div>
+        <h3>Digital & Small Services</h3>
+        <p><strong>Resume / CV Design: ₹150</strong><br><span class="small-note">Formatted, professional resume in Word & PDF.</span></p>
+        <p><strong>Notes PDF (digital): ₹30</strong><br><span class="small-note">Well-formatted notes in PDF (per topic/file).</span></p>
+        <p><strong>USB Transfer: ₹50</strong><br><span class="small-note">Copy files to USB / collect files from USB.</span></p>
+        <p><strong>ID Card Printing: ₹15/unit</strong><br><span class="small-note">Single-sided ID card prints with lamination.</span></p>
+      </div>
+
+      <!-- Design & media -->
+      <div>
+        <h3>Design & Media</h3>
+        <p><strong>Social Post Design: ₹200</strong><br><span class="small-note">Instagram/Facebook post design (1 design).</span></p>
+        <p><strong>Logo Design: ₹500</strong><br><span class="small-note">Simple logo concepts and 1 round of revision.</span></p>
+        <p><strong>Project Explanation Video: ₹1000</strong><br><span class="small-note">Short recorded explanation/demo video for projects.</span></p>
+      </div>
+
+      <!-- Coding / Projects -->
+      <div>
+        <h3>Coding & Project Kits</h3>
+        <p><strong>Quick Fix: ₹30–₹50</strong><br><span class="small-note">Small bug fixes or debugging help.</span></p>
+        <p><strong>30-Min Guidance: ₹50</strong><br><span class="small-note">Short mentoring session (30 minutes).</span></p>
+        <p><strong>1 Hour Coding Support: ₹100</strong><br><span class="small-note">Hands-on coding help / tutoring.</span></p>
+        <p><strong>Code Cleanup: ₹50–₹150</strong><br><span class="small-note">Refactor & comment code for clarity.</span></p>
+        <p><strong>Mini Project: ₹200–₹300</strong><br><span class="small-note">Small project deliverable with code + report.</span></p>
+        <p><strong>Intermediate Project: ₹400–₹600</strong></p>
+        <p><strong>Full Bundle: ₹800–₹1200</strong><br><span class="small-note">Complete package: code, PPT and report.</span></p>
+      </div>
+
+      <!-- Assignments & other -->
+      <div>
+        <h3>Assignment & Support</h3>
+        <p><strong>Report Typing: ₹80–₹150</strong><br><span class="small-note">Typing long reports, formatting, headers/TOC.</span></p>
+        <p><strong>PPT Creation: ₹50–₹100</strong><br><span class="small-note">Slide deck from notes or report.</span></p>
+        <p><strong>Assignment Formatting: ₹20–₹50</strong><br><span class="small-note">Formatting to college template.</span></p>
+        <p><strong>PDF Conversion: ₹10</strong><br><span class="small-note">Word → PDF / Scanned images → PDF.</span></p>
+        <p><strong>Scanning: ₹5/page</strong><br><span class="small-note">High-quality scanned pages.</span></p>
+        <p><strong>Data Entry / Excel Work: ₹200/hour</strong><br><span class="small-note">Data cleaning, sheet preparation.</span></p>
+        <p><strong>Form Filling / College Forms: ₹100</strong><br><span class="small-note">Help filling application forms correctly.</span></p>
+        <p><strong>MCQ / Small Assignment Help: ₹100</strong><br><span class="small-note">Solution assistance for small assignment pieces (tutoring style).</span></p>
+        <p><strong>On-Campus Delivery: ₹10–₹20</strong><br><span class="small-note">Fast delivery within campus.</span></p>
+      </div>
+    </div>
   </div>
 
   <div class="order-box">
-    <h2>Order Now</h2>
+    <h2>Order Now - Select Your Options</h2>
 
     <label for="service">Select Service</label>
     <select id="service" aria-label="service">
@@ -70,27 +125,47 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
       <option value="bw_single" data-type="per_page" data-min="3" data-max="3" data-min-qty="6">B/W Print (Single) — ₹3/page</option>
       <option value="bw_double" data-type="per_page" data-min="4" data-max="4" data-min-qty="6">B/W Print (Double) — ₹4/sheet</option>
       <option value="color_print" data-type="per_page" data-min="10" data-max="10">Color Print — ₹10/page</option>
+      <option value="poster_print" data-type="per_page" data-min="20" data-max="20">Poster Printing — ₹20/page</option>
+      <option value="id_card" data-type="flat" data-min="15" data-max="15">ID Card Printing — ₹15/unit</option>
+      <option value="folder" data-type="flat" data-min="30" data-max="30">Folder / Cover — ₹30</option>
 
-      <!-- Other services -->
+      <!-- Digital / Design -->
+      <option value="notes_pdf" data-type="flat" data-min="30" data-max="30">Notes PDF (digital) — ₹30</option>
+      <option value="resume" data-type="flat" data-min="150" data-max="150">Resume / CV Design — ₹150</option>
+      <option value="social_post" data-type="flat" data-min="200" data-max="200">Social Post Design — ₹200</option>
+      <option value="logo_design" data-type="flat" data-min="500" data-max="500">Logo Design — ₹500</option>
+      <option value="video_explain" data-type="flat" data-min="1000" data-max="1000">Project Explanation Video — ₹1000</option>
+      <option value="usb_transfer" data-type="flat" data-min="50" data-max="50">USB Transfer — ₹50</option>
+
+      <!-- Printing extras / finishes -->
       <option value="lamination" data-type="flat" data-min="20" data-max="20">Lamination — ₹20</option>
-      <option value="formatting_print" data-type="per_page" data-min="20" data-max="50">Formatting — ₹20–₹50</option>
+
+      <!-- Formatting / Scanning -->
+      <option value="formatting_print" data-type="per_page" data-min="20" data-max="50">Formatting — ₹20–₹50/page</option>
+      <option value="report_typing" data-type="per_page" data-min="80" data-max="150">Report Typing — ₹80–₹150/page</option>
+      <option value="ppt" data-type="flat" data-min="50" data-max="100">PPT Creation — ₹50–₹100</option>
       <option value="scanning_print" data-type="per_page" data-min="5" data-max="5">Scanning — ₹5/page</option>
 
+      <!-- Coding Help -->
       <option value="quick_fix" data-type="flat" data-min="30" data-max="50">Quick Fix — ₹30–₹50</option>
       <option value="guidance_30" data-type="flat" data-min="50" data-max="50">30-Min Guidance — ₹50</option>
       <option value="coding_1hr" data-type="flat" data-min="100" data-max="100">1 Hour Coding Support — ₹100</option>
       <option value="code_cleanup" data-type="flat" data-min="50" data-max="150">Code Cleanup — ₹50–₹150</option>
 
+      <!-- Project Kits -->
       <option value="mini_project" data-type="flat" data-min="200" data-max="300">Mini Project — ₹200–₹300</option>
-      <option value="intermediate_project" data-type="flat" data-min="400" data-max="600">Intermediate — ₹400–₹600</option>
+      <option value="intermediate_project" data-type="flat" data-min="400" data-max="600">Intermediate Project — ₹400–₹600</option>
       <option value="full_bundle" data-type="flat" data-min="800" data-max="1200">Full Bundle — ₹800–₹1200</option>
-      <option value="report_typing" data-type="per_page" data-min="80" data-max="150">Report Typing — ₹80–₹150</option>
-      <option value="ppt" data-type="flat" data-min="50" data-max="100">PPT — ₹50–₹100</option>
 
+      <!-- Assignment Support & others -->
       <option value="assign_formatting" data-type="per_page" data-min="20" data-max="50">Assignment Formatting — ₹20–₹50</option>
       <option value="pdf_conversion" data-type="flat" data-min="10" data-max="10">PDF Conversion — ₹10</option>
       <option value="assign_scanning" data-type="per_page" data-min="5" data-max="5">Assignment Scanning — ₹5/page</option>
+      <option value="data_entry" data-type="flat" data-min="200" data-max="200">Data Entry / Excel — ₹200/hour</option>
+      <option value="form_filling" data-type="flat" data-min="100" data-max="100">Form Filling — ₹100</option>
+      <option value="mcq_help" data-type="flat" data-min="100" data-max="100">MCQ / Small Assignment Help — ₹100</option>
 
+      <!-- Delivery -->
       <option value="delivery" data-type="flat" data-min="10" data-max="20">On-Campus Delivery — ₹10–₹20</option>
     </select>
 
@@ -101,10 +176,10 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
       <input id="addSpiral" type="checkbox" style="width:18px;height:18px;cursor:pointer;">
       <label for="addSpiral" style="margin:0;cursor:pointer;">Add Spiral Binding (₹20)</label>
     </div>
-    <p class="small-note" id="spiral-note">Adds ₹20 flat if selected (available for printing/report typing/scanning).</p>
+    <p class="small-note" id="spiral-note">Adds ₹20 flat if selected (enabled for printing/report-typing/scanning).</p>
 
     <label for="notes">Additional Notes</label>
-    <textarea id="notes" rows="3" placeholder="Optional"></textarea>
+    <textarea id="notes" rows="3" placeholder="Optional — e.g., Python, Java, A4, double-sided, etc."></textarea>
 
     <div class="total-row" role="status" aria-live="polite">
       <div class="label">Estimated total:</div>
@@ -121,7 +196,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
   </div>
 
   <h2>Contact Us</h2>
-  <p class="small-note"><b>Phone:</b> +91 99786 51150 | +91 91040 63798 | +91 85113 67564</p>
+  <p class="small-note"><b>Phone:</b> +91 99786 51150 | +91 91040 63798 | +91 85113 67564 — For direct orders: WhatsApp us.</p>
 </section>
 
 <footer>© <span id="year"></span> Essentials Hub</footer>
@@ -185,7 +260,6 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
     if(note) note.style.opacity = printing ? '1' : '0.5';
   }
 
-  // Robust calculate function: never throws
   function calculate(){
     try{
       clearError();
@@ -203,11 +277,10 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
       if(qtyEl){
         qty = safeNumber(qtyEl.value, 1);
         if(qty < 1) qty = 1;
-        // make integer for page counts
         if(type === 'per_page') qty = Math.floor(qty);
       }
 
-      // min-qty enforcement (allow only integer min)
+      // min-qty enforcement
       const rawMinQty = opt.dataset.minQty ?? opt.getAttribute('data-min-qty') ?? opt.dataset.minqty ?? opt.getAttribute('data-minqty');
       const minQty = (rawMinQty !== undefined && rawMinQty !== null) ? Math.max(1, Math.floor(safeNumber(rawMinQty,1))) : 1;
       if(qty < minQty){
@@ -368,7 +441,7 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
     }
   });
 
-  // first render
+  // initial render
   updateSpiralAvailability();
   displayTotal();
 })();
