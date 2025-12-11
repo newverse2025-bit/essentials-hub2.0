@@ -1,259 +1,282 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Essentials Hub</title>
-  <style>
-    :root{
-      --bg1:#0d111b;
-      --bg2:#0b1526;
-      --card:#111827;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --accent:#6366f1;
-      --accent2:#4cc1ff;
-      --radius:12px;
-      font-family:Inter, system-ui, sans-serif;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; padding:0;
-      background:
-        radial-gradient(900px 600px at 80% 10%, rgba(76,193,255,0.06), transparent),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-    }
-    header{
-      background:rgba(255,255,255,0.02);
-      backdrop-filter:blur(8px);
-      color:var(--text);
-      text-align:center;
-      padding:22px;
-      font-size:28px;
-      font-weight:700;
-      border-bottom:1px solid rgba(255,255,255,0.05);
-    }
-    .tagline{ text-align:center; font-size:14px; color:var(--muted); margin-top:6px; }
-
-    section{ padding:20px; max-width:920px; margin:28px auto; }
-    h2{ color:var(--accent2); border-left:4px solid var(--accent2); padding-left:10px; }
-
-    .pricing-table, .order-box{
-      background:var(--card);
-      padding:18px;
-      border-radius:var(--radius);
-      box-shadow:0 10px 30px rgba(0,0,0,0.45);
-      border:1px solid rgba(255,255,255,0.04);
-      margin-bottom:18px;
-    }
-
-    label{ display:block; font-weight:700; color:var(--text); margin-top:10px; }
-
-    input[type="number"], select, textarea{
-      width:100%; padding:10px; margin-top:8px; margin-bottom:12px;
-      background:rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.06);
-      color:var(--text); border-radius:8px; outline:none;
-    }
-
-    .row-inline{ display:flex; align-items:center; gap:10px; }
-    .small-note{ font-size:13px; color:var(--muted); margin-top:4px; margin-bottom:8px; }
-
-    button{ display:inline-block; padding:10px 14px; border-radius:10px; border:0; cursor:pointer; font-weight:800; }
-    .btn-primary{
-      background: linear-gradient(90deg, var(--accent), #5f7bff);
-      color:#fff; box-shadow:0 8px 24px rgba(99,102,241,0.18);
-    }
-    .btn-ghost{
-      background:transparent; color:var(--text); border:1px solid rgba(255,255,255,0.04); padding:9px 12px; border-radius:10px;
-    }
-
-    .total-row{ display:flex; gap:12px; align-items:center; margin-top:8px; }
-    .total-row .label{ color:var(--muted); font-weight:600; }
-    .total-amount{ font-size:1.4rem; font-weight:800; color:var(--text); }
-
-    footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; border-top:1px solid rgba(255,255,255,0.04); }
-
-    @media (max-width:720px){ .row-inline{ flex-direction:column; align-items:flex-start } }
-  </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Essentials Hub</title>
+<style>
+:root{
+  --bg1:#0d111b; --bg2:#0b1526; --card:#111827;
+  --text:#e5e7eb; --muted:#9ca3af; --accent:#6366f1; --accent2:#4cc1ff;
+  --radius:12px; font-family:Inter, system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+body{ margin:0; padding:0;
+  background:
+    radial-gradient(900px 600px at 80% 10%, rgba(76,193,255,0.06), transparent),
+    linear-gradient(180deg, var(--bg1), var(--bg2));
+  color:var(--text); -webkit-font-smoothing:antialiased;
+}
+header{ background:rgba(255,255,255,0.02); backdrop-filter:blur(8px); color:var(--text);
+  text-align:center; padding:20px; font-size:26px; font-weight:700; border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.tagline{ text-align:center; font-size:13px; color:var(--muted); margin-top:6px; }
+section{ padding:20px; max-width:920px; margin:22px auto; }
+h2{ color:var(--accent2); border-left:4px solid var(--accent2); padding-left:10px; }
+.pricing-table, .order-box{
+  background:var(--card); padding:16px; border-radius:var(--radius);
+  box-shadow:0 8px 24px rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.04); margin-bottom:16px;
+}
+label{ display:block; font-weight:700; color:var(--text); margin-top:10px; }
+input[type="number"], select, textarea{
+  width:100%; padding:10px; margin-top:8px; margin-bottom:12px;
+  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
+  color:var(--text); border-radius:8px; outline:none;
+}
+.row-inline{ display:flex; align-items:center; gap:10px; }
+.small-note{ font-size:13px; color:var(--muted); margin-top:4px; margin-bottom:8px; }
+button{ display:inline-block; padding:10px 14px; border-radius:10px; border:0; cursor:pointer; font-weight:800; }
+.btn-primary{ background: linear-gradient(90deg, var(--accent), #5f7bff); color:#fff; box-shadow:0 8px 24px rgba(99,102,241,0.18); }
+.btn-ghost{ background:transparent; color:var(--text); border:1px solid rgba(255,255,255,0.04); padding:9px 12px; border-radius:10px; }
+.total-row{ display:flex; gap:12px; align-items:center; margin-top:8px; }
+.total-row .label{ color:var(--muted); font-weight:600; }
+.total-amount{ font-size:1.2rem; font-weight:800; color:var(--text); }
+.error-banner{ background:#2b0a0a; color:#ffd6d6; padding:10px; border-radius:8px; margin-bottom:12px; display:none; }
+footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; border-top:1px solid rgba(255,255,255,0.04); }
+@media (max-width:720px){ .row-inline{ flex-direction:column; align-items:flex-start } }
+</style>
 </head>
 <body>
-  <header>✨Essentials Hub • NewVerse Services✨</header>
-  <p class="tagline">Your One-Stop for Printing, Coding, and Project Help — fast, affordable, student-friendly.</p>
+<header>✨Essentials Hub</header>
+<p class="tagline">Printing, Coding, Project Kits & Assignment Help — fast, affordable.</p>
 
-  <section>
-    <div class="pricing-table">
-      <h2>Pricing (Highlights)</h2>
-      <p>B/W Print (Single): ₹3/page</p>
-      <p>B/W Print (Double): ₹4/sheet</p>
-      <p>Color Print: ₹10/page</p>
-      <p>Spiral Binding: ₹20 (add-on)</p>
-      <p>Lamination: ₹20</p>
+<section>
+  <div id="errorBanner" class="error-banner" role="alert"></div>
+
+  <div class="pricing-table">
+    <h2>Pricing Quick</h2>
+    <p>B/W Single: ₹3/page · B/W Double: ₹4/sheet · Color: ₹10/page</p>
+    <p>Spiral binding (add-on): ₹20 · Lamination: ₹20 · Scanning: ₹5/page</p>
+  </div>
+
+  <div class="order-box">
+    <h2>Order Now</h2>
+
+    <label for="service">Select Service</label>
+    <select id="service" aria-label="service">
+      <option value="">Choose...</option>
+
+      <!-- Printing -->
+      <option value="bw_single" data-type="per_page" data-min="3" data-max="3" data-min-qty="6">B/W Print (Single) — ₹3/page</option>
+      <option value="bw_double" data-type="per_page" data-min="4" data-max="4" data-min-qty="6">B/W Print (Double) — ₹4/sheet</option>
+      <option value="color_print" data-type="per_page" data-min="10" data-max="10">Color Print — ₹10/page</option>
+
+      <!-- Other services -->
+      <option value="lamination" data-type="flat" data-min="20" data-max="20">Lamination — ₹20</option>
+      <option value="formatting_print" data-type="per_page" data-min="20" data-max="50">Formatting — ₹20–₹50</option>
+      <option value="scanning_print" data-type="per_page" data-min="5" data-max="5">Scanning — ₹5/page</option>
+
+      <option value="quick_fix" data-type="flat" data-min="30" data-max="50">Quick Fix — ₹30–₹50</option>
+      <option value="guidance_30" data-type="flat" data-min="50" data-max="50">30-Min Guidance — ₹50</option>
+      <option value="coding_1hr" data-type="flat" data-min="100" data-max="100">1 Hour Coding Support — ₹100</option>
+      <option value="code_cleanup" data-type="flat" data-min="50" data-max="150">Code Cleanup — ₹50–₹150</option>
+
+      <option value="mini_project" data-type="flat" data-min="200" data-max="300">Mini Project — ₹200–₹300</option>
+      <option value="intermediate_project" data-type="flat" data-min="400" data-max="600">Intermediate — ₹400–₹600</option>
+      <option value="full_bundle" data-type="flat" data-min="800" data-max="1200">Full Bundle — ₹800–₹1200</option>
+      <option value="report_typing" data-type="per_page" data-min="80" data-max="150">Report Typing — ₹80–₹150</option>
+      <option value="ppt" data-type="flat" data-min="50" data-max="100">PPT — ₹50–₹100</option>
+
+      <option value="assign_formatting" data-type="per_page" data-min="20" data-max="50">Assignment Formatting — ₹20–₹50</option>
+      <option value="pdf_conversion" data-type="flat" data-min="10" data-max="10">PDF Conversion — ₹10</option>
+      <option value="assign_scanning" data-type="per_page" data-min="5" data-max="5">Assignment Scanning — ₹5/page</option>
+
+      <option value="delivery" data-type="flat" data-min="10" data-max="20">On-Campus Delivery — ₹10–₹20</option>
+    </select>
+
+    <label for="quantity">Quantity / Pages / Hours</label>
+    <input id="quantity" type="number" min="1" value="1" />
+
+    <div class="row-inline" style="margin-top:8px;">
+      <input id="addSpiral" type="checkbox" style="width:18px;height:18px;cursor:pointer;">
+      <label for="addSpiral" style="margin:0;cursor:pointer;">Add Spiral Binding (₹20)</label>
+    </div>
+    <p class="small-note" id="spiral-note">Adds ₹20 flat if selected (available for printing/report typing/scanning).</p>
+
+    <label for="notes">Additional Notes</label>
+    <textarea id="notes" rows="3" placeholder="Optional"></textarea>
+
+    <div class="total-row" role="status" aria-live="polite">
+      <div class="label">Estimated total:</div>
+      <div class="total-amount">₹<span id="total">0</span></div>
     </div>
 
-    <div class="order-box" aria-labelledby="order-heading">
-      <h2 id="order-heading">Order Now - Select Your Options</h2>
-
-      <label for="service">Select Service:</label>
-      <select id="service" aria-label="Select service">
-        <option value="">Choose...</option>
-
-        <option value="bw_single" data-type="per_page" data-min="3" data-max="3" data-min-qty="6">B/W Print (Single) — ₹3/page</option>
-        <option value="bw_double" data-type="per_page" data-min="4" data-max="4" data-min-qty="6">B/W Print (Double) — ₹4/sheet</option>
-        <option value="color_print" data-type="per_page" data-min="10" data-max="10">Color Print — ₹10/page</option>
-
-        <option value="lamination" data-type="flat" data-min="20" data-max="20">Lamination — ₹20</option>
-        <option value="formatting_print" data-type="per_page" data-min="20" data-max="50">Formatting — ₹20–₹50</option>
-        <option value="scanning_print" data-type="per_page" data-min="5" data-max="5">Scanning — ₹5/page</option>
-
-        <option value="quick_fix" data-type="flat" data-min="30" data-max="50">Quick Fix — ₹30–₹50</option>
-        <option value="guidance_30" data-type="flat" data-min="50" data-max="50">30-Min Guidance — ₹50</option>
-        <option value="coding_1hr" data-type="flat" data-min="100" data-max="100">1 Hour Coding Support — ₹100</option>
-
-        <option value="mini_project" data-type="flat" data-min="200" data-max="300">Mini Project — ₹200–₹300</option>
-        <option value="report_typing" data-type="per_page" data-min="80" data-max="150">Report Typing — ₹80–₹150</option>
-
-        <option value="assign_formatting" data-type="per_page" data-min="20" data-max="50">Formatting — ₹20–₹50</option>
-        <option value="pdf_conversion" data-type="flat" data-min="10" data-max="10">PDF Conversion — ₹10</option>
-        <option value="assign_scanning" data-type="per_page" data-min="5" data-max="5">Scanning — ₹5/page</option>
-
-        <option value="delivery" data-type="flat" data-min="10" data-max="20">On-Campus Delivery — ₹10–₹20</option>
-      </select>
-
-      <label for="quantity">Quantity/Pages/Hours:</label>
-      <input id="quantity" type="number" min="1" value="1" />
-
-      <!-- Spiral checkbox aligned and will be auto-enabled for printing services -->
-      <div class="row-inline" style="margin-top:8px;">
-        <input id="addSpiral" type="checkbox" style="width:18px;height:18px;cursor:pointer;">
-        <label for="addSpiral" style="margin:0;cursor:pointer;">Add Spiral Binding (₹20)</label>
-      </div>
-      <p class="small-note" id="spiral-note">Adds ₹20 flat if selected.</p>
-
-      <label for="notes">Additional Notes (e.g., language for coding):</label>
-      <textarea id="notes" rows="3" placeholder="Optional — e.g., Python, Java, A4, double-sided"></textarea>
-
-      <div class="total-row" role="status" aria-live="polite">
-        <div class="label">Estimated total:</div>
-        <div class="total-amount">₹<span id="total">0</span></div>
-      </div>
-
-      <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;">
-        <button id="calcBtn" class="btn-primary">Calculate Total</button>
-        <button id="waOrder" class="btn-ghost">Order via WhatsApp</button>
-        <button id="downloadInvoice" class="btn-ghost">Download Invoice</button>
-      </div>
-      <p class="small-note" id="order-id-note" style="margin-top:8px;"></p>
+    <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <button id="calcBtn" class="btn-primary">Calculate Total</button>
+      <button id="waOrder" class="btn-ghost">Order via WhatsApp</button>
+      <button id="downloadInvoice" class="btn-ghost">Download Invoice</button>
     </div>
 
-    <h2>Contact Us</h2>
-    <p class="small-note"><b>Phone:</b> +91 99786 51150 | +91 91040 63798 | +91 85113 67564 — For direct orders: WhatsApp us.</p>
-  </section>
+    <p class="small-note" id="order-id-note" style="margin-top:8px;"></p>
+  </div>
 
-  <footer>© <span id="year"></span> Essentials Hub</footer>
+  <h2>Contact Us</h2>
+  <p class="small-note"><b>Phone:</b> +91 99786 51150 | +91 91040 63798 | +91 85113 67564</p>
+</section>
 
-  <script>
-    // Elements
-    const serviceEl = document.getElementById('service');
-    const qtyEl = document.getElementById('quantity');
-    const totalEl = document.getElementById('total');
-    const notesEl = document.getElementById('notes');
-    const calcBtn = document.getElementById('calcBtn');
-    const waBtn = document.getElementById('waOrder');
-    const spiralBox = document.getElementById('addSpiral');
-    const downloadBtn = document.getElementById('downloadInvoice');
-    const orderIdNote = document.getElementById('order-id-note');
-    const yearEl = document.getElementById('year');
-    yearEl.textContent = new Date().getFullYear();
+<footer>© <span id="year"></span> Essentials Hub</footer>
 
-    // helper: format rupee (basic)
-    function formatINR(n){
-      return n.toLocaleString('en-IN');
-    }
+<script>
+(() => {
+  // elements
+  const serviceEl = document.getElementById('service');
+  const qtyEl = document.getElementById('quantity');
+  const totalEl = document.getElementById('total');
+  const notesEl = document.getElementById('notes');
+  const calcBtn = document.getElementById('calcBtn');
+  const waBtn = document.getElementById('waOrder');
+  const spiralBox = document.getElementById('addSpiral');
+  const downloadBtn = document.getElementById('downloadInvoice');
+  const orderIdNote = document.getElementById('order-id-note');
+  const errorBanner = document.getElementById('errorBanner');
+  const yearEl = document.getElementById('year');
+  if(yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // auto-generate order id
-    function generateOrderId(){
-      return 'EH' + Date.now().toString().slice(-8);
-    }
+  function showError(msg){
+    if(!errorBanner) return;
+    errorBanner.textContent = msg;
+    errorBanner.style.display = 'block';
+    setTimeout(()=>{ errorBanner.style.display = 'none'; }, 5000);
+  }
 
-    // determine whether selected service is a printing-type
-    function isPrintingService(opt){
-      if(!opt || !opt.value) return false;
-      // treat per_page items as printing/report typing/scanning as printing category
-      return opt.dataset.type === 'per_page';
-    }
+  function clearError(){ if(errorBanner) errorBanner.style.display = 'none'; }
 
-    // enable/disable spiral checkbox based on selected service
-    function updateSpiralAvailability(){
-      const opt = serviceEl.selectedOptions[0];
-      const printing = isPrintingService(opt);
+  function safeNumber(x, fallback=0){
+    const n = Number(x);
+    return (isFinite(n) ? n : fallback);
+  }
+
+  function formatINR(n){
+    return safeNumber(n).toLocaleString('en-IN');
+  }
+
+  function generateOrderId(){
+    return 'EH' + Date.now().toString().slice(-8);
+  }
+
+  function getSelectedOption(){
+    try { return serviceEl && serviceEl.selectedOptions && serviceEl.selectedOptions[0]; }
+    catch(e){ return null; }
+  }
+
+  function isPrintingService(opt){
+    if(!opt) return false;
+    return String(opt.dataset.type || opt.getAttribute('data-type') || '').toLowerCase() === 'per_page';
+  }
+
+  function updateSpiralAvailability(){
+    const opt = getSelectedOption();
+    const printing = isPrintingService(opt);
+    if(spiralBox){
       spiralBox.disabled = !printing;
-      spiralBox.checked = spiralBox.disabled ? false : spiralBox.checked;
-      document.getElementById('spiral-note').style.opacity = printing ? '1' : '0.5';
+      if(!printing) spiralBox.checked = false;
     }
+    const note = document.getElementById('spiral-note');
+    if(note) note.style.opacity = printing ? '1' : '0.5';
+  }
 
-    // calculate totals with spiral add-on
-    function calculate(){
-      const opt = serviceEl.selectedOptions[0];
-      if(!opt || !opt.value) return {min:0,max:0};
+  // Robust calculate function: never throws
+  function calculate(){
+    try{
+      clearError();
+      const opt = getSelectedOption();
+      if(!opt || !opt.value) return {min:0,max:0,violatesMinQty:false};
 
-      const min = Number(opt.dataset.min || 0);
-      const max = Number(opt.dataset.max || min);
-      const type = opt.dataset.type || 'flat';
-      let qty = Number(qtyEl.value) || 1;
-      if(qty < 1) qty = 1;
+      // parse min/max
+      const dmin = opt.dataset.min ?? opt.getAttribute('data-min') ?? '0';
+      const dmax = opt.dataset.max ?? opt.getAttribute('data-max') ?? dmin;
+      const min = Math.max(0, safeNumber(String(dmin).replace(/[^0-9.-]/g,''), 0));
+      const max = Math.max(min, safeNumber(String(dmax).replace(/[^0-9.-]/g,''), min));
 
-      // enforce min-qty if present
-      const minQty = Number(opt.dataset.minQty || 1);
+      const type = (opt.dataset.type || opt.getAttribute('data-type') || 'flat').toString();
+      let qty = 1;
+      if(qtyEl){
+        qty = safeNumber(qtyEl.value, 1);
+        if(qty < 1) qty = 1;
+        // make integer for page counts
+        if(type === 'per_page') qty = Math.floor(qty);
+      }
+
+      // min-qty enforcement (allow only integer min)
+      const rawMinQty = opt.dataset.minQty ?? opt.getAttribute('data-min-qty') ?? opt.dataset.minqty ?? opt.getAttribute('data-minqty');
+      const minQty = (rawMinQty !== undefined && rawMinQty !== null) ? Math.max(1, Math.floor(safeNumber(rawMinQty,1))) : 1;
       if(qty < minQty){
-        return {min:0,max:0,violatesMinQty:true, minQtyRequired:minQty};
+        return {min:0, max:0, violatesMinQty:true, minQtyRequired:minQty};
       }
 
       let minTotal = (type === 'per_page') ? min * qty : min * qty;
       let maxTotal = (type === 'per_page') ? max * qty : max * qty;
 
-      // spiral add-on (flat)
-      if(spiralBox.checked){
+      // spiral add-on
+      if(spiralBox && spiralBox.checked){
         minTotal += 20;
         maxTotal += 20;
       }
 
+      minTotal = safeNumber(minTotal, 0);
+      maxTotal = safeNumber(maxTotal, minTotal);
+
       return {min:minTotal, max:maxTotal, violatesMinQty:false};
+    } catch(err){
+      console.error('Calculation error', err);
+      showError('An unexpected error occurred while calculating. Try reloading the page.');
+      return {min:0,max:0,violatesMinQty:false};
     }
+  }
 
-    function displayTotal(){
-      updateSpiralAvailability();
-      const t = calculate();
-      if(t.violatesMinQty){
-        totalEl.textContent = '0';
-        totalEl.parentElement.querySelector('.label').textContent = `Estimated total: (min ${t.minQtyRequired} pages required)`;
-        return t;
-      } else {
-        totalEl.parentElement.querySelector('.label').textContent = 'Estimated total:';
-      }
-      totalEl.textContent = (t.min === t.max) ? formatINR(t.min) : `${formatINR(t.min)} – ${formatINR(t.max)}`;
-      // show example order id for user reference
-      orderIdNote.textContent = `Order ID (for reference): ${generateOrderId()}`;
+  function setEstimatedLabel(text){
+    const orderBox = document.querySelector('.order-box');
+    if(!orderBox) return;
+    const label = orderBox.querySelector('.total-row .label');
+    if(label) label.textContent = text;
+  }
+
+  function displayTotal(){
+    updateSpiralAvailability();
+    const t = calculate();
+    if(t.violatesMinQty){
+      if(totalEl) totalEl.textContent = '0';
+      setEstimatedLabel(`Estimated total: (min ${t.minQtyRequired} pages required)`);
+      if(orderIdNote) orderIdNote.textContent = '';
       return t;
+    } else {
+      setEstimatedLabel('Estimated total:');
     }
-
-    // events
-    calcBtn.addEventListener('click', (e) => { e.preventDefault(); displayTotal(); });
-    [serviceEl, qtyEl].forEach(el => el.addEventListener('change', displayTotal));
-    spiralBox.addEventListener('change', displayTotal);
-
-    // Whatsapp opener with order details
-    function openUrlFallback(url){
-      try{
-        const win = window.open(url, '_blank');
-        if(!win) window.location.href = url;
-      } catch(e){ window.location.href = url; }
+    if(totalEl){
+      totalEl.textContent = (t.min === t.max) ? formatINR(t.min) : `${formatINR(t.min)} – ${formatINR(t.max)}`;
     }
+    if(orderIdNote) orderIdNote.textContent = `Order ID: ${generateOrderId()}`;
+    return t;
+  }
 
-    waBtn.addEventListener('click', (e) => {
-      e.preventDefault();
+  // events
+  if(calcBtn) calcBtn.addEventListener('click', e => { e.preventDefault(); displayTotal(); });
+  if(serviceEl) serviceEl.addEventListener('change', () => { displayTotal(); });
+  if(qtyEl) qtyEl.addEventListener('input', () => { displayTotal(); });
+  if(spiralBox) spiralBox.addEventListener('change', () => { displayTotal(); });
+
+  function openUrlFallback(url){
+    try{
+      const win = window.open(url, '_blank');
+      if(!win) window.location.href = url;
+    } catch(e){
+      window.location.href = url;
+    }
+  }
+
+  if(waBtn) waBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    try{
       const t = calculate();
       if(t.violatesMinQty){
         alert(`Minimum ${t.minQtyRequired} pages required for the selected service.`);
@@ -264,12 +287,11 @@
         alert('Please select a service.');
         return;
       }
-
       const orderId = generateOrderId();
-      const optText = serviceEl.selectedOptions[0].textContent.trim();
-      const qty = Number(qtyEl.value) || 1;
-      const notes = (notesEl.value || 'None').trim();
-      const spiral = spiralBox.checked ? 'Yes' : 'No';
+      const optText = (getSelectedOption() ? getSelectedOption().textContent.trim() : '—');
+      const qty = (qtyEl ? (Number(qtyEl.value) || 1) : 1);
+      const notes = (notesEl && notesEl.value) ? notesEl.value.trim() : 'None';
+      const spiral = (spiralBox && spiralBox.checked) ? 'Yes' : 'No';
       const totalText = (t.min === t.max) ? `₹${formatINR(t.min)}` : `₹${formatINR(t.min)} – ₹${formatINR(t.max)}`;
 
       const plainMsg = [
@@ -286,17 +308,21 @@
       ].join('\n');
 
       const encoded = encodeURIComponent(plainMsg);
-      const phone = '918511367564'; // change if needed
+      const phone = '918511367564';
       const url1 = `https://wa.me/${phone}?text=${encoded}`;
       const url2 = `https://api.whatsapp.com/send?phone=${phone}&text=${encoded}`;
 
       openUrlFallback(url1);
       setTimeout(()=>{ if(!location.href.includes('wa.me') && !location.href.includes('api.whatsapp.com')) openUrlFallback(url2); }, 900);
-    });
+    } catch(err){
+      console.error('WhatsApp send error', err);
+      showError('Could not open WhatsApp. Try again or copy the order manually.');
+    }
+  });
 
-    // invoice download (opens printable window)
-    downloadBtn.addEventListener('click', (e) => {
-      e.preventDefault();
+  if(downloadBtn) downloadBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    try{
       const t = calculate();
       if(t.violatesMinQty){
         alert(`Minimum ${t.minQtyRequired} pages required for the selected service.`);
@@ -307,63 +333,45 @@
         alert('Please select a service before downloading invoice.');
         return;
       }
-
       const orderId = generateOrderId();
-      const optText = serviceEl.selectedOptions[0].textContent.trim();
-      const qty = Number(qtyEl.value) || 1;
-      const notes = (notesEl.value || 'None').trim();
-      const spiral = spiralBox.checked ? 'Yes' : 'No';
-      const totalText = (t.min === t.max) ? `₹${formatINR(t.min)}` : `₹${formatINR(t.min)} – ₹${formatINR(t.max)}`;
+      const optText = (getSelectedOption() ? getSelectedOption().textContent.trim() : '—');
+      const qty = (qtyEl ? (Number(qtyEl.value) || 1) : 1);
+      const notes = (notesEl && notesEl.value) ? notesEl.value.trim() : 'None';
+      const spiral = (spiralBox && spiralBox.checked) ? 'Yes' : 'No';
+      const totalText = (t.min === t.max) ? `₹${formatINR(t.min)}` : `₹${formatINR(t.min)} – ${formatINR(t.max)}`;
 
-      // build simple invoice HTML
       const invoiceHtml = `
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Invoice - ${orderId}</title>
-<style>
-  body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff;padding:24px;}
-  .box{max-width:720px;margin:0 auto;border:1px solid #e6e6e6;padding:18px;border-radius:8px;}
-  h1{margin:0 0 6px;font-size:20px;}
-  .meta{color:#444;font-size:13px;margin-bottom:12px;}
-  table{width:100%;border-collapse:collapse;margin-top:12px;}
-  th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;}
-  .total{font-weight:800;font-size:18px;text-align:right;padding-top:8px;}
-  .small{font-size:12px;color:#666;margin-top:8px;}
-  .center{ text-align:center; margin-top:16px; }
-  @media print{ body{padding:0} .box{border:none} }
-</style>
-</head>
-<body>
-  <div class="box">
-    <h1>Essentials Hub — Invoice</h1>
-    <div class="meta">Order ID: <strong>${orderId}</strong> &nbsp;&nbsp; Date: ${new Date().toLocaleString()}</div>
-
-    <table>
-      <thead><tr><th>Item</th><th>Qty</th><th>Price</th></tr></thead>
+      <!doctype html><html><head><meta charset="utf-8"><title>Invoice - ${orderId}</title>
+      <style>body{font-family:Arial;color:#111;background:#fff;padding:24px} .box{max-width:720px;margin:0 auto;border:1px solid #eee;padding:18px;border-radius:8px}
+      h1{margin:0 0 6px;font-size:20px} .meta{color:#444;font-size:13px;margin-bottom:12px}
+      table{width:100%;border-collapse:collapse;margin-top:12px} th,td{padding:10px;border-bottom:1px solid #eee;text-align:left}
+      .total{font-weight:800;font-size:18px;text-align:right;padding-top:8px} .small{font-size:12px;color:#666;margin-top:8px} .center{ text-align:center; margin-top:16px; }
+      @media print{ body{padding:0} .box{border:none} }</style></head><body>
+      <div class="box"><h1>Essentials Hub — Invoice</h1>
+      <div class="meta">Order ID: <strong>${orderId}</strong> &nbsp;&nbsp; Date: ${new Date().toLocaleString()}</div>
+      <table><thead><tr><th>Item</th><th>Qty</th><th>Price</th></tr></thead>
       <tbody>
-        <tr><td>${optText}</td><td>${qty}</td><td>${totalText}</td></tr>
-        <tr><td>Spiral Binding</td><td>${spiral === 'Yes' ? 1 : 0}</td><td>${spiral === 'Yes' ? '₹20' : '₹0'}</td></tr>
-      </tbody>
-    </table>
-
-    <div class="total">Estimated Total: <span>${totalText}</span></div>
-    <div class="small">Notes: ${notes}</div>
-    <div class="center"><button onclick="window.print()">Print / Save PDF</button></div>
-  </div>
-</body>
-</html>
+      <tr><td>${optText}</td><td>${qty}</td><td>${totalText}</td></tr>
+      <tr><td>Spiral Binding</td><td>${spiral === 'Yes' ? 1 : 0}</td><td>${spiral === 'Yes' ? '₹20' : '₹0'}</td></tr>
+      </tbody></table>
+      <div class="total">Estimated Total: <span>${totalText}</span></div>
+      <div class="small">Notes: ${notes}</div>
+      <div class="center"><button onclick="window.print()">Print / Save PDF</button></div>
+      </div></body></html>
       `;
-
       const w = window.open('', '_blank');
       w.document.write(invoiceHtml);
       w.document.close();
-    });
+    } catch(err){
+      console.error('Invoice error', err);
+      showError('Could not create invoice. Try again.');
+    }
+  });
 
-    // initial setup
-    updateSpiralAvailability();
-    displayTotal();
-  </script>
+  // first render
+  updateSpiralAvailability();
+  displayTotal();
+})();
+</script>
 </body>
 </html>
