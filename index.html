@@ -38,7 +38,6 @@ nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  flex-wrap:wrap;
 }
 .nav-brand{
   font-size:20px;
@@ -59,6 +58,38 @@ nav{
 }
 .nav-links a:hover{
   background:rgba(76,193,255,0.1);
+}
+
+/* ===== HAMBURGER ===== */
+.hamburger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+}
+.hamburger span{
+  width:24px;
+  height:3px;
+  background:#fff;
+  border-radius:3px;
+}
+
+/* ===== MOBILE MENU ===== */
+.mobile-menu{
+  display:none;
+  flex-direction:column;
+  background:#0f1724;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+.mobile-menu a{
+  padding:14px 20px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.mobile-menu a:hover{
+  background:rgba(76,193,255,0.08);
 }
 
 /* ===== HEADER ===== */
@@ -115,11 +146,6 @@ button{
   color:#fff;
 }
 .btn-primary:hover{box-shadow:0 0 30px rgba(99,102,241,.6)}
-.btn-ghost{
-  background:transparent;
-  border:1px solid rgba(255,255,255,.1);
-  color:#fff;
-}
 .total-row{display:flex;gap:10px;margin-top:10px}
 .total-amount{font-size:20px;font-weight:900}
 .small-note{font-size:12px;color:var(--muted)}
@@ -131,6 +157,13 @@ footer{
   border-top:1px solid rgba(255,255,255,.05);
   margin-top:40px;
 }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:720px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .mobile-menu.show{display:flex}
+}
 </style>
 </head>
 
@@ -140,11 +173,24 @@ footer{
 <nav>
   <div class="nav-inner">
     <div class="nav-brand">Essentials Hub</div>
+
     <div class="nav-links">
       <a href="#home">Home</a>
       <a href="#order">Order</a>
       <a href="#contact">Contact</a>
     </div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="#home" onclick="closeMenu()">Home</a>
+    <a href="#order" onclick="closeMenu()">Order</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
   </div>
 </nav>
 
@@ -154,9 +200,8 @@ footer{
   <p class="tagline">Printing • Coding • Projects • Student Services</p>
 </header>
 
-<!-- ===== ORDER SECTION ===== -->
+<!-- ===== ORDER ===== -->
 <section id="order">
-
 <div class="order-box">
 <h2>Order Now</h2>
 
@@ -196,7 +241,6 @@ footer{
 
 <button class="btn-primary" onclick="submitOrder()">Order via WhatsApp</button>
 </div>
-
 </section>
 
 <!-- ===== CONTACT ===== -->
@@ -209,42 +253,23 @@ footer{
 
 <footer>© 2025 Essentials Hub</footer>
 
-<!-- ===== CONFIRMATION POPUP ===== -->
-<div id="confirmPopup" style="
-display:none;
-position:fixed;
-inset:0;
-background:#0b1322;
-z-index:9999;
-display:flex;
-align-items:center;
-justify-content:center;
-">
-  <div style="
-    background:#0f1724;
-    padding:28px;
-    border-radius:14px;
-    max-width:420px;
-    text-align:center;
-    box-shadow:0 0 40px rgba(76,193,255,.25);
-  ">
-    <h2 style="color:#4cc1ff">✅ Order Confirmed</h2>
-    <p class="small-note">Your order has been submitted successfully.</p>
-    <p class="small-note">We will contact you shortly on WhatsApp.</p>
-    <button class="btn-primary" onclick="closeConfirm()">Close</button>
-  </div>
-</div>
-
 <script>
+function toggleMenu(){
+  document.getElementById("mobileMenu").classList.toggle("show");
+}
+function closeMenu(){
+  document.getElementById("mobileMenu").classList.remove("show");
+}
+
 function calcTotal(){
   const opt=service.selectedOptions[0];
   if(!opt)return 0;
-  let qtyVal=+qty.value||1;
-  let total=opt.dataset.min*qtyVal;
+  let q=+qty.value||1;
+  let total=opt.dataset.min*q;
   if(spiral.checked) total+=20;
   if(folder.checked) total+=30;
   if(delivery.checked){
-    if(opt.dataset.type==="per_page" && qtyVal<20) total+=5;
+    if(opt.dataset.type==="per_page" && q<20) total+=5;
     if(opt.dataset.type==="flat") total+=15;
     collegeBox.style.display="block";
   }else collegeBox.style.display="none";
@@ -260,13 +285,7 @@ Service: ${service.value}
 Quantity: ${qty.value}
 College: ${college.value||'—'}
 Total: ₹${total}`;
-
   window.open("https://wa.me/918511367564?text="+encodeURIComponent(msg));
-  document.getElementById("confirmPopup").style.display="flex";
-}
-
-function closeConfirm(){
-  document.getElementById("confirmPopup").style.display="none";
 }
 </script>
 
