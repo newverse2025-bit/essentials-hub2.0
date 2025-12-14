@@ -4,12 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Essentials Hub</title>
-
 <style>
 :root{
   --bg1:#0d111b; --bg2:#0b1526; --card:#0f1724;
-  --text:#e5e7eb; --muted:#9ca3af;
-  --accent:#6366f1; --accent2:#4cc1ff;
+  --text:#e5e7eb; --muted:#9ca3af; --accent:#6366f1; --accent2:#4cc1ff;
   --radius:12px; font-family:Inter, system-ui, sans-serif;
 }
 *{box-sizing:border-box}
@@ -20,14 +18,20 @@ body{
     linear-gradient(180deg, var(--bg1), var(--bg2));
   color:var(--text);
 }
-header{text-align:center;padding:28px 20px 16px}
-.tagline{color:var(--muted);font-size:13px;margin-top:6px}
+header{
+  text-align:center;
+  padding:20px;
+  font-size:26px;
+  font-weight:700;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.tagline{text-align:center;color:var(--muted);font-size:13px;margin-top:6px}
 section{max-width:980px;margin:auto;padding:20px}
 h2{color:var(--accent2);border-left:4px solid var(--accent2);padding-left:10px}
 
 .pricing-table,.order-box{
   background:var(--card);
-  padding:16px;
+  padding:18px;
   border-radius:var(--radius);
   box-shadow:0 10px 30px rgba(0,0,0,.5);
   margin-bottom:16px;
@@ -58,86 +62,63 @@ button{
   background:linear-gradient(90deg,var(--accent),#5f7bff);
   color:#fff;
 }
+.btn-primary:hover{box-shadow:0 0 30px rgba(99,102,241,.6)}
+.btn-ghost{
+  background:transparent;
+  border:1px solid rgba(255,255,255,.1);
+  color:#fff;
+}
 .total-row{display:flex;gap:10px;margin-top:10px}
 .total-amount{font-size:20px;font-weight:900}
 .small-note{font-size:12px;color:var(--muted)}
-footer{text-align:center;padding:16px;color:var(--muted)}
+
+footer{text-align:center;padding:14px;color:var(--muted)}
 </style>
 </head>
 
 <body>
+<header>✨ Essentials Hub</header>
+<p class="tagline">Printing • Coding • Projects • Student Services</p>
 
-<header>
-  <h1>✨ Essentials Hub</h1>
-  <p class="tagline">Printing • Coding • Projects • Student Services</p>
-</header>
+<section>
 
-<section id="pricing">
-  <div class="pricing-table">
-    <h2>Pricing (Complete list)</h2>
+<!-- PRICING MENU -->
+<div class="pricing-table">
+<h2>Pricing (Complete list)</h2>
 
-   <div class="pricing-table">
-    <h2>Pricing (Complete list with short descriptions)</h2>
-    <div class="table-grid">
-      <div>
-        <h3>Printing & Binding</h3>
-        <p><strong>B/W Print (Single): ₹3/page</strong><br><span class="small-note">Standard single-sided black & white printing (min 6 pages).</span></p>
-        <p><strong>B/W Print (Double): ₹4/sheet</strong><br><span class="small-note">Double-sided economical printing (min 6 sheets).</span></p>
-        <p><strong>Color Print: ₹10/page</strong><br><span class="small-note">Full-color pages for reports, posters or images.</span></p>
-        <p><strong>Poster Printing: ₹20/page</strong><br><span class="small-note">Large-format poster prints (A3+ style).</span></p>
-        <p><strong>Spiral Binding (add-on): ₹20</strong><br><span class="small-note">Neat spiral binding for reports and notes (flat add-on).</span></p>
-        <p><strong>Folder / Cover: ₹30</strong><br><span class="small-note">Cardboard soft cover for project submissions.</span></p>
-      </div>
+<h3>Printing & Binding</h3>
+<p><b>B/W Print (Single): ₹3/page</b></p>
+<p><b>B/W Print (Double): ₹4/sheet</b></p>
+<p><b>Color Print: ₹10/page</b></p>
+<p><b>Poster Printing: ₹20/page</b></p>
+<p><b>Spiral Binding: ₹20</b></p>
+<p><b>Folder / Cover: ₹30</b></p>
 
-      <div>
-        <h3>Digital & Small Services</h3>
-        <p><strong>Resume / CV Design: ₹150</strong><br><span class="small-note">Formatted, professional resume in Word & PDF.</span></p>
-        <p><strong>Notes PDF (digital): ₹30</strong><br><span class="small-note">Well-formatted notes in PDF (per topic/file).</span></p>
-        <p><strong>USB Transfer: ₹50</strong><br><span class="small-note">Copy files to USB / collect files from USB.</span></p>
-        <p><strong>ID Card Printing: ₹15/unit</strong><br><span class="small-note">Single-sided ID card prints with lamination.</span></p>
-      </div>
+<h3>Digital & Small Services</h3>
+<p><b>Resume / CV Design: ₹150</b></p>
+<p><b>Notes PDF: ₹30</b></p>
+<p><b>USB Transfer: ₹50</b></p>
+<p><b>ID Card Printing: ₹15</b></p>
 
-      <div>
-        <h3>Design & Media</h3>
-        <p><strong>Social Post Design: ₹200</strong><br><span class="small-note">Instagram/Facebook post design (1 design).</span></p>
-        <p><strong>Logo Design: ₹500</strong><br><span class="small-note">Simple logo concepts and 1 round of revision.</span></p>
-        <p><strong>Project Explanation Video: ₹1000</strong><br><span class="small-note">Short recorded explanation/demo video for projects.</span></p>
-      </div>
+<h3>Design & Media</h3>
+<p><b>Social Post Design: ₹200</b></p>
+<p><b>Logo Design: ₹500</b></p>
+<p><b>Project Explanation Video: ₹1000</b></p>
 
-      <div>
-        <h3>Coding & Project Kits</h3>
-        <p><strong>Quick Fix: ₹30–₹50</strong><br><span class="small-note">Small bug fixes or debugging help.</span></p>
-        <p><strong>30-Min Guidance: ₹50</strong><br><span class="small-note">Short mentoring session (30 minutes).</span></p>
-        <p><strong>1 Hour Coding Support: ₹100</strong><br><span class="small-note">Hands-on coding help / tutoring.</span></p>
-        <p><strong>Code Cleanup: ₹50–₹150</strong><br><span class="small-note">Refactor & comment code for clarity.</span></p>
-        <p><strong>Mini Project: ₹200–₹300</strong><br><span class="small-note">Small project deliverable with code + report.</span></p>
-        <p><strong>Intermediate Project: ₹400–₹600</strong></p>
-        <p><strong>Full Bundle: ₹800–₹1200</strong><br><span class="small-note">Complete package: code, PPT and report.</span></p>
-      </div>
+<!-- ✅ ADDED -->
+<p><b>Civil Drawings (PDF): ₹200</b><br>
+<span class="small-note">Ready-made civil drawings for academic use</span></p>
 
-      <div>
-        <h3>Assignment & Support</h3>
-        <p><strong>Report Typing: ₹80–₹150</strong><br><span class="small-note">Typing long reports, formatting, headers/TOC.</span></p>
-        <p><strong>PPT Creation: ₹50–₹100</strong><br><span class="small-note">Slide deck from notes or report.</span></p>
-        <p><strong>Assignment Formatting: ₹20–₹50</strong><br><span class="small-note">Formatting to college template.</span></p>
-        <p><strong>PDF Conversion: ₹10</strong><br><span class="small-note">Word → PDF / Scanned images → PDF.</span></p>
-        <p><strong>Scanning: ₹5/page</strong><br><span class="small-note">High-quality scanned pages.</span></p>
-        <p><strong>Data Entry / Excel Work: ₹200/hour</strong><br><span class="small-note">Data cleaning, sheet preparation.</span></p>
-        <p><strong>Form Filling / College Forms: ₹100</strong><br><span class="small-note">Help filling application forms correctly.</span></p>
-        <p><strong>MCQ / Small Assignment Help: ₹100</strong><br><span class="small-note">Solution assistance for small assignment pieces (tutoring style).</span></p>
-        <p class="small-muted">Delivery fees: Printing orders — ₹5 (free if pages ≥ 20). Flat services — ₹15 (always paid).</p>
-      </div>
-    </div>
-  </div>
+<h3>Coding & Projects</h3>
+<p><b>1 Hour Coding Support: ₹100</b></p>
+</div>
 
-
-
-<section id="order">
+<!-- ORDER BOX -->
 <div class="order-box">
 <h2>Order Now</h2>
 
 <label>Your Name</label>
-<input id="custName">
+<input id="custName" placeholder="Enter your full name">
 
 <label>Select Service</label>
 <select id="service">
@@ -148,8 +129,8 @@ footer{text-align:center;padding:16px;color:var(--muted)}
 <option data-type="flat" data-min="100">1 Hour Coding Help</option>
 </select>
 
-<label>Quantity</label>
-<input id="qty" type="number" value="1">
+<label>Quantity / Pages</label>
+<input id="qty" type="number" value="1" min="1">
 
 <div class="row-inline">
 <div><input type="checkbox" id="spiral"> Spiral ₹20</div>
@@ -157,9 +138,10 @@ footer{text-align:center;padding:16px;color:var(--muted)}
 <div><input type="checkbox" id="delivery"> Delivery</div>
 </div>
 
+<!-- ✅ DELIVERY → ASK COLLEGE -->
 <div id="collegeBox" style="display:none">
 <label>College Name</label>
-<input id="college">
+<input id="college" placeholder="Enter your college name">
 </div>
 
 <label>Notes</label>
@@ -172,6 +154,7 @@ footer{text-align:center;padding:16px;color:var(--muted)}
 
 <button class="btn-primary" onclick="submitOrder()">Order via WhatsApp</button>
 </div>
+
 </section>
 
 <footer>© 2025 Essentials Hub</footer>
@@ -180,30 +163,38 @@ footer{text-align:center;padding:16px;color:var(--muted)}
 function calcTotal(){
   const opt=service.selectedOptions[0];
   if(!opt)return 0;
-  let q=+qty.value||1;
-  let total=opt.dataset.min*q;
+  let qtyVal=+qty.value||1;
+  let total=opt.dataset.min*qtyVal;
+
   if(spiral.checked) total+=20;
   if(folder.checked) total+=30;
+
   if(delivery.checked){
     collegeBox.style.display="block";
-    if(opt.dataset.type==="per_page" && q<20) total+=5;
+    if(opt.dataset.type==="per_page" && qtyVal<20) total+=5;
     if(opt.dataset.type==="flat") total+=15;
-  }else collegeBox.style.display="none";
-  document.getElementById("total").innerText=total;
+  }else{
+    collegeBox.style.display="none";
+  }
+
+  totalSpan.innerText=total;
   return total;
 }
+
 function submitOrder(){
-  const total=calcTotal();
   if(delivery.checked && !college.value.trim()){
-    alert("Please enter your college name.");
+    alert("Please enter your college name for delivery.");
     return;
   }
+
+  const total=calcTotal();
   const msg=`Order from Essentials Hub
-Name: ${custName.value||'—'}
+Name: ${custName.value}
 Service: ${service.value}
 Quantity: ${qty.value}
-College: ${college.value||'—'}
+College: ${college.value||'N/A'}
 Total: ₹${total}`;
+
   window.open("https://wa.me/918511367564?text="+encodeURIComponent(msg));
 }
 </script>
