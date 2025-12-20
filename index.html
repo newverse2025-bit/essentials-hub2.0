@@ -508,7 +508,6 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
       const url1 = `https://wa.me/${phone}?text=${encoded}`;
       const url2 = `https://api.whatsapp.com/send?phone=${phone}&text=${encoded}`;
 
-
       openUrlFallback(url1);
       setTimeout(()=>{ if(!location.href.includes('wa.me') && !location.href.includes('api.whatsapp.com')) openUrlFallback(url2); }, 900);
     } catch(err){
