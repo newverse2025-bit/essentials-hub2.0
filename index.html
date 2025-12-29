@@ -503,18 +503,19 @@ footer{ text-align:center; padding:16px; color:var(--muted); margin-top:18px; bo
         'Please confirm next steps.'
       ].join('\n');
 
-      const encoded = encodeURIComponent(plainMsg);
-      const phone = '918511367564';
-      const url1 = `https://wa.me/${phone}?text=${encoded}`;
-      const url2 = `https://api.whatsapp.com/send?phone=${phone}&text=${encoded}`;
+     try {
+  const encoded = encodeURIComponent(plainMsg.trim());
+  const phone = '918511367564';
 
-      openUrlFallback(url1);
-      setTimeout(()=>{ if(!location.href.includes('wa.me') && !location.href.includes('api.whatsapp.com')) openUrlFallback(url2); }, 900);
-    } catch(err){
-      console.error('WhatsApp send error', err);
-      showError('Could not open WhatsApp. Try again or copy the order manually.');
-    }
-  });
+  const whatsappURL = `https://wa.me/${phone}?text=${encoded}`;
+
+  // Open WhatsApp directly (safe for GitHub Pages)
+  window.location.href = whatsappURL;
+
+} catch (err) {
+  console.error('WhatsApp send error', err);
+  alert('Could not open WhatsApp. Please try again.');
+}
 
   // invoice
   if(downloadBtn) downloadBtn.addEventListener('click', (e) => {
