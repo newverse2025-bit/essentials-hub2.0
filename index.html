@@ -3,122 +3,172 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Essentials Hub | Premium Student Services</title>
+<title>Essentials Hub | Professional Student Services</title>
 <style>
 :root{
-  --bg-main:#0f172a; --bg-card:#1e293b;
-  --text-main:#f8fafc; --text-muted:#94a3b8;
-  --accent-primary:#6366f1; --accent-secondary:#38bdf8;
-  --border-color:rgba(255,255,255,0.1); --radius:12px;
-  font-family:'Inter', system-ui, -apple-system, sans-serif;
+  /* Professional Color Grading */
+  --bg-deep: #0a0f1a;
+  --bg-surface: #121a2d;
+  --bg-input: #080d18;
+  --accent-primary: #6366f1; /* Indigo */
+  --accent-secondary: #0ea5e9; /* Sky Blue */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border: rgba(255, 255, 255, 0.08);
+  --success: #10b981;
+  --radius: 12px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
-*{box-sizing:border-box}
-body{ 
-  margin:0; padding:0; background-color: var(--bg-main); color: var(--text-main);
-  background-image: radial-gradient(circle at top right, rgba(99,102,241,0.1), transparent);
-  line-height: 1.5; -webkit-font-smoothing: antialiased;
+
+*{ box-sizing: border-box; }
+
+body {
+  margin: 0; padding: 0;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  /* Subtle mesh gradient for professional depth */
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.1) 0px, transparent 50%);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
 }
-header{
-  padding:30px 20px; text-align:center; border-bottom: 1px solid var(--border-color);
-  background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+
+header {
+  padding: 40px 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  background: rgba(10, 15, 26, 0.7);
+  backdrop-filter: blur(12px);
+  position: sticky; top: 0; z-index: 100;
 }
-header h1{ margin:0; font-size:28px; font-weight:800; letter-spacing:-1px; }
-.tagline{ color:var(--text-muted); font-size:14px; margin-top:5px; }
 
-section{ max-width:1000px; margin:20px auto; padding:0 20px; }
-
-.card{
-  background:var(--bg-card); border:1px solid var(--border-color);
-  border-radius:var(--radius); padding:24px; margin-bottom:24px;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+header h1 { 
+  margin: 0; font-size: 32px; font-weight: 800; 
+  background: linear-gradient(to right, #fff, var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
 }
-h2{ font-size:18px; margin-top:0; color:var(--accent-secondary); display:flex; align-items:center; gap:10px; }
-h2::after{ content:""; flex:1; height:1px; background:var(--border-color); }
 
-/* Grid for pricing display */
-.pricing-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px; }
-.price-cat h3{ font-size:15px; text-transform:uppercase; letter-spacing:1px; color:var(--accent-primary); margin-bottom:12px; }
-.price-item{ margin-bottom:10px; font-size:14px; }
-.price-item strong{ color:#fff; }
-.price-desc{ font-size:12px; color:var(--text-muted); display:block; }
+.tagline { color: var(--text-secondary); font-size: 14px; margin-top: 8px; font-weight: 500; }
 
-/* Order Form Styling */
-label{ display:block; font-size:12px; font-weight:700; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px; margin-top:16px; }
-select, input[type="number"], input[type="text"], textarea{
-  width:100%; padding:12px; background:rgba(15,23,42,0.5); border:1px solid var(--border-color);
-  border-radius:8px; color:#fff; font-size:15px; transition: 0.2s;
+section { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 30px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
 }
-select:focus, input:focus, textarea:focus{ outline:none; border-color:var(--accent-primary); box-shadow: 0 0 0 3px rgba(99,102,241,0.2); }
 
-.options-row{ display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin:20px 0; }
-.checkbox-card{
-  background:rgba(255,255,255,0.03); padding:12px; border-radius:8px;
-  border:1px solid var(--border-color); display:flex; align-items:center; gap:10px; cursor:pointer;
+h2 { 
+  font-size: 18px; margin-top: 0; margin-bottom: 24px;
+  color: var(--accent-secondary);
+  text-transform: uppercase; letter-spacing: 1px;
+  display: flex; align-items: center; gap: 12px;
 }
-.checkbox-card input{ width:18px; height:18px; accent-color:var(--accent-primary); }
 
-.total-bar{
-  background: linear-gradient(90deg, var(--accent-primary), #4f46e5);
-  padding:20px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; margin-top:25px;
+h2::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+/* Pricing Layout */
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+.price-cat h3 { font-size: 14px; color: var(--accent-primary); margin-bottom: 16px; border-left: 3px solid var(--accent-primary); padding-left: 10px; }
+.price-item { margin-bottom: 12px; font-size: 14px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.price-item strong { color: #fff; }
+.price-desc { font-size: 12px; color: var(--text-secondary); display: block; margin-top: 2px; }
+
+/* Form Elements */
+label { display: block; font-size: 12px; font-weight: 700; color: var(--text-secondary); margin-bottom: 8px; margin-top: 20px; text-transform: uppercase; }
+select, input, textarea {
+  width: 100%; padding: 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 8px; color: #fff; font-size: 15px;
+  transition: all 0.2s ease;
 }
-.total-label{ font-weight:700; font-size:14px; text-transform:uppercase; opacity:0.9; }
-.total-value{ font-size:24px; font-weight:800; }
+select:focus, input:focus, textarea:focus { outline: none; border-color: var(--accent-primary); box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15); }
 
-.btn-group{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px; }
-button{ 
-  padding:14px; border-radius:8px; border:none; font-weight:700; cursor:pointer; 
-  transition:0.2s; font-size:15px; 
+.options-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 25px 0; }
+.checkbox-card {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 14px; border-radius: 10px;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+  cursor: pointer; transition: 0.2s ease;
 }
-.btn-wa{ background:#25d366; color:#fff; }
-.btn-wa:hover{ background:#1ea952; transform:translateY(-2px); }
-.btn-inv{ background:rgba(255,255,255,0.1); color:#fff; }
-.btn-inv:hover{ background:rgba(255,255,255,0.2); }
+.checkbox-card:hover { background: rgba(255, 255, 255, 0.05); border-color: var(--accent-secondary); }
+.checkbox-card input { width: 18px; height: 18px; accent-color: var(--accent-primary); margin: 0; }
 
-footer{ text-align:center; padding:40px; color:var(--text-muted); font-size:13px; }
+/* Total Display */
+.total-bar {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  padding: 24px; border-radius: 12px;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 30px; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+}
+.total-label { font-weight: 800; font-size: 13px; text-transform: uppercase; color: rgba(255,255,255,0.9); }
+.total-value { font-size: 28px; font-weight: 900; letter-spacing: -0.5px; }
 
-@media (max-width: 600px) { .btn-group { grid-template-columns: 1fr; } }
+.btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
+button { 
+  padding: 16px; border-radius: 10px; border: none; font-weight: 800; cursor: pointer; 
+  transition: 0.3s; font-size: 15px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.btn-wa { background: var(--success); color: #fff; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3); }
+.btn-wa:hover { filter: brightness(1.1); transform: translateY(-2px); }
+.btn-inv { background: rgba(255, 255, 255, 0.08); color: #fff; border: 1px solid var(--border); }
+.btn-inv:hover { background: rgba(255, 255, 255, 0.15); }
+
+footer { text-align: center; padding: 60px 20px; color: var(--text-secondary); font-size: 13px; }
+
+@media (max-width: 600px) { .btn-group { grid-template-columns: 1fr; } .header h1 { font-size: 24px; } }
 </style>
 </head>
 <body>
 
 <header>
   <h1>✨ Essentials Hub</h1>
-  <p class="tagline">Printing, Coding, Project Kits & Assignment Help</p>
+  <p class="tagline">Premium Printing, Coding, & Academic Support Solutions</p>
 </header>
 
 <section>
   <div class="card">
-    <h2>Service Catalog & Pricing</h2>
+    <h2>Service Catalog</h2>
     <div class="pricing-grid">
       <div class="price-cat">
-        <h3>Manuals & Printing</h3>
+        <h3>Manuals & Prints</h3>
         <div class="price-item"><strong>Maths Manual: ₹95</strong> <span class="price-desc">Complete with spiral binding.</span></div>
-        <div class="price-item"><strong>B/W Prints: ₹3 - ₹4</strong> <span class="price-desc">Single/Double sided options.</span></div>
-        <div class="price-item"><strong>Color/Poster: ₹10 - ₹20</strong> <span class="price-desc">High-quality full color.</span></div>
+        <div class="price-item"><strong>B/W Printing: ₹3 - ₹4</strong> <span class="price-desc">High-speed laser quality.</span></div>
+        <div class="price-item"><strong>Color/Poster: ₹10 - ₹20</strong> <span class="price-desc">Vibrant full-color A3+ style.</span></div>
       </div>
       <div class="price-cat">
-        <h3>Coding & Development</h3>
-        <div class="price-item"><strong>Project Bundles: ₹200 - ₹1200</strong> <span class="price-desc">Code, Report, & PPT packages.</span></div>
-        <div class="price-item"><strong>Support: ₹30 - ₹100</strong> <span class="price-desc">Quick fixes and hourly tutoring.</span></div>
+        <h3>Design & Media</h3>
+        <div class="price-item"><strong>CV/Resume: ₹150</strong> <span class="price-desc">ATS-friendly professional designs.</span></div>
+        <div class="price-item"><strong>Logo & Social: ₹200 - ₹500</strong> <span class="price-desc">Custom branding solutions.</span></div>
+        <div class="price-item"><strong>Video Demo: ₹1000</strong> <span class="price-desc">Project walkthroughs & explainers.</span></div>
       </div>
       <div class="price-cat">
-        <h3>Digital & Media</h3>
-        <div class="price-item"><strong>Design: ₹150 - ₹500</strong> <span class="price-desc">Resumes, Logos, & Social Posts.</span></div>
-        <div class="price-item"><strong>Support: ₹10 - ₹100</strong> <span class="price-desc">PDF Conversion, Scanning, Form Filling.</span></div>
+        <h3>Coding & Academics</h3>
+        <div class="price-item"><strong>Full Project: ₹800 - ₹1200</strong> <span class="price-desc">Code, PPT, and documentation.</span></div>
+        <div class="price-item"><strong>Reports & Typing: ₹80 - ₹150</strong> <span class="price-desc">Formatting & technical typing.</span></div>
+        <div class="price-item"><strong>MCQ/Assignment: ₹100</strong> <span class="price-desc">Tutoring-style solutions.</span></div>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <h2>Place Your Order</h2>
+    <h2>Configure Order</h2>
     
-    <label for="service">Choose Service</label>
+    <label for="service">Select Service Category</label>
     <select id="service">
-      <option value="">Select a service...</option>
-      <optgroup label="Manuals">
+      <option value="">Choose a service...</option>
+      <optgroup label="Academic Manuals">
         <option value="maths_manual" data-type="flat" data-min="95" data-max="95">Maths Manual (with spiral) — ₹95</option>
       </optgroup>
-      <optgroup label="Printing & Binding">
+      <optgroup label="Printing Services">
         <option value="bw_single" data-type="per_page" data-min="3" data-max="3" data-min-qty="6">B/W Print (Single) — ₹3/page</option>
         <option value="bw_double" data-type="per_page" data-min="4" data-max="4" data-min-qty="6">B/W Print (Double) — ₹4/sheet</option>
         <option value="color_print" data-type="per_page" data-min="10" data-max="10">Color Print — ₹10/page</option>
@@ -126,7 +176,7 @@ footer{ text-align:center; padding:40px; color:var(--text-muted); font-size:13px
         <option value="id_card" data-type="flat" data-min="15" data-max="15">ID Card Printing — ₹15/unit</option>
         <option value="lamination" data-type="flat" data-min="20" data-max="20">Lamination — ₹20</option>
       </optgroup>
-      <optgroup label="Digital & Design">
+      <optgroup label="Design & Media">
         <option value="notes_pdf" data-type="flat" data-min="30" data-max="30">Notes PDF (digital) — ₹30</option>
         <option value="resume" data-type="flat" data-min="150" data-max="150">Resume / CV Design — ₹150</option>
         <option value="social_post" data-type="flat" data-min="200" data-max="200">Social Post Design — ₹200</option>
@@ -134,7 +184,7 @@ footer{ text-align:center; padding:40px; color:var(--text-muted); font-size:13px
         <option value="video_explain" data-type="flat" data-min="1000" data-max="1000">Project Explanation Video — ₹1000</option>
         <option value="usb_transfer" data-type="flat" data-min="50" data-max="50">USB Transfer — ₹50</option>
       </optgroup>
-      <optgroup label="Coding & Project Kits">
+      <optgroup label="Coding & Engineering">
         <option value="quick_fix" data-type="flat" data-min="30" data-max="50">Quick Fix — ₹30–₹50</option>
         <option value="guidance_30" data-type="flat" data-min="50" data-max="50">30-Min Guidance — ₹50</option>
         <option value="coding_1hr" data-type="flat" data-min="100" data-max="100">1 Hour Coding Support — ₹100</option>
@@ -143,7 +193,7 @@ footer{ text-align:center; padding:40px; color:var(--text-muted); font-size:13px
         <option value="intermediate_project" data-type="flat" data-min="400" data-max="600">Intermediate Project — ₹400–₹600</option>
         <option value="full_bundle" data-type="flat" data-min="800" data-max="1200">Full Bundle — ₹800–₹1200</option>
       </optgroup>
-      <optgroup label="Assignment Support">
+      <optgroup label="Administrative Support">
         <option value="report_typing" data-type="per_page" data-min="80" data-max="150">Report Typing — ₹80–₹150/page</option>
         <option value="ppt" data-type="flat" data-min="50" data-max="100">PPT Creation — ₹50–₹100</option>
         <option value="formatting_print" data-type="per_page" data-min="20" data-max="50">Formatting — ₹20–₹50/page</option>
@@ -157,43 +207,44 @@ footer{ text-align:center; padding:40px; color:var(--text-muted); font-size:13px
       </optgroup>
     </select>
 
-    <label for="quantity">Quantity (Pages / Units / Hours)</label>
+    <label for="quantity">Quantity / Unit Volume</label>
     <input id="quantity" type="number" min="1" value="1" />
 
     <div class="options-row">
       <label class="checkbox-card">
-        <input id="addSpiral" type="checkbox"> <span>Add Spiral (₹20)</span>
+        <input id="addSpiral" type="checkbox"> <span>Spiral Add-on (₹20)</span>
       </label>
       <label class="checkbox-card">
-        <input id="addFolder" type="checkbox"> <span>Add Folder (₹30)</span>
+        <input id="addFolder" type="checkbox"> <span>Submission Folder (₹30)</span>
       </label>
       <label class="checkbox-card">
-        <input id="addDelivery" type="checkbox"> <span>Campus Delivery</span>
+        <input id="addDelivery" type="checkbox"> <span>On-Campus Delivery</span>
       </label>
     </div>
 
     <div id="collegeBlock" style="display:none;">
-      <label for="collegeName">College Name</label>
-      <input id="collegeName" type="text" placeholder="Enter your college name..." />
+      <label for="collegeName">College / Campus Location</label>
+      <input id="collegeName" type="text" placeholder="e.g. Ahmedabad University, Block B" />
     </div>
 
-    <label for="notes">Additional Instructions</label>
-    <textarea id="notes" rows="2" placeholder="Example: A4 size, Double sided, Urgent..."></textarea>
+    <label for="notes">Additional Requirements</label>
+    <textarea id="notes" rows="2" placeholder="Specific colors, deadline, file names, etc."></textarea>
 
     <div class="total-bar">
-      <div class="total-label" id="totalLabel">Estimated Total</div>
+      <div class="total-label" id="totalLabel">Final Quote</div>
       <div class="total-value">₹<span id="total">0</span></div>
     </div>
 
     <div class="btn-group">
-      <button id="waOrder" class="btn-wa">Order via WhatsApp</button>
-      <button id="downloadInvoice" class="btn-inv">Save Invoice</button>
+      <button id="waOrder" class="btn-wa">Checkout via WhatsApp</button>
+      <button id="downloadInvoice" class="btn-inv">Generate Invoice</button>
     </div>
   </div>
 </section>
 
 <footer>
-  © <span id="year"></span> Essentials Hub | Professional Academic Solutions
+  © <span id="year"></span> Essentials Hub<br>
+  Official Partner for Academic Excellence & Printing Logistics
 </footer>
 
 <script>
@@ -230,7 +281,7 @@ footer{ text-align:center; padding:40px; color:var(--text-muted); font-size:13px
       totalEl.textContent = "---";
       return;
     } else {
-      document.getElementById('totalLabel').textContent = "Estimated Total";
+      document.getElementById('totalLabel').textContent = "Final Quote";
     }
 
     let minT = (opt.dataset.type === 'per_page') ? min * qty : min;
@@ -252,18 +303,19 @@ footer{ text-align:center; padding:40px; color:var(--text-muted); font-size:13px
 
   waBtn.addEventListener('click', () => {
     const opt = serviceEl.selectedOptions[0];
-    if(!opt.value) return alert("Please select a service first.");
-    if(deliveryBox.checked && !collegeNameInput.value.trim()) return alert("Please enter your college name for delivery.");
+    if(!opt.value) return alert("Select a service to proceed.");
+    if(deliveryBox.checked && !collegeNameInput.value.trim()) return alert("College name is required for delivery.");
 
-    const orderId = 'EH-' + Math.random().toString(36).substr(2, 5).toUpperCase();
-    const msg = `*NEW ORDER: ${orderId}*\n` +
+    const orderId = 'INV-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+    const msg = `*OFFICIAL ORDER REQUEST [${orderId}]*\n\n` +
                 `*Service:* ${opt.text}\n` +
-                `*Qty:* ${qtyEl.value}\n` +
-                `*Spiral:* ${spiralBox.checked ? 'Yes' : 'No'}\n` +
-                `*Folder:* ${folderBox.checked ? 'Yes' : 'No'}\n` +
-                `*Delivery:* ${deliveryBox.checked ? collegeNameInput.value : 'No'}\n` +
-                `*Notes:* ${notesEl.value || 'None'}\n` +
-                `*TOTAL:* ₹${totalEl.textContent}`;
+                `*Quantity:* ${qtyEl.value}\n` +
+                `*Spiral:* ${spiralBox.checked ? 'Enabled' : 'Disabled'}\n` +
+                `*Folder:* ${folderBox.checked ? 'Enabled' : 'Disabled'}\n` +
+                `*Delivery:* ${deliveryBox.checked ? collegeNameInput.value : 'In-Store Pickup'}\n` +
+                `*Instructions:* ${notesEl.value || 'Standard'}\n\n` +
+                `*ESTIMATED TOTAL:* ₹${totalEl.textContent}\n\n` +
+                `Please confirm for processing.`;
 
     window.open(`https://wa.me/918511367564?text=${encodeURIComponent(msg)}`);
   });
