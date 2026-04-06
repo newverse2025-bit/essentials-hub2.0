@@ -1229,10 +1229,8 @@
 
   const collegeInput = document.getElementById('collegeName').value.trim();
 
-  // Validation
   if (isDelivery && !collegeInput) {
-    const inp = document.getElementById('collegeName');
-    inp.focus();
+    alert("Please enter college name");
     return;
   }
 
@@ -1242,20 +1240,25 @@
   const spiral = document.getElementById('spiralAddon')?.checked ? "Yes" : "No";
   const folder = document.getElementById('folderAddon')?.checked ? "Yes" : "No";
 
-  const message =
-`Order ID: ${currentOrderId}
+  // ✅ CLEAN MESSAGE (NO %0A)
+  const message = `
+Order ID: ${currentOrderId}
+
 Hello Essentials Hub,
 I want to place an order:
-- Service: ${service}
-- Quantity/Pages/Hours: ${qty}
-- Spiral Binding: ${spiral}
-- File / Folder: ${folder}
-- On-Campus Delivery: ${deliveryText}
-- College: ${college}
-- Notes: None
-- Estimated Total: ${total}
 
-Please confirm next steps.`;
+• Service: ${service}
+• Quantity/Pages/Hours: ${qty}
+• Spiral Binding: ${spiral}
+• File / Folder: ${folder}
+• On-Campus Delivery: ${deliveryText}
+• College: ${college}
+• Notes: None
+
+Estimated Total: ${total}
+
+Please confirm next steps.
+`;
 
   window.open(`https://wa.me/919978651150?text=${encodeURIComponent(message)}`, '_blank');
 }
