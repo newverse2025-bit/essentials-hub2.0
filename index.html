@@ -6,26 +6,17 @@
     <title>Essentials Hub | Premium Student Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Branding */
             --bg: #060913;
             --primary: #6366f1;
             --secondary: #38bdf8;
-            --accent-glow: rgba(99, 102, 241, 0.15);
-            
-            /* Glassmorphism System */
-            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-blur: blur(20px);
-            
-            /* Text */
             --text-main: #ffffff;
             --text-muted: #94a3b8;
-            
-            /* Motion */
+            --grad: linear-gradient(135deg, var(--primary), var(--secondary));
             --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
@@ -34,86 +25,86 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-font-smoothing: antialiased;
         }
 
         body {
             background-color: var(--bg);
             color: var(--text-main);
-            overflow-x: hidden;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* --- BACKGROUND ELEMENTS --- */
-        .mesh-gradient {
+        /* --- BACKGROUND GLOW --- */
+        .glow-mesh {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             z-index: -1;
             background: 
-                radial-gradient(circle at 15% 15%, var(--accent-glow) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.1) 0%, transparent 40%);
+                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(56, 189, 248, 0.1) 0%, transparent 40%);
         }
 
-        /* --- REUSABLE COMPONENTS --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        /* --- REUSABLES --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
         .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
+            background: var(--glass);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             transition: var(--transition);
         }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
             padding: 14px 28px;
-            border-radius: 12px;
+            border-radius: 14px;
             font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
             border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             text-decoration: none;
-            gap: 8px;
+            font-size: 1rem;
         }
 
         .btn-primary {
             background: var(--primary);
             color: white;
-            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            filter: brightness(1.1);
-            box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.5);
+            box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
         }
 
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
+        .btn-outline {
+            background: transparent;
             border: 1px solid var(--glass-border);
+            color: white;
         }
 
-        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); }
+        .btn-outline:hover { background: var(--glass); }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO --- */
         .hero {
             padding: 140px 0 80px;
             text-align: center;
-            position: relative;
         }
 
         .hero h1 {
             font-size: clamp(2.5rem, 8vw, 4.5rem);
             font-weight: 800;
-            letter-spacing: -2px;
             line-height: 1.1;
             margin-bottom: 24px;
             background: linear-gradient(to bottom, #fff, #94a3b8);
@@ -122,64 +113,79 @@
         }
 
         .hero p {
-            font-size: 1.25rem;
             color: var(--text-muted);
+            font-size: 1.2rem;
             max-width: 600px;
             margin: 0 auto 40px;
         }
 
-        /* --- SERVICES GRID --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+        /* --- TRUST BAR --- */
+        .trust-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 30px;
+            flex-wrap: wrap;
             margin-bottom: 80px;
         }
 
-        .service-item {
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .trust-item span { color: var(--secondary); font-size: 1.2rem; }
+
+        /* --- SERVICES --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 100px;
+        }
+
+        .service-card {
             padding: 40px;
-            text-align: left;
-            position: relative;
-            overflow: hidden;
+            text-align: center;
         }
 
-        .service-item:hover {
-            border-color: rgba(99, 102, 241, 0.3);
-            transform: translateY(-5px);
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(99, 102, 241, 0.4);
         }
 
-        .service-icon {
-            font-size: 2rem;
+        .icon-box {
+            font-size: 2.5rem;
             margin-bottom: 20px;
-            display: block;
         }
 
-        /* --- CONVERSION ENGINE (ORDER SECTION) --- */
+        .service-card h3 { margin-bottom: 10px; }
+        .service-card p { color: var(--secondary); font-weight: 700; font-size: 0.9rem; }
+
+        /* --- CONFIGURATOR --- */
+        .config-section {
+            padding: 80px 0;
+            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+        }
+
         .order-layout {
             display: grid;
-            grid-template-columns: 1.4fr 0.6fr;
-            gap: 30px;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
             align-items: start;
         }
 
-        .form-section { padding: 48px; }
-        .summary-card { padding: 32px; position: sticky; top: 30px; }
-
-        .input-group { margin-bottom: 24px; }
-        .input-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
+        .form-group { margin-bottom: 24px; }
+        label { display: block; margin-bottom: 10px; font-weight: 600; color: var(--text-muted); font-size: 0.9rem; }
 
         select, input {
             width: 100%;
             padding: 16px;
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--glass-border);
             border-radius: 12px;
             color: white;
@@ -188,317 +194,281 @@
             transition: var(--transition);
         }
 
-        select:focus, input:focus { border-color: var(--primary); background: rgba(255,255,255,0.08); }
+        select:focus, input:focus { border-color: var(--primary); }
 
-        .addon-box {
+        .checkbox-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 10px;
+            gap: 15px;
         }
 
-        .addon-option {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--glass-border);
-            padding: 16px;
-            border-radius: 12px;
-            cursor: pointer;
+        .check-card {
+            padding: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 0.9rem;
-            transition: var(--transition);
+            cursor: pointer;
         }
 
-        .addon-option.active {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.1);
-        }
+        .check-card input { width: auto; }
 
-        .addon-option.disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-
-        /* --- PRICE BREAKDOWN --- */
-        .breakdown-row {
+        /* --- SUMMARY --- */
+        .summary-box { padding: 40px; }
+        .summary-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 12px;
-            color: var(--text-muted);
-            font-size: 0.95rem;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .total-row {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid var(--glass-border);
-            color: white;
+            border: none;
             font-size: 1.5rem;
             font-weight: 800;
+            color: white;
         }
 
-        .order-id-badge {
-            font-family: monospace;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--secondary);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            margin-bottom: 20px;
-            display: inline-block;
+        .order-id { font-family: monospace; color: var(--secondary); font-size: 0.8rem; margin-bottom: 10px; display: block; }
+
+        /* --- FOOTER & CONTACT --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+            margin: 60px 0;
         }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 992px) {
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
             .order-layout { grid-template-columns: 1fr; }
-            .summary-card { position: static; }
-            .hero h1 { font-size: 3rem; }
+            .hero h1 { font-size: 2.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="mesh-gradient"></div>
+    <div class="glow-mesh"></div>
 
-    <header class="container hero">
-        <div style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); display: inline-block; padding: 6px 16px; border-radius: 100px; color: var(--secondary); font-size: 0.8rem; font-weight: 700; margin-bottom: 20px;">
-            STILL SERVING AHMEDABAD COLLEGES 🚀
+    <section class="container hero">
+        <h1>Your All-in-One <br> Student Service Hub</h1>
+        <p>Printing • Coding • Design • Academic Help — Premium quality support delivered directly to your campus doorstep.</p>
+        <div style="display: flex; gap: 16px; justify-content: center;">
+            <a href="#order" class="btn btn-primary">Order Now</a>
+            <a href="#services" class="btn btn-outline">View Services</a>
         </div>
-        <h1>High-End Academic <br> Support Partner.</h1>
-        <p>Premium Printing • Logic-Driven Coding • Expert Design • Same-Day Campus Delivery.</p>
-        <div style="display: flex; gap: 15px; justify-content: center;">
-            <a href="#order-engine" class="btn btn-primary">Start Order</a>
-            <a href="#services" class="btn btn-secondary">Our Services</a>
+    </section>
+
+    <div class="container">
+        <div class="glass-card trust-bar">
+            <div class="trust-item"><span>✦</span> Trusted by 500+ Students</div>
+            <div class="trust-item"><span>✦</span> Serving 10+ Ahmedabad Colleges</div>
+            <div class="trust-item"><span>✦</span> Same-Day Campus Delivery</div>
         </div>
-    </header>
+    </div>
 
     <section class="container" id="services">
         <div class="services-grid">
-            <div class="glass-card service-item">
-                <span class="service-icon">📄</span>
-                <h3>Elite Printing</h3>
-                <p>Laser-sharp manuals and records. B/W and High-Res color.</p>
-                <div style="color: var(--secondary); font-weight: 700; margin-top: 15px;">From ₹2/page</div>
+            <div class="glass-card service-card">
+                <div class="icon-box">🖨️</div>
+                <h3>Printing</h3>
+                <p>B&W ₹2/pg | Colour ₹10/pg</p>
             </div>
-            <div class="glass-card service-item">
-                <span class="service-icon">⚡</span>
-                <h3>Coding Bundles</h3>
-                <p>Debugging, Mini-projects, and Full Engineering documentation.</p>
-                <div style="color: var(--secondary); font-weight: 700; margin-top: 15px;">From ₹499</div>
+            <div class="glass-card service-card">
+                <div class="icon-box">💻</div>
+                <h3>Coding Help</h3>
+                <p>Starting ₹49 (Flat)</p>
             </div>
-            <div class="glass-card service-item">
-                <span class="service-icon">🎨</span>
-                <h3>Visual Design</h3>
-                <p>ATS Resumes, Logos, and Premium Pitch Decks.</p>
-                <div style="color: var(--secondary); font-weight: 700; margin-top: 15px;">From ₹199</div>
+            <div class="glass-card service-card">
+                <div class="icon-box">🎨</div>
+                <h3>Design</h3>
+                <p>PPT, Resume, etc. — ₹49</p>
+            </div>
+            <div class="glass-card service-card">
+                <div class="icon-box">📚</div>
+                <h3>Academic Help</h3>
+                <p>Assignments & Reports — ₹49</p>
             </div>
         </div>
     </section>
 
-    <main class="container" id="order-engine" style="padding-bottom: 100px;">
-        <div class="order-layout">
-            
-            <div class="glass-card form-section">
-                <h2 style="margin-bottom: 30px; font-weight: 800;">Order Configurator</h2>
-                
-                <div class="input-group">
-                    <label>Select Service</label>
-                    <select id="service-select" onchange="handleServiceChange()">
+    <section class="config-section" id="order">
+        <div class="container">
+            <div class="order-layout">
+                <div class="glass-card summary-box">
+                    <h2 style="margin-bottom: 30px;">Order Configurator</h2>
+                    
+                    <div class="form-group">
+                        <label>1. Select Service</label>
+                        <select id="serviceSelect" onchange="toggleInputs()">
+                            <option value="bw_printing" data-price="2">Printing (Black & White) - ₹2/pg</option>
+                            <option value="color_printing" data-price="10">Printing (Colour) - ₹10/pg</option>
+                            <option value="coding" data-price="49">Coding Help - ₹49</option>
+                            <option value="design" data-price="49">Design Services - ₹49</option>
+                            <option value="academic" data-price="49">Academic Help - ₹49</option>
                         </select>
-                </div>
+                    </div>
 
-                <div class="input-group">
-                    <label id="qty-label">Quantity</label>
-                    <input type="number" id="qty-input" value="1" min="1" oninput="updatePrice()">
-                </div>
+                    <div class="form-group" id="qtyContainer">
+                        <label>2. Number of Pages</label>
+                        <input type="number" id="qtyInput" value="1" min="1" oninput="updatePrice()">
+                    </div>
 
-                <div class="input-group" id="addon-container">
-                    <label>Printing Add-ons</label>
-                    <div class="addon-box">
-                        <div class="addon-option" id="addon-spiral" onclick="toggleAddon('spiral')">
-                            <span>Spiral Binding</span>
-                            <span style="margin-left: auto; color: var(--secondary);">+₹20</span>
+                    <div id="printingOptions">
+                        <div class="form-group">
+                            <label>3. Add-ons (Printing Only)</label>
+                            <div class="checkbox-group">
+                                <label class="glass-card check-card">
+                                    <input type="checkbox" id="spiralAddon" onchange="updatePrice()"> Spiral (+₹20)
+                                </label>
+                                <label class="glass-card check-card">
+                                    <input type="checkbox" id="folderAddon" onchange="updatePrice()"> Folder (+₹30)
+                                </label>
+                            </div>
                         </div>
-                        <div class="addon-option" id="addon-folder" onclick="toggleAddon('folder')">
-                            <span>Plastic Folder</span>
-                            <span style="margin-left: auto; color: var(--secondary);">+₹30</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>4. Delivery Preference</label>
+                        <label class="glass-card check-card" style="margin-bottom: 15px;">
+                            <input type="checkbox" id="deliveryToggle" onchange="toggleDelivery()"> 🚚 Campus Delivery (+₹30)
+                        </label>
+                        <div id="deliveryInput" style="display: none;">
+                            <input type="text" id="collegeName" placeholder="Enter College & Block Name">
                         </div>
                     </div>
                 </div>
 
-                <div class="input-group">
-                    <div class="addon-option" id="delivery-toggle" onclick="toggleDelivery()" style="margin-top: 10px;">
-                        <span>🚚 Enable Campus Delivery</span>
-                        <span style="margin-left: auto; color: var(--secondary);">+₹40</span>
+                <div class="glass-card summary-box">
+                    <span class="order-id" id="orderId">#ID-GENERATING...</span>
+                    <h3 style="margin-bottom: 25px;">Price Breakdown</h3>
+                    
+                    <div class="summary-row">
+                        <span>Base Price</span>
+                        <span id="basePrice">₹0</span>
                     </div>
-                </div>
+                    <div class="summary-row">
+                        <span>Add-ons</span>
+                        <span id="addonPrice">₹0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery</span>
+                        <span id="deliveryPrice">₹0</span>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span>Total</span>
+                        <span id="totalPrice">₹0</span>
+                    </div>
 
-                <div class="input-group" id="location-box" style="display: none;">
-                    <label>College & Room Number</label>
-                    <input type="text" id="location-input" placeholder="e.g. Nirma Univ, Block C, Room 201" oninput="updatePrice()">
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="sendToWhatsApp()">
+                        Proceed to WhatsApp
+                    </button>
+                    <button class="btn btn-outline" style="width: 100%; margin-top: 12px;" onclick="window.print()">
+                        Generate Invoice
+                    </button>
                 </div>
             </div>
-
-            <div class="glass-card summary-card">
-                <div class="order-id-badge" id="order-id">#ID-0000</div>
-                <h3 style="margin-bottom: 20px;">Summary</h3>
-                
-                <div id="breakdown-area">
-                    </div>
-
-                <div class="breakdown-row total-row">
-                    <span>Total</span>
-                    <span id="final-price">₹0</span>
-                </div>
-
-                <button class="btn btn-primary" style="width: 100%; margin-top: 30px;" onclick="placeOrder()">
-                    Proceed to WhatsApp
-                </button>
-                <p style="text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 15px;">
-                    Instant confirmation on WhatsApp
-                </p>
-            </div>
-
         </div>
-    </main>
+    </section>
 
-    <footer class="container" style="padding: 60px 0; border-top: 1px solid var(--glass-border); text-align: center; color: var(--text-muted); font-size: 0.9rem;">
-        <p>© 2026 Essentials Hub • Ahmedabad's Academic Standard</p>
+    <section class="container" style="padding: 80px 0;">
+        <h2 style="text-align: center; margin-bottom: 40px;">What Students Say</h2>
+        <div class="services-grid">
+            <div class="glass-card service-card" style="font-style: italic;">
+                "Best printing service for lab manuals. The spiral binding is super clean!"
+                <p style="margin-top: 10px; font-weight: 800; color: #fff;">— Rahul, LDCE</p>
+            </div>
+            <div class="glass-card service-card" style="font-style: italic;">
+                "Got my resume designed and delivered the same day. Highly recommended."
+                <p style="margin-top: 10px; font-weight: 800; color: #fff;">— Sneha, Nirma Univ</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container contact-grid">
+        <div class="glass-card" style="padding: 20px;">📞 +91 9978651150</div>
+        <div class="glass-card" style="padding: 20px;">📞 +91 9104063798</div>
+        <div class="glass-card" style="padding: 20px;">📞 +91 8511367564</div>
+    </div>
+
+    <footer>
+        <p>© 2026 Essentials Hub – Academic Support Partner</p>
     </footer>
 
     <script>
-        /**
-         * SERVICE DATA ARCHITECTURE
-         * type: 'unit' (multiplies price by qty)
-         * type: 'flat' (flat fee regardless of qty)
-         */
-        const SERVICES = {
-            'print_bw': { name: 'Printing (B/W)', price: 2, type: 'unit', allowAddons: true, minQty: 1 },
-            'print_color': { name: 'Printing (Color)', price: 10, type: 'unit', allowAddons: true, minQty: 1 },
-            'coding_mini': { name: 'Coding: Mini Project', price: 999, type: 'flat', allowAddons: false, minQty: 1 },
-            'coding_major': { name: 'Coding: Major Project', price: 2499, type: 'flat', allowAddons: false, minQty: 1 },
-            'design_resume': { name: 'Design: Premium Resume', price: 199, type: 'flat', allowAddons: false, minQty: 1 },
-            'academic_report': { name: 'Academic Report Writing', price: 599, type: 'unit', allowAddons: false, minQty: 1 }
-        };
+        let currentOrderId = "EH-" + Math.floor(100000 + Math.random() * 900000);
+        document.getElementById('orderId').innerText = "#" + currentOrderId;
 
-        let state = {
-            orderID: 'EH-' + Math.floor(1000 + Math.random() * 9000),
-            serviceKey: 'print_bw',
-            qty: 1,
-            addons: { spiral: false, folder: false },
-            delivery: false,
-            location: ''
-        };
-
-        // Initialization
-        window.onload = () => {
-            const select = document.getElementById('service-select');
-            Object.keys(SERVICES).forEach(key => {
-                let opt = document.createElement('option');
-                opt.value = key;
-                opt.innerText = SERVICES[key].name;
-                select.appendChild(opt);
-            });
-            document.getElementById('order-id').innerText = '#' + state.orderID;
-            updatePrice();
-        };
-
-        function handleServiceChange() {
-            state.serviceKey = document.getElementById('service-select').value;
-            const config = SERVICES[state.serviceKey];
+        function toggleInputs() {
+            const service = document.getElementById('serviceSelect').value;
+            const isPrinting = service.includes('printing');
             
-            // Logic: Disable add-ons if not printing
-            const addonBox = document.getElementById('addon-container');
-            if (!config.allowAddons) {
-                state.addons.spiral = false;
-                state.addons.folder = false;
-                addonBox.style.opacity = '0.3';
-                addonBox.style.pointerEvents = 'none';
-                document.getElementById('addon-spiral').classList.remove('active');
-                document.getElementById('addon-folder').classList.remove('active');
-            } else {
-                addonBox.style.opacity = '1';
-                addonBox.style.pointerEvents = 'all';
+            document.getElementById('qtyContainer').style.display = isPrinting ? 'block' : 'none';
+            document.getElementById('printingOptions').style.display = isPrinting ? 'block' : 'none';
+            
+            if(!isPrinting) {
+                document.getElementById('spiralAddon').checked = false;
+                document.getElementById('folderAddon').checked = false;
             }
-
-            // UI Label update
-            document.getElementById('qty-label').innerText = config.type === 'unit' ? 'Quantity (Pages/Units)' : 'Number of Sets';
-            
-            updatePrice();
-        }
-
-        function toggleAddon(key) {
-            state.addons[key] = !state.addons[key];
-            document.getElementById(`addon-${key}`).classList.toggle('active');
             updatePrice();
         }
 
         function toggleDelivery() {
-            state.delivery = !state.delivery;
-            document.getElementById('delivery-toggle').classList.toggle('active');
-            document.getElementById('location-box').style.display = state.delivery ? 'block' : 'none';
+            const isDelivery = document.getElementById('deliveryToggle').checked;
+            document.getElementById('deliveryInput').style.display = isDelivery ? 'block' : 'none';
             updatePrice();
         }
 
         function updatePrice() {
-            state.qty = Math.max(1, parseInt(document.getElementById('qty-input').value) || 1);
-            state.location = document.getElementById('location-input').value;
+            const serviceSelect = document.getElementById('serviceSelect');
+            const service = serviceSelect.value;
+            const baseRate = parseInt(serviceSelect.options[serviceSelect.selectedIndex].dataset.price);
+            const qty = parseInt(document.getElementById('qtyInput').value) || 1;
             
-            const config = SERVICES[state.serviceKey];
-            const basePrice = config.type === 'unit' ? (config.price * state.qty) : config.price;
-            
-            let addonPrice = 0;
-            if (state.addons.spiral) addonPrice += 20;
-            if (state.addons.folder) addonPrice += 30;
-            
-            const deliveryPrice = state.delivery ? 40 : 0;
-            const total = basePrice + addonPrice + deliveryPrice;
+            let baseTotal = 0;
+            let addonsTotal = 0;
+            let deliveryTotal = document.getElementById('deliveryToggle').checked ? 30 : 0;
 
-            // Render Breakdown
-            const breakdownArea = document.getElementById('breakdown-area');
-            breakdownArea.innerHTML = `
-                <div class="breakdown-row"><span>Base (${config.name})</span><span>₹${basePrice}</span></div>
-                ${addonPrice > 0 ? `<div class="breakdown-row"><span>Add-ons</span><span>₹${addonPrice}</span></div>` : ''}
-                ${state.delivery ? `<div class="breakdown-row"><span>Delivery</span><span>₹40</span></div>` : ''}
-            `;
+            if (service.includes('printing')) {
+                baseTotal = baseRate * qty;
+                if (document.getElementById('spiralAddon').checked) addonsTotal += 20;
+                if (document.getElementById('folderAddon').checked) addonsTotal += 30;
+            } else {
+                baseTotal = baseRate;
+            }
 
-            document.getElementById('final-price').innerText = `₹${total}`;
+            document.getElementById('basePrice').innerText = "₹" + baseTotal;
+            document.getElementById('addonPrice').innerText = "₹" + addonsTotal;
+            document.getElementById('deliveryPrice').innerText = "₹" + deliveryTotal;
+            document.getElementById('totalPrice').innerText = "₹" + (baseTotal + addonsTotal + deliveryTotal);
         }
 
-        function placeOrder() {
-            const config = SERVICES[state.serviceKey];
-            const total = document.getElementById('final-price').innerText;
-            const addonsUsed = [];
-            if (state.addons.spiral) addonsUsed.push('Spiral Binding');
-            if (state.addons.folder) addonsUsed.push('Plastic Folder');
-
-            const message = `*NEW ORDER: ${state.orderID}*%0A` +
-                            `--------------------------%0A` +
-                            `*Service:* ${config.name}%0A` +
-                            `*Quantity:* ${state.qty}%0A` +
-                            `*Add-ons:* ${addonsUsed.length > 0 ? addonsUsed.join(', ') : 'None'}%0A` +
-                            `*Delivery:* ${state.delivery ? state.location : 'Self-Pickup'}%0A` +
-                            `--------------------------%0A` +
-                            `*TOTAL PAYABLE:* ${total}%0A` +
-                            `--------------------------%0A` +
-                            `Please confirm the order.`;
-
-            const whatsappUrl = `https://wa.me/919978651150?text=${message}`;
+        function sendToWhatsApp() {
+            const service = document.getElementById('serviceSelect').options[document.getElementById('serviceSelect').selectedIndex].text;
+            const qty = document.getElementById('qtyInput').value;
+            const total = document.getElementById('totalPrice').innerText;
+            const delivery = document.getElementById('deliveryToggle').checked ? document.getElementById('collegeName').value : "Self-Pickup";
             
-            // Visual feedback
-            const btn = event.target;
-            const originalText = btn.innerText;
-            btn.innerText = "Redirecting...";
-            btn.style.opacity = "0.7";
-
-            setTimeout(() => {
-                window.open(whatsappUrl, '_blank');
-                btn.innerText = originalText;
-                btn.style.opacity = "1";
-            }, 600);
+            const message = `*Essentials Hub Order*%0A` +
+                            `*Order ID:* ${currentOrderId}%0A` +
+                            `*Service:* ${service}%0A` +
+                            `*Quantity:* ${qty} units%0A` +
+                            `*Delivery:* ${delivery}%0A` +
+                            `*Total:* ${total}`;
+            
+            window.open(`https://wa.me/919978651150?text=${message}`, '_blank');
         }
+
+        // Initialize
+        toggleInputs();
     </script>
 </body>
 </html>
