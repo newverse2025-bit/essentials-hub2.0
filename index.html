@@ -1248,19 +1248,24 @@
     const btn = document.getElementById('whatsappBtn');
     btn.classList.add('loading');
 
-    const message =
-      `*ESSENTIALS HUB ORDER*%0A` +
-      `━━━━━━━━━━━━━━━━━━━━%0A` +
-      `Order ID: ${currentOrderId}%0A` +
-      `Service: ${service}%0A` +
-      `Quantity: ${qty}%0A` +
-      `Spiral: ${spiral}%0A` +
-      `Folder: ${folder}%0A` +
-      `Delivery: ${delivery}%0A` +
-      `Same-Day: ${sameDay}%0A` +
-      `━━━━━━━━━━━━━━━━━━━━%0A` +
-      `Total: ${total}%0A` +
-      `Please confirm my order.`;
+   const message = `
+Order ID: ${currentOrderId}
+
+Hello Essentials Hub,
+I want to place an order:
+
+• Service: ${service}
+• Quantity/Pages/Hours: ${qty}
+• Spiral Binding: ${spiral}
+• File / Folder: ${folder}
+• On-Campus Delivery: ${isDelivery ? "Yes (₹30)" : "No (₹0)"}
+• College: ${isDelivery ? delivery : "—"}
+• Same-Day Delivery: ${sameDay}
+
+Estimated Total: ${total}
+
+Please confirm next steps.
+`;
 
     setTimeout(() => {
       btn.classList.remove('loading');
