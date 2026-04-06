@@ -1,500 +1,500 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Essentials Hub</title>
-<style>
-/* Modern Color Palette & Variables */
-:root {
-  --bg1: #060913;
-  --bg2: #0f172a;
-  --card: rgba(30, 41, 59, 0.7);
-  --text: #f8fafc;
-  --muted: #94a3b8;
-  --accent: #6366f1;
-  --accent-glow: rgba(99, 102, 241, 0.3);
-  --accent2: #38bdf8;
-  --success: #10b981;
-  --radius: 16px;
-  --glass-border: rgba(255, 255, 255, 0.08);
-  font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essentials Hub | Premium Student Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #060913;
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.3);
+            --secondary: #38bdf8;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-blur: blur(20px);
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
 
-* { box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--bg1);
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(56, 189, 248, 0.1) 0px, transparent 50%);
-  color: var(--text);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-header {
-  padding: 40px 20px 20px;
-  text-align: center;
-  background: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--glass-border);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
+        /* --- Liquid Background Effects --- */
+        .glow-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 30%, var(--accent-glow) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(56, 189, 248, 0.15) 0%, transparent 40%);
+        }
 
-header span {
-  font-size: 32px;
-  font-weight: 800;
-  background: linear-gradient(to right, #818cf8, #38bdf8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: -0.02em;
-}
+        /* --- Layout --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
-.tagline {
-  text-align: center;
-  font-size: 14px;
-  color: var(--muted);
-  max-width: 600px;
-  margin: 10px auto 0;
-}
+        section {
+            padding: 80px 0;
+        }
 
-section {
-  padding: 20px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
+        /* --- UI Components --- */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            transition: var(--transition);
+        }
 
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
 
-h2::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, var(--glass-border), transparent);
-}
+        .btn {
+            padding: 12px 28px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
 
-/* Glassmorphism Cards */
-.pricing-table, .order-box {
-  background: var(--card);
-  backdrop-filter: blur(16px);
-  padding: 30px;
-  border-radius: var(--radius);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-  margin-bottom: 30px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
 
-.pricing-table:hover, .order-box:hover {
-  border-color: rgba(99, 102, 241, 0.4);
-  transform: translateY(-4px);
-  box-shadow: 0 25px 60px rgba(99, 102, 241, 0.1);
-}
+        .btn-primary:hover {
+            background: #4f46e5;
+            transform: scale(1.02);
+        }
 
-/* Grid Styling */
-.table-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-}
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: white;
+        }
 
-.table-grid h3 {
-  color: var(--accent2);
-  font-size: 1.1rem;
-  margin-top: 0;
-  display: flex;
-  align-items: center;
-}
+        .btn-outline:hover {
+            background: var(--glass-bg);
+        }
 
-.table-grid p {
-  background: rgba(255,255,255,0.03);
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-}
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            padding-top: 120px;
+            padding-bottom: 60px;
+        }
 
-.table-grid p:hover {
-  background: rgba(255,255,255,0.06);
-  border-color: var(--glass-border);
-}
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
 
-/* Form Controls */
-label {
-  display: block;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
 
-input[type="number"], select, textarea, input[type="text"] {
-  width: 100%;
-  padding: 14px;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid var(--glass-border);
-  color: var(--text);
-  border-radius: 10px;
-  font-size: 1rem;
-  transition: 0.2s;
-}
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
 
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-glow);
-  background: rgba(15, 23, 42, 0.9);
-}
+        /* --- Trust Bar --- */
+        .trust-bar {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 30px;
+            text-align: center;
+        }
 
-/* Checkbox Row Styling */
-.row-inline {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 12px;
-  margin: 20px 0;
-}
+        .trust-item span {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
 
-.row-inline > div {
-  background: rgba(255,255,255,0.03);
-  padding: 15px;
-  border-radius: 12px;
-  border: 1px solid var(--glass-border);
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  cursor: pointer;
-}
+        .trust-item strong {
+            font-size: 1.1rem;
+            color: var(--secondary);
+        }
 
-.row-inline > div:hover {
-  background: rgba(99, 102, 241, 0.1);
-  border-color: var(--accent);
-}
+        /* --- Services Grid --- */
+        .grid-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
 
-/* Buttons */
-.btn-primary {
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-  color: white;
-  padding: 16px 28px;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
-}
+        .service-card {
+            padding: 32px;
+            text-align: left;
+        }
 
-.btn-ghost {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text);
-  border: 1px solid var(--glass-border);
-  padding: 16px 28px;
-}
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
 
-.btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
+        .service-card h3 {
+            margin-bottom: 12px;
+            font-size: 1.4rem;
+        }
 
-button:active { transform: scale(0.96); }
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
 
-/* Total Bar */
-.total-row {
-  margin: 25px 0;
-  padding: 20px;
-  background: linear-gradient(90deg, rgba(99, 102, 241, 0.1), transparent);
-  border-radius: 12px;
-  border-left: 4px solid var(--accent);
-}
+        .price-tag {
+            color: var(--secondary);
+            font-weight: 600;
+        }
 
-.total-amount {
-  font-size: 2rem;
-  color: var(--accent2);
-  text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-}
+        /* --- Calculator Section --- */
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 30px;
+        }
 
-.error-banner {
-  background: #7f1d1d;
-  color: #fecaca;
-  border-left: 4px solid #ef4444;
-}
+        @media (max-width: 768px) {
+            .calculator-container { grid-template-columns: 1fr; }
+        }
 
-footer {
-  margin-top: 50px;
-  padding: 40px;
-  background: rgba(0,0,0,0.2);
-  border-top: 1px solid var(--glass-border);
-}
+        .config-box { padding: 40px; }
+        .summary-box { 
+            padding: 40px; 
+            background: rgba(99, 102, 241, 0.05); 
+            border: 1px solid var(--accent-glow);
+        }
 
-@media (max-width: 600px) {
-  .pricing-table, .order-box { padding: 20px; }
-  .total-amount { font-size: 1.5rem; }
-}
-</style>
+        .form-group { margin-bottom: 24px; }
+        label { display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem; }
+        
+        select, input {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: white;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        select:focus, input:focus { border-color: var(--accent); }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .check-item input { width: auto; cursor: pointer; }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .total-row {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            border: none;
+        }
+
+        /* --- Footer & Misc --- */
+        .footer {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .order-id { color: var(--secondary); font-family: monospace; }
+        
+        [data-aos] { opacity: 0; transform: translateY(20px); transition: var(--transition); }
+        .visible { opacity: 1 !important; transform: translateY(0) !important; }
+    </style>
 </head>
 <body>
-<header><span>✨ Essentials Hub</span>
-  <p class="tagline">The premium student companion for Printing, Coding, & Project Kits.</p>
-</header>
 
-<section>
-  <div id="errorBanner" class="error-banner" role="alert"></div>
+    <div class="glow-mesh"></div>
 
-  <div class="pricing-table">
-    <h2>Available Services</h2>
-    <div class="table-grid">
-      <div>
-        <h3>📚 Lab Manuals</h3>
-        <p><strong>Maths Manual (with spiral): ₹95</strong><br>
-        <span class="small-note">Neat printing and spiral binding included.</span></p>
-      </div> 
-      <div>
-        <h3>🖨️ Printing & Binding</h3>
-        <p><strong>B/W Print (Single): ₹3/page</strong></p>
-        <p><strong>B/W Print (Double): ₹4/sheet</strong></p>
-        <p><strong>Color Print: ₹10/page</strong></p>
-        <p><strong>Spiral Binding: ₹20</strong></p>
-        <p><strong>Folder / Cover: ₹30</strong></p>
-      </div>
-      <div>
-        <h3>💻 Coding Support</h3>
-        <p><strong>Quick Fix: ₹30–₹50</strong></p>
-        <p><strong>1 Hour Coding: ₹100</strong></p>
-        <p><strong>Mini Project: ₹200–₹300</strong></p>
-        <p><strong>Full Bundle: ₹800–₹1200</strong><br><span class="small-note">Code + PPT + Report.</span></p>
-      </div>
-      <div>
-        <h3>📝 Assignment Help</h3>
-        <p><strong>Report Typing: ₹80–₹150</strong></p>
-        <p><strong>PPT Creation: ₹50–₹100</strong></p>
-        <p><strong>Excel/Data Entry: ₹200/hr</strong></p>
-      </div>
-    </div>
-  </div>
+    <section class="hero container">
+        <h1 data-aos>Your All-in-One <br> Student Service Hub</h1>
+        <p data-aos>Printing • Coding • Assignments • Delivered to your campus. High-quality support tailored for the modern student.</p>
+        <div class="hero-btns" data-aos>
+            <a href="#order" class="btn btn-primary">Order Now</a>
+            <a href="#services" class="btn btn-outline">View Services</a>
+        </div>
+    </section>
 
-  <div class="order-box">
-    <h2>Customize Your Order</h2>
-
-    <label for="service">Choose a Service</label>
-    <select id="service">
-      <option value="">Select a category...</option>
-      <option value="maths_manual" data-type="flat" data-min="95" data-max="95">Maths Manual (with spiral) — ₹95</option>
-      <option value="bw_single" data-type="per_page" data-min="3" data-max="3" data-min-qty="6">B/W Print (Single) — ₹3/page</option>
-      <option value="bw_double" data-type="per_page" data-min="4" data-max="4" data-min-qty="6">B/W Print (Double) — ₹4/sheet</option>
-      <option value="color_print" data-type="per_page" data-min="10" data-max="10">Color Print — ₹10/page</option>
-      <option value="poster_print" data-type="per_page" data-min="20" data-max="20">Poster Printing — ₹20/page</option>
-      <option value="id_card" data-type="flat" data-min="15" data-max="15">ID Card Printing — ₹15/unit</option>
-      <option value="notes_pdf" data-type="flat" data-min="30" data-max="30">Notes PDF (digital) — ₹30</option>
-      <option value="resume" data-type="flat" data-min="150" data-max="150">Resume / CV Design — ₹150</option>
-      <option value="social_post" data-type="flat" data-min="200" data-max="200">Social Post Design — ₹200</option>
-      <option value="logo_design" data-type="flat" data-min="500" data-max="500">Logo Design — ₹500</option>
-      <option value="video_explain" data-type="flat" data-min="1000" data-max="1000">Project Explanation Video — ₹1000</option>
-      <option value="usb_transfer" data-type="flat" data-min="50" data-max="50">USB Transfer — ₹50</option>
-      <option value="lamination" data-type="flat" data-min="20" data-max="20">Lamination — ₹20</option>
-      <option value="formatting_print" data-type="per_page" data-min="20" data-max="50">Formatting — ₹20–₹50/page</option>
-      <option value="report_typing" data-type="per_page" data-min="80" data-max="150">Report Typing — ₹80–₹150/page</option>
-      <option value="ppt" data-type="flat" data-min="50" data-max="100">PPT Creation — ₹50–₹100</option>
-      <option value="scanning_print" data-type="per_page" data-min="5" data-max="5">Scanning — ₹5/page</option>
-      <option value="quick_fix" data-type="flat" data-min="30" data-max="50">Quick Fix — ₹30–₹50</option>
-      <option value="guidance_30" data-type="flat" data-min="50" data-max="50">30-Min Guidance — ₹50</option>
-      <option value="coding_1hr" data-type="flat" data-min="100" data-max="100">1 Hour Coding Support — ₹100</option>
-      <option value="code_cleanup" data-type="flat" data-min="50" data-max="150">Code Cleanup — ₹50–₹150</option>
-      <option value="mini_project" data-type="flat" data-min="200" data-max="300">Mini Project — ₹200–₹300</option>
-      <option value="intermediate_project" data-type="flat" data-min="400" data-max="600">Intermediate Project — ₹400–₹600</option>
-      <option value="full_bundle" data-type="flat" data-min="800" data-max="1200">Full Bundle — ₹800–₹1200</option>
-      <option value="assign_formatting" data-type="per_page" data-min="20" data-max="50">Assignment Formatting — ₹20–₹50</option>
-      <option value="pdf_conversion" data-type="flat" data-min="10" data-max="10">PDF Conversion — ₹10</option>
-      <option value="assign_scanning" data-type="per_page" data-min="5" data-max="5">Assignment Scanning — ₹5/page</option>
-      <option value="data_entry" data-type="flat" data-min="200" data-max="200">Data Entry / Excel — ₹200/hour</option>
-      <option value="form_filling" data-type="flat" data-min="100" data-max="100">Form Filling — ₹100</option>
-      <option value="mcq_help" data-type="flat" data-min="100" data-max="100">MCQ / Small Assignment Help — ₹100</option>
-    </select>
-
-    <label for="quantity">Quantity / Pages / Hours</label>
-    <input id="quantity" type="number" min="1" value="1" />
-
-    <div class="row-inline">
-      <div>
-        <input id="addSpiral" type="checkbox">
-        <label for="addSpiral">Spiral Binding (₹20)</label>
-      </div>
-      <div>
-        <input id="addFolder" type="checkbox">
-        <label for="addFolder">File / Folder (₹30)</label>
-      </div>
-      <div>
-        <input id="addDelivery" type="checkbox">
-        <label for="addDelivery">On-Campus Delivery</label>
-      </div>
+    <div class="container" data-aos>
+        <div class="glass-card trust-bar">
+            <div class="trust-item"><span>Status</span><strong>Trusted by 500+ Students</strong></div>
+            <div class="trust-item"><span>Location</span><strong>Ahmedabad Colleges</strong></div>
+            <div class="trust-item"><span>Speed</span><strong>Same-Day Delivery</strong></div>
+        </div>
     </div>
 
-    <div id="collegeBlock" style="display:none; margin-bottom: 20px;">
-      <label for="collegeName">College Name</label>
-      <input id="collegeName" type="text" placeholder="e.g., GP Ahmedabad" />
-    </div>
+    <section id="services" class="container">
+        <h2 style="text-align:center; margin-bottom: 40px;" data-aos>Premium Solutions</h2>
+        <div class="grid-services">
+            <div class="glass-card service-card" data-aos>
+                <span class="service-icon">🖨️</span>
+                <h3>Printing</h3>
+                <p>High-speed B/W and Color printing. Lab manuals and thesis printing.</p>
+                <span class="price-tag">Starting ₹2/page</span>
+            </div>
+            <div class="glass-card service-card" data-aos>
+                <span class="service-icon">💻</span>
+                <h3>Coding Support</h3>
+                <p>Python, Java, Web Dev projects and bug fixing bundles.</p>
+                <span class="price-tag">Starting ₹499</span>
+            </div>
+            <div class="glass-card service-card" data-aos>
+                <span class="service-icon">🎨</span>
+                <h3>Design</h3>
+                <p>ATS-friendly resumes, logos, and professional PPT designs.</p>
+                <span class="price-tag">Starting ₹199</span>
+            </div>
+            <div class="glass-card service-card" data-aos>
+                <span class="service-icon">📚</span>
+                <h3>Academic Help</h3>
+                <p>Assignment research, report writing, and documentation.</p>
+                <span class="price-tag">Starting ₹299</span>
+            </div>
+        </div>
+    </section>
 
-    <label for="notes">Additional Requirements</label>
-    <textarea id="notes" rows="3" placeholder="e.g., Python, Double-sided, Specific deadlines..."></textarea>
+    <section id="order" class="container">
+        <div class="calculator-container">
+            <div class="glass-card config-box">
+                <h2 style="margin-bottom: 25px;">Configure Order</h2>
+                
+                <div class="form-group">
+                    <label>Select Service</label>
+                    <select id="serviceType" onchange="calculateTotal()">
+                        <option value="printing" data-price="2">Printing (B/W - ₹2/pg)</option>
+                        <option value="printing_color" data-price="10">Printing (Color - ₹10/pg)</option>
+                        <option value="coding" data-price="499">Coding Project (Basic - ₹499)</option>
+                        <option value="coding_pro" data-price="999">Coding Project (Full - ₹999)</option>
+                        <option value="design" data-price="199">Resume/Design (₹199)</option>
+                        <option value="academic" data-price="299">Academic Report (₹299)</option>
+                    </select>
+                </div>
 
-    <div class="total-row">
-      <div class="label">Estimated Total</div>
-      <div class="total-amount">₹<span id="total">0</span></div>
-    </div>
+                <div class="form-group">
+                    <label id="qtyLabel">Number of Pages / Units</label>
+                    <input type="number" id="quantity" value="1" min="1" oninput="calculateTotal()">
+                </div>
 
-    <div style="display:flex; gap:12px; flex-wrap:wrap;">
-      <button id="waOrder" class="btn-primary">Proceed to WhatsApp</button>
-      <button id="downloadInvoice" class="btn-ghost">Generate Invoice</button>
-    </div>
-    <p class="small-note" id="order-id-note"></p>
-  </div>
+                <div class="form-group">
+                    <label>Add-ons</label>
+                    <div class="checkbox-group">
+                        <label class="check-item">
+                            <input type="checkbox" id="addonSpiral" onchange="calculateTotal()"> Spiral Binding (+₹20)
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" id="addonFolder" onchange="calculateTotal()"> Plastic Folder (+₹30)
+                        </label>
+                    </div>
+                </div>
 
-  <div style="text-align:center; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--glass-border);">
-    <h3>Contact & Support</h3>
-    <p>+91 99786 51150 | +91 91040 63798 | +91 85113 67564</p>
-  </div>
-</section>
+                <div class="form-group">
+                    <label class="check-item">
+                        <input type="checkbox" id="deliveryToggle" onchange="toggleDelivery()"> 🚚 Campus Delivery (+₹40)
+                    </label>
+                </div>
 
-<footer>
-  © <span id="year"></span> Essentials Hub • Excellence in Academic Support
-</footer>
+                <div id="deliveryInfo" class="form-group" style="display: none;">
+                    <label>College Name & Room/Block</label>
+                    <input type="text" id="collegeDetails" placeholder="e.g. Nirma Univ, Block C">
+                </div>
+            </div>
 
-<script>
-// EXACT SAME LOGIC FROM YOUR ORIGINAL CODE
-(() => {
-  const serviceEl = document.getElementById('service');
-  const qtyEl = document.getElementById('quantity');
-  const totalEl = document.getElementById('total');
-  const notesEl = document.getElementById('notes');
-  const waBtn = document.getElementById('waOrder');
-  const spiralBox = document.getElementById('addSpiral');
-  const folderBox = document.getElementById('addFolder');
-  const deliveryBox = document.getElementById('addDelivery');
-  const downloadBtn = document.getElementById('downloadInvoice');
-  const orderIdNote = document.getElementById('order-id-note');
-  const errorBanner = document.getElementById('errorBanner');
-  const collegeBlock = document.getElementById('collegeBlock');
-  const collegeNameInput = document.getElementById('collegeName');
-  const yearEl = document.getElementById('year');
-  if(yearEl) yearEl.textContent = new Date().getFullYear();
+            <div class="glass-card summary-box">
+                <h3 style="margin-bottom: 20px;">Order Summary</h3>
+                <div class="summary-row">
+                    <span>Order ID</span>
+                    <span class="order-id" id="displayOrderID">#EH-0000</span>
+                </div>
+                <div class="summary-row">
+                    <span>Base Price</span>
+                    <span id="baseTotal">₹0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Add-ons</span>
+                    <span id="addonTotal">₹0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Delivery</span>
+                    <span id="deliveryCharge">₹0</span>
+                </div>
+                <div class="summary-row total-row">
+                    <span>Total</span>
+                    <span id="grandTotal">₹0</span>
+                </div>
 
-  const PRINT_DELIVERY_FEE = 5;   
-  const FLAT_DELIVERY_FEE = 15;   
-  const FREE_PRINT_THRESHOLD = 20; 
+                <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="sendWhatsApp()">Proceed to WhatsApp</button>
+                <button class="btn btn-outline" style="width: 100%; margin-top: 12px;" onclick="printInvoice()">Generate Invoice</button>
+            </div>
+        </div>
+    </section>
 
-  function safeNumber(x, fallback=0){
-    const n = Number(x);
-    return (isFinite(n) ? n : fallback);
-  }
-  function formatINR(n){ return safeNumber(n).toLocaleString('en-IN'); }
-  function generateOrderId(){ return 'EH' + Date.now().toString().slice(-8); }
-  function getSelectedOption(){ try { return serviceEl && serviceEl.selectedOptions && serviceEl.selectedOptions[0]; } catch(e){ return null; } }
-  function isPrintingService(opt){ if(!opt) return false; return String(opt.dataset.type || opt.getAttribute('data-type') || '').toLowerCase() === 'per_page'; }
+    <section class="container">
+        <h2 style="text-align: center; margin-bottom: 40px;">Student Feedback</h2>
+        <div class="grid-services">
+            <div class="glass-card service-card" style="font-style: italic;">
+                "Best service for lab manuals! Saved me 3 hours of cycling to the market."
+                <p style="margin-top: 15px; font-weight: 600; color: #fff;">— Aarav, LDCE</p>
+            </div>
+            <div class="glass-card service-card" style="font-style: italic;">
+                "The coding project bundle was clean and well-documented. Highly recommend!"
+                <p style="margin-top: 15px; font-weight: 600; color: #fff;">— Priya, Nirma Univ</p>
+            </div>
+        </div>
+    </section>
 
-  function showError(msg){
-    if(!errorBanner) return;
-    errorBanner.textContent = msg;
-    errorBanner.style.display = 'block';
-    setTimeout(()=>{ errorBanner.style.display = 'none'; }, 5000);
-  }
-  function clearError(){ if(errorBanner) errorBanner.style.display = 'none'; }
+    <footer class="footer container">
+        <div style="margin-bottom: 30px;">
+            <h3>Contact Us</h3>
+            <p>+91 9978651150 | +91 9104063798 | +91 8511367564</p>
+        </div>
+        <p>© 2026 Essentials Hub – Academic Support Partner</p>
+    </footer>
 
-  function updateExtrasAvailability(){
-    const opt = getSelectedOption();
-    const printing = isPrintingService(opt);
-    if(spiralBox){ spiralBox.disabled = !printing; if(!printing) spiralBox.checked = false; }
-    if(folderBox){ folderBox.disabled = !printing; if(!printing) folderBox.checked = false; }
-  }
+    <script>
+        // AOS Implementation
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, observerOptions);
 
-  function updateCollegeBlock(){
-    if(deliveryBox && deliveryBox.checked){
-      collegeBlock.style.display = 'block';
-    } else {
-      collegeBlock.style.display = 'none';
-      if(collegeNameInput) collegeNameInput.value = '';
-    }
-  }
+        document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
 
-  function calculate(){
-    try{
-      clearError();
-      const opt = getSelectedOption();
-      if(!opt || !opt.value) return {min:0,max:0,violatesMinQty:false,deliveryFee:0,freeDelivery:false};
+        // State Management
+        let orderID = "EH-" + Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('displayOrderID').innerText = "#" + orderID;
 
-      const dmin = opt.dataset.min ?? opt.getAttribute('data-min') ?? '0';
-      const dmax = opt.dataset.max ?? opt.getAttribute('data-max') ?? dmin;
-      const min = Math.max(0, safeNumber(String(dmin).replace(/[^0-9.-]/g,''), 0));
-      const max = Math.max(min, safeNumber(String(dmax).replace(/[^0-9.-]/g,''), min));
-      const type = (opt.dataset.type || opt.getAttribute('data-type') || 'flat').toString();
+        function toggleDelivery() {
+            const isDelivery = document.getElementById('deliveryToggle').checked;
+            document.getElementById('deliveryInfo').style.display = isDelivery ? 'block' : 'none';
+            calculateTotal();
+        }
 
-      let qty = safeNumber(qtyEl.value, 1);
-      if(qty < 1) qty = 1;
-      
-      const rawMinQty = opt.dataset.minQty ?? opt.getAttribute('data-min-qty');
-      const minQty = rawMinQty ? Math.max(1, Math.floor(safeNumber(rawMinQty,1))) : 1;
-      if(qty < minQty) return {min:0, max:0, violatesMinQty:true, minQtyRequired:minQty, deliveryFee:0, freeDelivery:false};
+        function calculateTotal() {
+            const serviceSelect = document.getElementById('serviceType');
+            const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+            const basePrice = parseFloat(selectedOption.getAttribute('data-price'));
+            const qty = parseInt(document.getElementById('quantity').value) || 1;
 
-      let minTotal = (type === 'per_page') ? min * qty : min;
-      let maxTotal = (type === 'per_page') ? max * qty : max;
+            // Calculations
+            let baseTotal = basePrice * qty;
+            
+            let addons = 0;
+            if(document.getElementById('addonSpiral').checked) addons += 20;
+            if(document.getElementById('addonFolder').checked) addons += 30;
 
-      if(spiralBox && spiralBox.checked){ minTotal += 20; maxTotal += 20; }
-      if(folderBox && folderBox.checked){ minTotal += 30; maxTotal += 30; }
+            let delivery = document.getElementById('deliveryToggle').checked ? 40 : 0;
+            let finalTotal = baseTotal + addons + delivery;
 
-      let deliveryFee = 0;
-      let freeDelivery = false;
-      if(deliveryBox && deliveryBox.checked){
-        if(isPrintingService(opt)){
-          if(qty >= FREE_PRINT_THRESHOLD){ deliveryFee = 0; freeDelivery = true; }
-          else { deliveryFee = PRINT_DELIVERY_FEE; }
-        } else { deliveryFee = FLAT_DELIVERY_FEE; }
-      }
+            // Update UI
+            document.getElementById('baseTotal').innerText = `₹${baseTotal}`;
+            document.getElementById('addonTotal').innerText = `₹${addons}`;
+            document.getElementById('deliveryCharge').innerText = `₹${delivery}`;
+            document.getElementById('grandTotal').innerText = `₹${finalTotal}`;
+        }
 
-      return {min: minTotal + deliveryFee, max: maxTotal + deliveryFee, violatesMinQty:false, deliveryFee, freeDelivery};
-    } catch(err){ return {min:0,max:0,violatesMinQty:false,deliveryFee:0,freeDelivery:false}; }
-  }
+        function sendWhatsApp() {
+            const service = document.getElementById('serviceType').value;
+            const qty = document.getElementById('quantity').value;
+            const total = document.getElementById('grandTotal').innerText;
+            const college = document.getElementById('collegeDetails').value || "Self-Pickup";
+            
+            const message = `*Essentials Hub Order*%0A------------------%0A*Order ID:* ${orderID}%0A*Service:* ${service}%0A*Quantity:* ${qty}%0A*Total:* ${total}%0A*Delivery:* ${college}%0A------------------%0APlease confirm my order.`;
+            
+            window.open(`https://wa.me/919978651150?text=${message}`, '_blank');
+        }
 
-  function displayTotal(){
-    updateExtrasAvailability();
-    updateCollegeBlock();
-    const t = calculate();
-    if(t.violatesMinQty){
-      totalEl.textContent = '0';
-      if(orderIdNote) orderIdNote.textContent = `(Min ${t.minQtyRequired} required)`;
-      return;
-    }
-    totalEl.textContent = (t.min === t.max) ? formatINR(t.min) : `${formatINR(t.min)} – ${formatINR(t.max)}`;
-    if(orderIdNote) orderIdNote.textContent = `Order ID: ${generateOrderId()}`;
-  }
+        function printInvoice() {
+            const content = `
+                Essentials Hub Invoice
+                ID: ${orderID}
+                Service: ${document.getElementById('serviceType').value}
+                Total: ${document.getElementById('grandTotal').innerText}
+                Thank you for choosing Essentials Hub!
+            `;
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`<pre style="font-family: sans-serif; padding: 40px;">${content}</pre>`);
+            printWindow.document.close();
+            printWindow.print();
+        }
 
-  [serviceEl, qtyEl, spiralBox, folderBox, deliveryBox, collegeNameInput].forEach(el => {
-    if(el) el.addEventListener('change', displayTotal);
-    if(el) el.addEventListener('input', displayTotal);
-  });
-
-  waBtn.addEventListener('click', (e) => {
-    const t = calculate();
-    if(t.violatesMinQty || t.min === 0) return alert('Check selection/quantity');
-    if(deliveryBox.checked && !collegeNameInput.value.trim()) return alert('College name required');
-    
-    const msg = `Order ID: ${generateOrderId()}\nService: ${getSelectedOption().textContent}\nQty: ${qtyEl.value}\nTotal: ₹${totalEl.textContent}\nNotes: ${notesEl.value}`;
-    window.open(`https://wa.me/918511367564?text=${encodeURIComponent(msg)}`, '_blank');
-  });
-
-  downloadBtn.addEventListener('click', () => {
-    const t = calculate();
-    if(t.min === 0) return alert('Select service first');
-    const w = window.open('', '_blank');
-    w.document.write(`<html><body><h1>Essentials Hub Invoice</h1><p>Service: ${getSelectedOption().textContent}</p><p>Total: ₹${totalEl.textContent}</p><button onclick="window.print()">Print</button></body></html>`);
-    w.document.close();
-  });
-
-  displayTotal();
-})();
-</script>
+        // Init
+        calculateTotal();
+    </script>
 </body>
 </html>
