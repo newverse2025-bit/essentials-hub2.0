@@ -6,19 +6,27 @@
     <title>Essentials Hub | Premium Student Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
+            /* Color Palette */
             --bg: #060913;
-            --accent: #6366f1;
-            --accent-glow: rgba(99, 102, 241, 0.3);
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.5);
             --secondary: #38bdf8;
             --text-main: #ffffff;
             --text-muted: #94a3b8;
+            
+            /* Glass Effects */
             --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-blur: blur(20px);
-            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-blur: blur(24px);
+            
+            /* Transitions */
+            --ease: cubic-bezier(0.23, 1, 0.32, 1);
+            --transition-slow: 0.6s var(--ease);
+            --transition-fast: 0.3s var(--ease);
         }
 
         * {
@@ -26,17 +34,18 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
             background-color: var(--bg);
             color: var(--text-main);
-            line-height: 1.6;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* --- Liquid Background Effects --- */
-        .glow-mesh {
+        /* --- BACKGROUND MESH --- */
+        .mesh-gradient {
             position: fixed;
             top: 0;
             left: 0;
@@ -44,450 +53,661 @@
             height: 100%;
             z-index: -1;
             background: 
-                radial-gradient(circle at 20% 30%, var(--accent-glow) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(56, 189, 248, 0.15) 0%, transparent 40%);
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.1) 0%, transparent 40%);
         }
 
-        /* --- Layout --- */
+        .mesh-sphere {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            filter: blur(80px);
+            opacity: 0.4;
+            pointer-events: none;
+            transition: transform 0.1s linear;
+        }
+
+        /* --- UTILITIES --- */
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 2rem;
         }
 
-        section {
-            padding: 80px 0;
-        }
-
-        /* --- UI Components --- */
-        .glass-card {
+        .glass-panel {
             background: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
-            transition: var(--transition);
-        }
-
-        .glass-card:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         .btn {
-            padding: 12px 28px;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 14px;
             font-weight: 600;
-            transition: var(--transition);
+            cursor: pointer;
+            transition: var(--transition-fast);
             text-decoration: none;
-            display: inline-block;
-            text-align: center;
+            border: none;
+            font-size: 1rem;
         }
 
         .btn-primary {
-            background: var(--accent);
+            background: var(--primary);
             color: white;
-            box-shadow: 0 4px 15px var(--accent-glow);
+            box-shadow: 0 8px 24px -6px var(--primary-glow);
         }
 
         .btn-primary:hover {
-            background: #4f46e5;
-            transform: scale(1.02);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px -4px var(--primary-glow);
+            filter: brightness(1.1);
         }
 
-        .btn-outline {
-            background: transparent;
+        .btn-secondary {
+            background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             color: white;
         }
 
-        .btn-outline:hover {
-            background: var(--glass-bg);
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.2);
         }
 
-        /* --- Hero Section --- */
+        /* --- HERO SECTION --- */
         .hero {
+            padding: 160px 0 100px;
             text-align: center;
-            padding-top: 120px;
-            padding-bottom: 60px;
+        }
+
+        .badge {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--secondary);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 24px;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
             font-weight: 800;
-            background: linear-gradient(to right, #fff, var(--secondary));
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(to bottom, #fff 40%, rgba(255,255,255,0.7));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
         }
 
         .hero p {
             color: var(--text-muted);
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             max-width: 600px;
             margin: 0 auto 40px;
         }
 
-        .hero-btns {
+        .cta-group {
             display: flex;
             gap: 16px;
             justify-content: center;
         }
 
-        /* --- Trust Bar --- */
+        /* --- TRUST SECTION --- */
         .trust-bar {
+            padding: 40px 0;
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
+            gap: 48px;
+            opacity: 0.7;
             flex-wrap: wrap;
-            gap: 20px;
-            padding: 30px;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .trust-item span { color: var(--secondary); }
+
+        /* --- SERVICES SECTION --- */
+        .section-title {
             text-align: center;
+            margin-bottom: 60px;
         }
 
-        .trust-item span {
-            display: block;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-        }
+        .section-title h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 12px; }
+        .section-title p { color: var(--text-muted); }
 
-        .trust-item strong {
-            font-size: 1.1rem;
-            color: var(--secondary);
-        }
-
-        /* --- Services Grid --- */
-        .grid-services {
+        .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 24px;
+            margin-bottom: 100px;
         }
 
         .service-card {
-            padding: 32px;
+            padding: 40px;
             text-align: left;
+            transition: var(--transition-fast);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
-        .service-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            display: block;
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: var(--transition-fast);
         }
 
-        .service-card h3 {
-            margin-bottom: 12px;
-            font-size: 1.4rem;
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.3);
         }
 
-        .service-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-        }
+        .service-card:hover::before { opacity: 1; }
 
-        .price-tag {
-            color: var(--secondary);
-            font-weight: 600;
-        }
-
-        /* --- Calculator Section --- */
-        .calculator-container {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .calculator-container { grid-template-columns: 1fr; }
-        }
-
-        .config-box { padding: 40px; }
-        .summary-box { 
-            padding: 40px; 
-            background: rgba(99, 102, 241, 0.05); 
-            border: 1px solid var(--accent-glow);
-        }
-
-        .form-group { margin-bottom: 24px; }
-        label { display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem; }
-        
-        select, input {
-            width: 100%;
-            padding: 14px;
+        .icon-box {
+            width: 56px;
+            height: 56px;
             background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            color: white;
-            outline: none;
-            transition: var(--transition);
-        }
-
-        select:focus, input:focus { border-color: var(--accent); }
-
-        .checkbox-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 10px;
-        }
-
-        .check-item {
+            border-radius: 16px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            font-size: 0.9rem;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            border: 1px solid var(--glass-border);
         }
 
-        .check-item input { width: auto; cursor: pointer; }
+        .service-card h3 { margin-bottom: 12px; font-weight: 700; }
+        .service-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
+        .price-tag { color: var(--secondary); font-weight: 700; font-size: 0.9rem; }
+
+        /* --- ORDER SYSTEM --- */
+        .order-section {
+            padding: 100px 0;
+            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+        }
+
+        .order-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        .configurator { padding: 48px; }
+        
+        .form-step { margin-bottom: 32px; }
+        .form-step label { 
+            display: block; 
+            margin-bottom: 12px; 
+            font-weight: 600; 
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        select, input[type="text"], input[type="number"] {
+            width: 100%;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 16px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition-fast);
+        }
+
+        select:focus, input:focus {
+            border-color: var(--primary);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .addon-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .addon-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            padding: 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .addon-card.active {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        /* --- PRICE SUMMARY --- */
+        .summary-card {
+            padding: 40px;
+            position: sticky;
+            top: 40px;
+        }
 
         .summary-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--glass-border);
+            margin-bottom: 16px;
+            font-size: 0.95rem;
         }
 
-        .total-row {
+        .summary-row.total {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--glass-border);
             font-size: 1.5rem;
             font-weight: 800;
-            color: white;
-            border: none;
         }
 
-        /* --- Footer & Misc --- */
-        .footer {
-            text-align: center;
-            padding: 60px 0;
+        .order-id {
+            font-family: monospace;
+            color: var(--secondary);
+            font-size: 0.8rem;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 100px 0;
+        }
+
+        .testimonial-card {
+            padding: 32px;
+            font-size: 1rem;
+            border-style: italic;
+        }
+
+        .testimonial-card p { margin-bottom: 20px; color: rgba(255,255,255,0.9); }
+        .author { font-weight: 700; color: var(--secondary); font-size: 0.9rem; }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 80px 0 40px;
             border-top: 1px solid var(--glass-border);
-            margin-top: 40px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            text-align: center;
         }
 
-        .order-id { color: var(--secondary); font-family: monospace; }
-        
-        [data-aos] { opacity: 0; transform: translateY(20px); transition: var(--transition); }
-        .visible { opacity: 1 !important; transform: translateY(0) !important; }
+        .footer-content h3 { margin-bottom: 16px; }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 40px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 900px) {
+            .order-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3rem; }
+            .addon-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="glow-mesh"></div>
+    <div class="mesh-gradient">
+        <div class="mesh-sphere" id="cursor-sphere"></div>
+    </div>
+
+    <nav class="container" style="padding-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-weight: 800; font-size: 1.5rem; letter-spacing: -1px;">
+            Essentials<span style="color: var(--primary);">Hub.</span>
+        </div>
+        <div class="trust-item" style="opacity: 0.8;">
+            <span>●</span> Ahmedabad, GJ
+        </div>
+    </nav>
 
     <section class="hero container">
-        <h1 data-aos>Your All-in-One <br> Student Service Hub</h1>
-        <p data-aos>Printing • Coding • Assignments • Delivered to your campus. High-quality support tailored for the modern student.</p>
-        <div class="hero-btns" data-aos>
+        <div class="badge">Next-Gen Academic Support</div>
+        <h1>Your All-in-One <br> Student Service Hub</h1>
+        <p>Premium printing, custom coding, and academic design. Delivered directly to your campus doorstep.</p>
+        <div class="cta-group">
             <a href="#order" class="btn btn-primary">Order Now</a>
-            <a href="#services" class="btn btn-outline">View Services</a>
+            <a href="#services" class="btn btn-secondary">View Services</a>
         </div>
     </section>
 
-    <div class="container" data-aos>
-        <div class="glass-card trust-bar">
-            <div class="trust-item"><span>Status</span><strong>Trusted by Students</strong></div>
-            <div class="trust-item"><span>Location</span><strong>Government Polytechnic Ahmedabad</strong></div>
-            <div class="trust-item"><span>Speed</span><strong>within 1-2 days Delivery</strong></div>
+    <div class="container">
+        <div class="trust-bar">
+            <div class="trust-item"><span>✔</span> Trusted by 500+ Students</div>
+            <div class="trust-item"><span>✔</span> Serving All Ahmedabad Colleges</div>
+            <div class="trust-item"><span>✔</span> Same-Day Campus Delivery</div>
         </div>
     </div>
 
-    <section id="services" class="container">
-        <h2 style="text-align:center; margin-bottom: 40px;" data-aos>Premium Solutions</h2>
-        <div class="grid-services">
-            <div class="glass-card service-card" data-aos>
-                <span class="service-icon">🖨️</span>
+    <section class="container" id="services" style="padding: 100px 0;">
+        <div class="section-title">
+            <h2>Streamlined Services</h2>
+            <p>Everything you need to excel, simplified into four categories.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="glass-panel service-card" onclick="scrollToOrder('printing')">
+                <div class="icon-box">🖨️</div>
                 <h3>Printing</h3>
-                <p>High-speed B/W and Color printing. Lab manuals and thesis printing.</p>
-                <span class="price-tag">Starting ₹2/page</span>
+                <p>High-speed laser printing for manuals, records, and thesis reports.</p>
+                <div class="price-tag">Starting from ₹2/pg</div>
             </div>
-            
-            <div class="glass-card service-card" data-aos>
-                <span class="service-icon">🎨</span>
-                <h3>Design</h3>
-                <p>ATS-friendly resumes, logos, and professional PPT designs.</p>
-                <span class="price-tag">Starting ₹49</span>
+
+            <div class="glass-panel service-card" onclick="scrollToOrder('design')">
+                <div class="icon-box">🎨</div>
+                <h3>Creative Design</h3>
+                <p>ATS-friendly resumes, professional PPTs, and branding.</p>
+                <div class="price-tag">Starting from ₹49</div>
             </div>
-            <div class="glass-card service-card" data-aos>
-                <span class="service-icon">📚</span>
+
+            <div class="glass-panel service-card" onclick="scrollToOrder('academic')">
+                <div class="icon-box">📚</div>
                 <h3>Academic Help</h3>
-                <p>Assignment research, report writing, and documentation.</p>
-                <span class="price-tag">Starting ₹49</span>
+                <p>Expert assistance with research papers and report formatting.</p>
+                <div class="price-tag">Starting from ₹49</div>
             </div>
         </div>
     </section>
 
-    <section id="order" class="container">
-        <div class="calculator-container">
-            <div class="glass-card config-box">
-                <h2 style="margin-bottom: 25px;">Configure Order</h2>
-                
-                <div class="form-group">
-                    <label>Select Service</label>
-                    <select id="serviceType" onchange="calculateTotal()">
-                        <option value="printing" data-price="2">Printing (B/W - ₹2/pg)</option>
-                        <option value="printing_color" data-price="10">Printing (Color - ₹10/pg)</option>
-                        <option value="design" data-price="199">Resume/Design (₹49)</option>
-                        <option value="academic" data-price="299">Academic Help (₹49)</option>
-                    </select>
-                </div>
+    <section class="order-section" id="order">
+        <div class="container">
+            <div class="section-title">
+                <h2>Place Your Order</h2>
+                <p>Configure your service and get an instant quote.</p>
+            </div>
 
-                <div class="form-group">
-                    <label id="qtyLabel">Number of Pages / Units</label>
-                    <input type="number" id="quantity" value="1" min="1" oninput="calculateTotal()">
-                </div>
+            <div class="order-grid">
+                <div class="glass-panel configurator">
+                    <div class="form-step">
+                        <label>1. Select Category</label>
+                        <select id="mainCategory" onchange="updateSubServices()">
+                            <option value="printing">Printing Services</option>
+                            <option value="coding">Coding & Projects</option>
+                            <option value="design">Design & Creative</option>
+                            <option value="academic">Academic Writing</option>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label>Add-ons</label>
-                    <div class="checkbox-group">
-                        <label class="check-item">
-                            <input type="checkbox" id="addonSpiral" onchange="calculateTotal()"> Spiral Binding (+₹20)
-                        </label>
-                        <label class="check-item">
-                            <input type="checkbox" id="addonFolder" onchange="calculateTotal()"> Plastic Folder (+₹30)
-                        </label>
+                    <div class="form-step">
+                        <label>2. Specific Service</label>
+                        <select id="subService" onchange="calculatePrice()">
+                            </select>
+                    </div>
+
+                    <div class="form-step">
+                        <label id="qtyLabel">3. Quantity (Pages/Units)</label>
+                        <input type="number" id="qtyInput" value="1" min="1" oninput="calculatePrice()">
+                    </div>
+
+                    <div class="form-step">
+                        <label>4. Premium Add-ons</label>
+                        <div class="addon-grid">
+                            <div class="addon-card" id="addon-spiral" onclick="toggleAddon('spiral')">
+                                <input type="checkbox" id="check-spiral" style="display:none">
+                                <span>Spiral Binding (+₹20)</span>
+                            </div>
+                            <div class="addon-card" id="addon-folder" onclick="toggleAddon('folder')">
+                                <input type="checkbox" id="check-folder" style="display:none">
+                                <span>Plastic Folder (+₹30)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-step">
+                        <div class="addon-card" id="addon-delivery" onclick="toggleDelivery()" style="margin-bottom: 16px;">
+                            <input type="checkbox" id="check-delivery" style="display:none">
+                            <span>🚚 Request Campus Delivery (+₹40)</span>
+                        </div>
+                        <div id="delivery-fields" style="display:none">
+                            <input type="text" id="collegeName" placeholder="Enter College & Block Name">
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="check-item">
-                        <input type="checkbox" id="deliveryToggle" onchange="toggleDelivery()"> 🚚 Campus Delivery (+₹40)
-                    </label>
-                </div>
+                <div class="glass-panel summary-card">
+                    <span class="order-id" id="orderIDDisplay">#ID-GENERATING</span>
+                    <h3 style="margin-bottom: 24px;">Order Summary</h3>
+                    
+                    <div class="summary-row">
+                        <span id="summaryService">Service Name</span>
+                        <span id="summaryBasePrice">₹0</span>
+                    </div>
+                    <div class="summary-row" id="summaryAddonRow" style="display:none">
+                        <span>Add-ons</span>
+                        <span id="summaryAddonPrice">₹0</span>
+                    </div>
+                    <div class="summary-row" id="summaryDeliveryRow" style="display:none">
+                        <span>Delivery</span>
+                        <span>₹40</span>
+                    </div>
+                    
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="summaryTotal">₹0</span>
+                    </div>
 
-                <div id="deliveryInfo" class="form-group" style="display: none;">
-                    <label>College Name & Room/Block</label>
-                    <input type="text" id="collegeDetails" placeholder="e.g. Nirma Univ, Block C">
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 32px;" onclick="proceedToWhatsApp()">
+                        Proceed to WhatsApp
+                    </button>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="window.print()">
+                        Download Invoice
+                    </button>
                 </div>
-            </div>
-
-            <div class="glass-card summary-box">
-                <h3 style="margin-bottom: 20px;">Order Summary</h3>
-                <div class="summary-row">
-                    <span>Order ID</span>
-                    <span class="order-id" id="displayOrderID">#EH-0000</span>
-                </div>
-                <div class="summary-row">
-                    <span>Base Price</span>
-                    <span id="baseTotal">₹0</span>
-                </div>
-                <div class="summary-row">
-                    <span>Add-ons</span>
-                    <span id="addonTotal">₹0</span>
-                </div>
-                <div class="summary-row">
-                    <span>Delivery</span>
-                    <span id="deliveryCharge">₹0</span>
-                </div>
-                <div class="summary-row total-row">
-                    <span>Total</span>
-                    <span id="grandTotal">₹0</span>
-                </div>
-
-                <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="sendWhatsApp()">Proceed to WhatsApp</button>
-                <button class="btn btn-outline" style="width: 100%; margin-top: 12px;" onclick="printInvoice()">Generate Invoice</button>
             </div>
         </div>
     </section>
 
     <section class="container">
-        <h2 style="text-align: center; margin-bottom: 40px;">Student Feedback</h2>
-        <div class="grid-services">
-            <div class="glass-card service-card" style="font-style: italic;">
-                "Best service for lab manuals! Saved me 3 hours of cycling to the market."
-                <p style="margin-top: 15px; font-weight: 600; color: #fff;">— Aarav, LDCE</p>
+        <div class="testimonials">
+            <div class="glass-panel testimonial-card">
+                <p>"The print quality was professional-grade. Usually, local shops mess up the alignment of lab manuals, but Essentials Hub was perfect."</p>
+                <div class="author">Rahul S. — Ahmedabad University</div>
             </div>
-            <div class="glass-card service-card" style="font-style: italic;">
-                "The coding project bundle was clean and well-documented. Highly recommend!"
-                <p style="margin-top: 15px; font-weight: 600; color: #fff;">— Priya, Nirma Univ</p>
+            <div class="glass-panel testimonial-card">
+                <p>"Saved my life with a Python debugging project at 2 AM. The campus delivery at 9 AM sharp was the cherry on top."</p>
+                <div class="author">Ishani P. — Nirma University</div>
             </div>
         </div>
     </section>
 
-    <footer class="footer container">
-        <div style="margin-bottom: 30px;">
-            <h3>Contact Us</h3>
-            <p>+91 9978651150 | +91 9104063798 | +91 8511367564</p>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div style="font-weight: 800; font-size: 1.5rem; margin-bottom: 10px;">Essentials Hub.</div>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">Your academic excellence partner.</p>
+                
+                <div class="contact-info">
+                    <span>+91 9978651150</span>
+                    <span>+91 9104063798</span>
+                    <span>+91 8511367564</span>
+                </div>
+                
+                <p style="font-size: 0.8rem; opacity: 0.5;">© 2026 Essentials Hub. All rights reserved.</p>
+            </div>
         </div>
-        <p>© 2026 Essentials Hub – Academic Support Partner</p>
     </footer>
 
     <script>
-        // AOS Implementation
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
+        /**
+         * GLOBAL STATE & CONFIG
+         */
+        const SERVICES_DATA = {
+            printing: {
+                label: "Printing Services",
+                options: [
+                    { id: 'bw', name: 'Black & White (B/W)', price: 2, unit: 'page' },
+                    { id: 'color', name: 'Full Color', price: 10, unit: 'page' },
+                    { id: 'manual', name: 'Lab Manual Set', price: 150, unit: 'set' }
+                ]
+            },
+            coding: {
+                label: "Coding & Projects",
+                options: [
+                    { id: 'debug', name: 'Bug Fixing / Debugging', price: 499, unit: 'task' },
+                    { id: 'mini', name: 'Mini Project (Python/C++)', price: 999, unit: 'project' },
+                    { id: 'full', name: 'Major Full-Stack Project', price: 2499, unit: 'project' }
+                ]
+            },
+            design: {
+                label: "Design & Creative",
+                options: [
+                    { id: 'resume', name: 'ATS Resume Design', price: 199, unit: 'resume' },
+                    { id: 'ppt', name: 'Presentation (15+ Slides)', price: 499, unit: 'deck' },
+                    { id: 'logo', name: 'Personal Branding/Logo', price: 799, unit: 'brand' }
+                ]
+            },
+            academic: {
+                label: "Academic Writing",
+                options: [
+                    { id: 'assign', name: 'Standard Assignment', price: 299, unit: 'task' },
+                    { id: 'report', name: 'Technical Report Writing', price: 599, unit: 'report' },
+                    { id: 'thesis', name: 'Thesis/Dissertation Help', price: 1999, unit: 'project' }
+                ]
+            }
+        };
+
+        let currentOrderID = "EH-" + Math.random().toString(36).substr(2, 6).toUpperCase();
+        document.getElementById('orderIDDisplay').innerText = "#" + currentOrderID;
+
+        /**
+         * UI CONTROLLERS
+         */
+        
+        // Mouse Follow Effect for Glow
+        const sphere = document.getElementById('cursor-sphere');
+        window.addEventListener('mousemove', (e) => {
+            sphere.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
+        });
+
+        function updateSubServices() {
+            const cat = document.getElementById('mainCategory').value;
+            const subSelect = document.getElementById('subService');
+            subSelect.innerHTML = '';
+            
+            SERVICES_DATA[cat].options.forEach(opt => {
+                const el = document.createElement('option');
+                el.value = opt.id;
+                el.dataset.price = opt.price;
+                el.dataset.unit = opt.unit;
+                el.innerText = `${opt.name} (₹${opt.price}/${opt.unit})`;
+                subSelect.appendChild(el);
             });
-        }, observerOptions);
+            calculatePrice();
+        }
 
-        document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
-
-        // State Management
-        let orderID = "EH-" + Math.floor(1000 + Math.random() * 9000);
-        document.getElementById('displayOrderID').innerText = "#" + orderID;
+        function toggleAddon(id) {
+            const card = document.getElementById('addon-' + id);
+            const check = document.getElementById('check-' + id);
+            check.checked = !check.checked;
+            card.classList.toggle('active');
+            calculatePrice();
+        }
 
         function toggleDelivery() {
-            const isDelivery = document.getElementById('deliveryToggle').checked;
-            document.getElementById('deliveryInfo').style.display = isDelivery ? 'block' : 'none';
-            calculateTotal();
+            const card = document.getElementById('addon-delivery');
+            const check = document.getElementById('check-delivery');
+            const fields = document.getElementById('delivery-fields');
+            check.checked = !check.checked;
+            card.classList.toggle('active');
+            fields.style.display = check.checked ? 'block' : 'none';
+            calculatePrice();
         }
 
-        function calculateTotal() {
-            const serviceSelect = document.getElementById('serviceType');
-            const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
-            const basePrice = parseFloat(selectedOption.getAttribute('data-price'));
-            const qty = parseInt(document.getElementById('quantity').value) || 1;
-
-            // Calculations
-            let baseTotal = basePrice * qty;
+        function calculatePrice() {
+            const subSelect = document.getElementById('subService');
+            const selectedOpt = subSelect.options[subSelect.selectedIndex];
             
-            let addons = 0;
-            if(document.getElementById('addonSpiral').checked) addons += 20;
-            if(document.getElementById('addonFolder').checked) addons += 30;
+            if(!selectedOpt) return;
 
-            let delivery = document.getElementById('deliveryToggle').checked ? 40 : 0;
-            let finalTotal = baseTotal + addons + delivery;
+            const basePrice = parseInt(selectedOpt.dataset.price);
+            const qty = parseInt(document.getElementById('qtyInput').value) || 1;
+            
+            let addonsTotal = 0;
+            if(document.getElementById('check-spiral').checked) addonsTotal += 20;
+            if(document.getElementById('check-folder').checked) addonsTotal += 30;
 
-            // Update UI
-            document.getElementById('baseTotal').innerText = `₹${baseTotal}`;
-            document.getElementById('addonTotal').innerText = `₹${addons}`;
-            document.getElementById('deliveryCharge').innerText = `₹${delivery}`;
-            document.getElementById('grandTotal').innerText = `₹${finalTotal}`;
+            const deliveryPrice = document.getElementById('check-delivery').checked ? 40 : 0;
+            
+            const baseTotal = basePrice * qty;
+            const finalTotal = baseTotal + addonsTotal + deliveryPrice;
+
+            // Update Summary UI
+            document.getElementById('summaryService').innerText = selectedOpt.text.split('(')[0];
+            document.getElementById('summaryBasePrice').innerText = `₹${baseTotal}`;
+            
+            const addonRow = document.getElementById('summaryAddonRow');
+            if(addonsTotal > 0) {
+                addonRow.style.display = 'flex';
+                document.getElementById('summaryAddonPrice').innerText = `₹${addonsTotal}`;
+            } else {
+                addonRow.style.display = 'none';
+            }
+
+            document.getElementById('summaryDeliveryRow').style.display = deliveryPrice > 0 ? 'flex' : 'none';
+            document.getElementById('summaryTotal').innerText = `₹${finalTotal}`;
         }
 
-        function sendWhatsApp() {
-            const service = document.getElementById('serviceType').value;
-            const qty = document.getElementById('quantity').value;
-            const total = document.getElementById('grandTotal').innerText;
-            const college = document.getElementById('collegeDetails').value || "Self-Pickup";
-            
-            const message = `*Essentials Hub Order*%0A------------------%0A*Order ID:* ${orderID}%0A*Service:* ${service}%0A*Quantity:* ${qty}%0A*Total:* ${total}%0A*Delivery:* ${college}%0A------------------%0APlease confirm my order.`;
-            
+        function proceedToWhatsApp() {
+            const subSelect = document.getElementById('subService');
+            const serviceName = subSelect.options[subSelect.selectedIndex].text;
+            const total = document.getElementById('summaryTotal').innerText;
+            const qty = document.getElementById('qtyInput').value;
+            const college = document.getElementById('collegeName').value || "Self-Pickup";
+
+            const message = `*Essentials Hub Order*%0A` +
+                            `--------------------------%0A` +
+                            `*Order ID:* ${currentOrderID}%0A` +
+                            `*Service:* ${serviceName}%0A` +
+                            `*Quantity:* ${qty}%0A` +
+                            `*Delivery:* ${college}%0A` +
+                            `*Total Amount:* ${total}%0A` +
+                            `--------------------------%0A` +
+                            `Please confirm my order details.`;
+
             window.open(`https://wa.me/919978651150?text=${message}`, '_blank');
         }
 
-        function printInvoice() {
-            const content = `
-                Essentials Hub Invoice
-                ID: ${orderID}
-                Service: ${document.getElementById('serviceType').value}
-                Total: ${document.getElementById('grandTotal').innerText}
-                Thank you for choosing Essentials Hub!
-            `;
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(`<pre style="font-family: sans-serif; padding: 40px;">${content}</pre>`);
-            printWindow.document.close();
-            printWindow.print();
+        function scrollToOrder(cat) {
+            document.getElementById('mainCategory').value = cat;
+            updateSubServices();
+            document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Init
-        calculateTotal();
+        // Initialize
+        window.onload = () => {
+            updateSubServices();
+        };
     </script>
 </body>
 </html>
