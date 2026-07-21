@@ -1243,8 +1243,11 @@
 
         <!-- Pages (printing only) -->
         <div class="form-group" id="qtyContainer">
-          <label class="field-label">2 — Number of Pages</label>
-          <input type="number" id="qtyInput" value="1" min="1" inputmode="numeric" pattern="[0-9]*" oninput="updatePrice()">
+         <label class="field-label">
+    2 — Number of Pages
+    <span style="color:#38bdf8;">(Minimum 10)</span>
+</label>
+          <input type="number" id="qtyInput" value="10" min="10" inputmode="numeric" pattern="[0-9]*" oninput="updatePrice()">
         </div>
 
         <!-- Printing add-ons -->
@@ -1523,6 +1526,13 @@
   /* ── updatePrice ──
      Recalculates breakdown and animates the total on change */
   function updatePrice() {
+    const qtyInput = document.getElementById("qtyInput");
+
+if (Number(qtyInput.value) < 10) {
+    qtyInput.value = 10;
+}
+
+const qty = Number(qtyInput.value);
     const serviceEl = document.getElementById('serviceSelect');
     const service   = serviceEl.value;
     const baseRate  = parseInt(serviceEl.options[serviceEl.selectedIndex].dataset.price);
