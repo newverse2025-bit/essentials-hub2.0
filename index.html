@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Essentials Hub | Premium Student Services</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -205,7 +205,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 18px 28px;
+      padding: calc(18px + env(safe-area-inset-top, 0px)) calc(28px + env(safe-area-inset-right, 0px)) 18px calc(28px + env(safe-area-inset-left, 0px));
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -247,12 +247,58 @@
       padding: 8px 16px;
       border-radius: 10px;
       transition: color 0.3s, background 0.3s;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .nav-links a:hover {
       color: var(--text);
       background: rgba(255,255,255,0.06);
     }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Hamburger toggle — hidden on desktop, shown at the mobile breakpoint */
+    .nav-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(16px) saturate(1.6);
+      -webkit-backdrop-filter: blur(16px) saturate(1.6);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+      cursor: pointer;
+      position: relative;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav-toggle span,
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      content: '';
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 18px; height: 2px;
+      border-radius: 2px;
+      background: var(--soft);
+      transform: translate(-50%, -50%);
+      transition: transform 0.3s var(--ease-out), opacity 0.3s var(--ease-out), background 0.3s;
+    }
+
+    .nav-toggle span::before { transform: translate(-50%, -6px); }
+    .nav-toggle span::after  { transform: translate(-50%, 6px); }
+
+    nav.menu-open .nav-toggle span { background: transparent; }
+    nav.menu-open .nav-toggle span::before { transform: translate(-50%, -50%) rotate(45deg); }
+    nav.menu-open .nav-toggle span::after  { transform: translate(-50%, -50%) rotate(-45deg); }
 
     /* =============================================
        HERO SECTION
@@ -684,6 +730,7 @@
       font-size: 0.88rem;
       font-weight: 500;
       color: var(--soft);
+      -webkit-tap-highlight-color: transparent;
       transition:
         background 0.3s,
         border-color 0.3s,
@@ -692,4 +739,944 @@
 
     .check-card:hover { transform: scale(1.02); }
 
-    .check-card inp
+    .check-card input[type="checkbox"] {
+      width: 17px; height: 17px;
+      accent-color: var(--primary);
+      cursor: pointer;
+      padding: 0;
+      border-radius: 5px;
+      flex-shrink: 0;
+    }
+
+    .check-card-full {
+      grid-column: span 2;
+    }
+
+    /* Delivery block */
+    .delivery-block { display: flex; flex-direction: column; gap: 10px; }
+
+    #deliveryInput {
+      margin-top: 6px;
+      display: none;
+    }
+
+    #deliveryInput.visible { display: block; animation: fade-up 0.35s var(--ease-out) both; }
+
+    /* =============================================
+       SUMMARY PANEL
+    ============================================= */
+    .summary-panel { padding: 40px; position: sticky; top: 96px; }
+
+    .order-id-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--sky);
+      background: rgba(56,189,248,0.12);
+      backdrop-filter: blur(12px) saturate(1.6);
+      -webkit-backdrop-filter: blur(12px) saturate(1.6);
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
+      border-radius: 8px;
+      padding: 5px 10px;
+      display: inline-block;
+      margin-bottom: 22px;
+      letter-spacing: 0.04em;
+    }
+
+    .summary-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+      color: var(--soft);
+    }
+
+    .summary-rows { margin-bottom: 24px; }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .summary-row .row-label { color: var(--muted); font-weight: 500; }
+    .summary-row .row-val  { color: var(--soft);  font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; }
+
+    .summary-row.total {
+      border-bottom: none;
+      border-top: 1px solid rgba(99,102,241,0.3);
+      margin-top: 8px;
+      padding-top: 18px;
+    }
+
+    .summary-row.total .row-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .summary-row.total .row-val {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text);
+      font-family: 'Sora', sans-serif;
+      letter-spacing: -0.03em;
+    }
+
+    /* Price flash animation when total updates */
+    @keyframes price-flash {
+      0%   { color: var(--sky); }
+      100% { color: var(--text); }
+    }
+
+    .price-flash { animation: price-flash 0.5s var(--ease-out) both; }
+
+    /* Button row gap */
+    .btn-row { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+
+    /* =============================================
+       CONTACT SECTION
+    ============================================= */
+    .contact-section { padding: 20px 0 60px; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .contact-card {
+      padding: 22px 20px;
+      text-align: center;
+    }
+
+    .contact-card .ph-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 6px;
+    }
+
+    .contact-card .ph-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    footer {
+      padding: 36px 0 32px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    footer span {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+    }
+
+    /* =============================================
+       SCROLL-REVEAL — base state
+       JS Intersection Observer adds .revealed
+    ============================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 0.75s var(--ease-out),
+        transform 0.75s var(--ease-out);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger delay utilities */
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+
+    /* =============================================
+       KEYFRAMES — general
+    ============================================= */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =============================================
+       MOBILE RESPONSIVE
+    ============================================= */
+    @media (max-width: 860px) {
+      nav {
+        padding: calc(14px + env(safe-area-inset-top, 0px)) calc(20px + env(safe-area-inset-right, 0px)) 14px calc(20px + env(safe-area-inset-left, 0px));
+        /* Reduce blur radius on mobile GPUs — a fixed, always-compositing
+           element is the most expensive place to run a heavy blur */
+        backdrop-filter: blur(20px) saturate(1.6) brightness(1.04);
+        -webkit-backdrop-filter: blur(20px) saturate(1.6) brightness(1.04);
+      }
+
+      .nav-toggle { display: flex; }
+
+      /* nav-links becomes a dropdown panel, toggled via JS with .menu-open on <nav> */
+      .nav-links {
+        flex-direction: column;
+        gap: 4px;
+        position: absolute;
+        top: 100%;
+        left: 16px;
+        right: 16px;
+        margin-top: 10px;
+        padding: 10px;
+        background: linear-gradient(165deg, rgba(255,255,255,0.14), rgba(20,22,35,0.92) 60%);
+        backdrop-filter: blur(24px) saturate(1.6);
+        -webkit-backdrop-filter: blur(24px) saturate(1.6);
+        border: 1px solid rgba(255,255,255,0.16);
+        border-radius: 18px;
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,0.3),
+          0 20px 40px rgba(0,0,0,0.5);
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+        transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+      }
+
+      nav.menu-open .nav-links {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .nav-links a { padding: 13px 14px; font-size: 0.95rem; }
+
+      /* :root override lightens .glass's blur globally on mobile —
+         fewer GPU-composited layers means smoother scrolling */
+      :root { --glass-blur: blur(20px) saturate(1.6) brightness(1.04); }
+
+      /* iOS Safari auto-zooms on focus if an input's font-size is
+         under 16px — this keeps the zoom from triggering */
+      select, input[type="number"], input[type="text"] { font-size: 16px; }
+
+      .hero { padding: 140px 0 70px; }
+      .hero h1 { font-size: 2.6rem; }
+      .order-layout { grid-template-columns: 1fr; }
+      .summary-panel { position: static; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-panel, .summary-panel { padding: 28px 24px; }
+      .trust-item { padding: 4px 14px; }
+      .trust-item:not(:last-child) { border-right: none; }
+      .trust-inner { flex-direction: column; gap: 12px; }
+
+      footer { padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)); }
+    }
+
+    @media (max-width: 480px) {
+      .check-grid { grid-template-columns: 1fr; }
+      .check-card-full { grid-column: span 1; }
+      .hero-cta { flex-direction: column; align-items: center; }
+      .services-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Respect the OS-level reduced-motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* =============================================
+       PRINTABLE INVOICE
+       Hidden on screen. Rendered as a plain, professional
+       sheet only inside @media print, with every other
+       element on the page hidden for that print pass.
+    ============================================= */
+    #invoiceSheet { display: none; }
+
+    @media print {
+      body * { visibility: hidden; }
+      #invoiceSheet, #invoiceSheet * { visibility: visible; }
+
+      #invoiceSheet {
+        display: block !important;
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        background: #ffffff;
+        color: #111111;
+        font-family: 'Sora', sans-serif;
+        padding: 0;
+      }
+
+      .invoice-header {
+        text-align: center;
+        border-bottom: 2px solid #111111;
+        padding-bottom: 16px;
+        margin-bottom: 24px;
+      }
+
+      .invoice-brand {
+        font-size: 1.6rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+
+      .invoice-brand-sub {
+        font-size: 0.8rem;
+        color: #555555;
+        margin-top: 4px;
+      }
+
+      .invoice-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+
+      .invoice-meta-label {
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #666666;
+        margin-bottom: 4px;
+      }
+
+      .invoice-meta-value {
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .invoice-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 24px;
+      }
+
+      .invoice-table th,
+      .invoice-table td {
+        text-align: left;
+        padding: 10px 8px;
+        border-bottom: 1px solid #cccccc;
+        font-size: 0.9rem;
+      }
+
+      .invoice-table th {
+        border-bottom: 2px solid #111111;
+        font-weight: 700;
+      }
+
+      .invoice-table th:nth-child(2),
+      .invoice-table td:nth-child(2) {
+        text-align: center;
+        width: 70px;
+      }
+
+      .invoice-table th:last-child,
+      .invoice-table td:last-child {
+        text-align: right;
+        width: 100px;
+      }
+
+      .invoice-total-row td {
+        border-top: 2px solid #111111;
+        border-bottom: none;
+        font-weight: 800;
+        font-size: 1.1rem;
+        padding-top: 14px;
+      }
+
+      .invoice-footer {
+        margin-top: 32px;
+        padding-top: 16px;
+        border-top: 1px solid #cccccc;
+        font-size: 0.8rem;
+        color: #444444;
+        text-align: center;
+      }
+
+      @page { margin: 18mm; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Animated background layers -->
+<div class="bg-mesh" aria-hidden="true"></div>
+<div class="bg-mesh-extra" aria-hidden="true"></div>
+
+<!-- =============================================
+     NAVIGATION
+============================================= -->
+<nav>
+  <div class="nav-logo">Essentials Hub</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#order">Order</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#order" class="btn btn-primary" style="padding: 10px 22px; font-size: 0.85rem; border-radius: 11px;">
+      Order Now
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- =============================================
+     HERO
+============================================= -->
+<section class="container hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    Government Polytechnic Ahmedabad
+  </div>
+  <h1>
+    Your All-in-One
+    <span class="grad-text">Student Service Hub</span>
+  </h1>
+  <p class="hero-sub">
+    Printing, Coding, Design, Academic Help — premium quality support delivered directly to your campus doorstep.
+  </p>
+  <div class="hero-cta">
+    <a href="#order" class="btn btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Place an Order
+    </a>
+    <a href="#services" class="btn btn-outline">Explore Services</a>
+  </div>
+</section>
+
+<!-- Trust bar -->
+<div class="container trust-bar">
+  <div class="glass trust-inner">
+    <div class="trust-item"><span class="trust-dot"></span>Trusted by Students</div>
+    <div class="trust-item"><span class="trust-dot"></span>GPA · Government Polytechnic Ahmedabad</div>
+    <div class="trust-item"><span class="trust-dot"></span>1–2 Day Campus Delivery</div>
+  </div>
+</div>
+
+<!-- =============================================
+     SERVICES
+============================================= -->
+<section class="container" id="services">
+  <div class="reveal">
+    <div class="section-label">What we offer</div>
+    <h2 class="section-title">Everything you need,<br>one place.</h2>
+    <p class="section-sub">From last-minute prints to full assignments — we've got you covered.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="glass service-card reveal delay-1">
+      <div class="svc-icon">🖨️</div>
+      <h3>Printing</h3>
+      <span class="svc-price">₹2 / ₹10 per page</span>
+      <p class="svc-desc">High-quality B&W and colour prints. Add spiral binding or folder for a polished finish.</p>
+    </div>
+    <div class="glass service-card reveal delay-2">
+      <div class="svc-icon">💻</div>
+      <h3>Coding Help</h3>
+      <span class="svc-price">Flat ₹49</span>
+      <p class="svc-desc">Debug, build, or understand your code. Fast turnaround for any language or framework.</p>
+    </div>
+    <div class="glass service-card reveal delay-3">
+      <div class="svc-icon">🎨</div>
+      <h3>Design</h3>
+      <span class="svc-price">Flat ₹49</span>
+      <p class="svc-desc">PPTs, resumes, posters, and more — crafted with a professional touch.</p>
+    </div>
+    <div class="glass service-card reveal delay-4">
+      <div class="svc-icon">📚</div>
+      <h3>Academic Help</h3>
+      <span class="svc-price">Flat ₹49</span>
+      <p class="svc-desc">Assignments, reports, and lab write-ups completed accurately and on time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     ORDER CONFIGURATOR
+============================================= -->
+<section class="config-section" id="order">
+  <div class="container">
+    <div class="reveal" style="margin-bottom: 48px;">
+      <div class="section-label">Configure & Order</div>
+      <h2 class="section-title">Build your order</h2>
+      <p class="section-sub">Select a service, pick your add-ons, and send the details straight to WhatsApp in seconds.</p>
+    </div>
+
+    <div class="order-layout">
+      <!-- Form Panel -->
+      <div class="glass form-panel reveal">
+        <h3 class="panel-title">Order Details</h3>
+
+        <!-- Service -->
+        <div class="form-group">
+          <label class="field-label">1 — Service</label>
+          <select id="serviceSelect" onchange="toggleInputs()">
+            <option value="bw_printing"   data-price="2">Printing (Black & White) — ₹2/pg</option>
+            <option value="color_printing" data-price="10">Printing (Colour) — ₹10/pg</option>
+            <option value="coding"         data-price="49">Coding Help — ₹49</option>
+            <option value="design"         data-price="49">Design Services — ₹49</option>
+            <option value="academic"       data-price="49">Academic Help — ₹49</option>
+          </select>
+        </div>
+
+        <!-- Pages (printing only) -->
+        <div class="form-group" id="qtyContainer">
+          <label class="field-label">2 — Number of Pages</label>
+          <input type="number" id="qtyInput" value="1" min="1" inputmode="numeric" pattern="[0-9]*" oninput="updatePrice()">
+        </div>
+
+        <!-- Printing add-ons -->
+        <div class="form-group" id="printingOptions">
+          <label class="field-label">3 — Add-ons</label>
+          <div class="check-grid">
+            <label class="glass check-card">
+              <input type="checkbox" id="spiralAddon" onchange="updatePrice()">
+              <div>
+                <div style="font-size: 0.88rem; font-weight: 600;">Spiral Bind</div>
+                <div style="font-size: 0.75rem; color: var(--muted);">+₹20</div>
+              </div>
+            </label>
+            <label class="glass check-card">
+              <input type="checkbox" id="folderAddon" onchange="updatePrice()">
+              <div>
+                <div style="font-size: 0.88rem; font-weight: 600;">Folder</div>
+                <div style="font-size: 0.75rem; color: var(--muted);">+₹30</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Delivery -->
+        <div class="form-group">
+          <label class="field-label">4 — Delivery</label>
+          <div class="delivery-block">
+            <label class="glass check-card check-card-full">
+              <input type="checkbox" id="deliveryToggle" onchange="toggleDelivery()">
+              <div>
+                <div style="font-size: 0.88rem; font-weight: 600;">🚚 Campus Delivery</div>
+                <div style="font-size: 0.75rem; color: var(--muted);">+₹30 — delivered to your block</div>
+              </div>
+            </label>
+            <label class="glass check-card check-card-full" id="sameDayWrapper">
+              <input type="checkbox" id="sameDayDelivery" onchange="updatePrice()" disabled>
+              <div>
+                <div style="font-size: 0.88rem; font-weight: 600;">⚡ Same-Day Delivery</div>
+                <div style="font-size: 0.75rem; color: var(--muted);">+₹10 — enable campus delivery first</div>
+              </div>
+            </label>
+            <div id="deliveryInput">
+              <input type="text" id="collegeName" placeholder="College name & block number..." autocomplete="off" autocapitalize="words" enterkeyhint="done">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary Panel -->
+      <div class="glass summary-panel reveal delay-2">
+        <span class="order-id-tag" id="orderId">#EH-000000</span>
+        <div class="summary-title">Price Summary</div>
+
+        <div class="summary-rows">
+          <div class="summary-row">
+            <span class="row-label">Base price</span>
+            <span class="row-val" id="basePrice">₹0</span>
+          </div>
+          <div class="summary-row">
+            <span class="row-label">Add-ons</span>
+            <span class="row-val" id="addonPrice">₹0</span>
+          </div>
+          <div class="summary-row">
+            <span class="row-label">Delivery</span>
+            <span class="row-val" id="deliveryPrice">₹0</span>
+          </div>
+          <div class="summary-row total">
+            <span class="row-label">Total</span>
+            <span class="row-val" id="totalPrice">₹2</span>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary btn-full" id="whatsappBtn" onclick="sendToWhatsApp()">
+            <span class="btn-text" style="display:flex; align-items:center; gap:8px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Proceed via WhatsApp
+            </span>
+          </button>
+          <button class="btn btn-outline btn-full" onclick="generateInvoice()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Generate Invoice
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     CONTACT
+============================================= -->
+<section class="container contact-section" id="contact">
+  <div class="section-label reveal" style="text-align:center; margin-bottom: 28px;">Reach us directly</div>
+  <div class="contact-grid">
+    <div class="glass contact-card reveal delay-1">
+      <div class="ph-label">Primary</div>
+      <div class="ph-num">+91 99786 51150</div>
+    </div>
+    <div class="glass contact-card reveal delay-2">
+      <div class="ph-label">Secondary</div>
+      <div class="ph-num">+91 91040 63798</div>
+    </div>
+    <div class="glass contact-card reveal delay-3">
+      <div class="ph-label">Support</div>
+      <div class="ph-num">+91 85113 67564</div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     FOOTER
+============================================= -->
+<footer>
+  <p>© 2026 <span>Essentials Hub</span> — Academic Support Partner, GPA</p>
+</footer>
+
+<!-- =============================================
+     PRINTABLE INVOICE
+     Hidden on screen — shown ONLY inside the print
+     stylesheet, and nothing else on the page prints
+     alongside it. Populated by generateInvoice().
+============================================= -->
+<div id="invoiceSheet">
+  <div class="invoice-header">
+    <div class="invoice-brand">Essentials Hub</div>
+    <div class="invoice-brand-sub">Academic Support Partner &middot; Government Polytechnic Ahmedabad</div>
+  </div>
+
+  <div class="invoice-meta">
+    <div>
+      <div class="invoice-meta-label">Deliver / Collect At</div>
+      <div class="invoice-meta-value" id="invCollege">Self-Pickup</div>
+    </div>
+    <div>
+      <div class="invoice-meta-label">Invoice No.</div>
+      <div class="invoice-meta-value" id="invOrderId">#EH-000000</div>
+    </div>
+    <div>
+      <div class="invoice-meta-label">Date</div>
+      <div class="invoice-meta-value" id="invDate">--</div>
+    </div>
+  </div>
+
+  <table class="invoice-table">
+    <thead>
+      <tr><th>Description</th><th>Qty</th><th>Amount</th></tr>
+    </thead>
+    <tbody id="invoiceItems"></tbody>
+    <tfoot>
+      <tr class="invoice-total-row">
+        <td colspan="2">Total</td>
+        <td id="invTotal">₹0</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="invoice-footer">
+    <p>Thank you for choosing Essentials Hub.</p>
+    <p>Contact: +91 99786 51150 &nbsp;|&nbsp; +91 91040 63798 &nbsp;|&nbsp; +91 85113 67564</p>
+  </div>
+</div>
+
+<!-- =============================================
+     JAVASCRIPT
+============================================= -->
+<script>
+  /* ── Order ID ── */
+  const currentOrderId = "EH-" + Math.floor(100000 + Math.random() * 900000);
+  document.getElementById('orderId').textContent = "#" + currentOrderId;
+
+  /* ── Ripple effect helper ──
+     Injects a ripple element on any .btn click */
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      ripple.style.cssText = `
+        width: ${size}px; height: ${size}px;
+        left: ${e.clientX - rect.left - size / 2}px;
+        top: ${e.clientY - rect.top - size / 2}px;
+      `;
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 700);
+    });
+  });
+
+  /* ── Scroll-reveal via Intersection Observer ──
+     Adds 'revealed' class when element enters viewport */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        revealObserver.unobserve(entry.target); // animate only once
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ── Subtle mouse-parallax on the hero orbs ──
+     Lightweight transform based on cursor position. Only attached on
+     devices with a precise pointer (mouse/trackpad) — skipping this
+     on touch-only phones avoids an idle listener doing no visible work. */
+  if (window.matchMedia('(pointer: fine)').matches) {
+    document.addEventListener('mousemove', e => {
+      const mx = (e.clientX / window.innerWidth  - 0.5) * 24;
+      const my = (e.clientY / window.innerHeight - 0.5) * 18;
+      document.querySelector('.bg-mesh').style.transform =
+        `translate(${mx * 0.4}px, ${my * 0.4}px)`;
+    });
+  }
+
+  /* ── Mobile nav toggle ──
+     Opens/closes the dropdown menu on phones and tablets, and closes
+     it automatically once a link is tapped. */
+  const navEl     = document.querySelector('nav');
+  const navToggle = document.getElementById('navToggle');
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = navEl.classList.toggle('menu-open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navEl.classList.remove('menu-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* ── toggleInputs ──
+     Show / hide pages field and add-ons based on service type */
+  function toggleInputs() {
+    const service = document.getElementById('serviceSelect').value;
+    const isPrinting = service.includes('printing');
+
+    document.getElementById('qtyContainer').style.display    = isPrinting ? 'block' : 'none';
+    document.getElementById('printingOptions').style.display = isPrinting ? 'block' : 'none';
+
+    // Same-day only available for printing
+    document.getElementById('sameDayWrapper').style.display = isPrinting ? 'flex' : 'none';
+
+    if (!isPrinting) {
+      document.getElementById('spiralAddon').checked    = false;
+      document.getElementById('folderAddon').checked    = false;
+      document.getElementById('sameDayDelivery').checked = false;
+    }
+
+    updatePrice();
+  }
+
+  /* ── toggleDelivery ──
+     Show / hide delivery address input and enable same-day */
+  function toggleDelivery() {
+    const isDelivery = document.getElementById('deliveryToggle').checked;
+    const inputEl    = document.getElementById('deliveryInput');
+    const sameDay    = document.getElementById('sameDayDelivery');
+
+    if (isDelivery) {
+      inputEl.style.display = 'block';
+      inputEl.classList.add('visible');
+      sameDay.disabled = false;
+    } else {
+      inputEl.style.display = 'none';
+      inputEl.classList.remove('visible');
+      sameDay.checked  = false;
+      sameDay.disabled = true;
+    }
+
+    updatePrice();
+  }
+
+  /* ── updatePrice ──
+     Recalculates breakdown and animates the total on change */
+  function updatePrice() {
+    const serviceEl = document.getElementById('serviceSelect');
+    const service   = serviceEl.value;
+    const baseRate  = parseInt(serviceEl.options[serviceEl.selectedIndex].dataset.price);
+    const qty       = parseInt(document.getElementById('qtyInput').value) || 1;
+
+    let base    = 0;
+    let addons  = 0;
+    let delivery = 0;
+
+    // Base calc
+    base = service.includes('printing') ? baseRate * qty : baseRate;
+
+    // Add-ons (printing only)
+    if (service.includes('printing')) {
+      if (document.getElementById('spiralAddon').checked) addons += 20;
+      if (document.getElementById('folderAddon').checked) addons += 30;
+    }
+
+    // Delivery
+    if (document.getElementById('deliveryToggle').checked) {
+      delivery = 30;
+      if (document.getElementById('sameDayDelivery').checked) delivery += 10;
+    }
+
+    const total = base + addons + delivery;
+
+    // Update DOM
+    document.getElementById('basePrice').textContent    = "₹" + base;
+    document.getElementById('addonPrice').textContent   = "₹" + addons;
+    document.getElementById('deliveryPrice').textContent = "₹" + delivery;
+
+    // Animate total on change — flash highlight
+    const totalEl = document.getElementById('totalPrice');
+    const prev    = totalEl.textContent;
+    const next    = "₹" + total;
+    if (prev !== next) {
+      totalEl.textContent = next;
+      totalEl.classList.remove('price-flash');
+      void totalEl.offsetWidth; // force reflow to restart animation
+      totalEl.classList.add('price-flash');
+    }
+  }
+
+  /* ── validateDeliveryAddress ──
+     Shared by sendToWhatsApp() and generateInvoice(). Returns true if
+     the order can proceed, false (after flashing the field) if a
+     delivery address was required but left blank. */
+  function validateDeliveryAddress() {
+    const isDelivery = document.getElementById('deliveryToggle').checked;
+    if (isDelivery && !document.getElementById('collegeName').value.trim()) {
+      const inp = document.getElementById('collegeName');
+      inp.style.borderColor = '#f87171';
+      inp.style.boxShadow   = '0 0 0 4px rgba(248,113,113,0.15)';
+      inp.focus();
+      setTimeout(() => {
+        inp.style.borderColor = '';
+        inp.style.boxShadow   = '';
+      }, 2200);
+      return false;
+    }
+    return true;
+  }
+
+  /* ── sendToWhatsApp ──
+     Validates, builds message, and opens WhatsApp with loading state */
+  function sendToWhatsApp() {
+    const serviceEl = document.getElementById('serviceSelect');
+    const service   = serviceEl.options[serviceEl.selectedIndex].text;
+    const isPrinting = service.includes('Printing');
+    const qty       = isPrinting ? document.getElementById('qtyInput').value : "1";
+    const total     = document.getElementById('totalPrice').textContent;
+    const isDelivery = document.getElementById('deliveryToggle').checked;
+
+    if (!validateDeliveryAddress()) return;
+
+    const delivery = isDelivery ? document.getElementById('collegeName').value : "Self-Pickup";
+    const sameDay  = document.getElementById('sameDayDelivery')?.checked ? "Yes (+₹10)" : "No";
+    const spiral   = document.getElementById('spiralAddon')?.checked ? "Yes" : "No";
+    const folder   = document.getElementById('folderAddon')?.checked ? "Yes" : "No";
+
+    // Show loading state on button
+    const btn = document.getElementById('whatsappBtn');
+    btn.classList.add('loading');
+
+   const message = `
+Order ID: ${currentOrderId}
+
+Hello Essentials Hub,
+I want to place an order:
+
+• Service: ${service}
+• Quantity/Pages/Hours: ${qty}
+• Spiral Binding: ${spiral}
+• File / Folder: ${folder}
+• On-Campus Delivery: ${isDelivery ? "Yes (₹30)" : "No (₹0)"}
+• College: ${isDelivery ? delivery : "—"}
+• Same-Day Delivery: ${sameDay}
+
+Estimated Total: ${total}
+
+Please confirm next steps.
+`;
+
+    setTimeout(() => {
+      btn.classList.remove('loading');
+      window.open(`https://wa.me/919978651150?text=${encodeURIComponent(message)}`, '_blank');
+    }, 800);
+  }
+
+  /* ── generateInvoice ──
+     Populates the hidden #invoiceSheet with the current order's
+     line items, then triggers the browser print dialog. The print
+     stylesheet (@media print) hides every other element on the page,
+     so only the invoice sheet itself reaches paper/PDF — the button
+     previously called window.print() directly, which printed the
+     whole live page instead of a clean invoice. */
+  function generateInvoice() {
+    if (!validateDeliveryAddress()) return;
+
+    const serviceEl   = document.getElementById('serviceSelect');
+    const serviceName = serviceEl.options[serviceEl.selectedIndex].text.split('—')[0].trim();
+    const isPrinting   = serviceEl.value.includes('printing');
+    const qty          = isPrinting ? parseInt(document.getElementById('qtyInput').value) || 1 : 1;
+    const isDelivery   = document.getElementById('deliveryToggle').checked;
+    const sameDay      = document.getElementById('sameDayDelivery')?.checked;
+    const spiral       = document.getElementById('spiralAddon')?.checked;
+    const folder       = document.getElementById('folderAddon')?.checked;
+
+    const rows = [];
+    rows.push({ desc: serviceName, qty: qty, amount: document.getElementById('basePrice').textContent });
+    if (spiral)              rows.push({ desc: 'Spiral Binding',     qty: 1, amount: '₹20' });
+    if (folder)               rows.push({ desc: 'Folder',             qty: 1, amount: '₹30' });
+    if (isDelivery)           rows.push({ desc: 'Campus Delivery',    qty: 1, amount: '₹30' });
+    if (isDelivery && sameDay) rows.push({ desc: 'Same-Day Delivery', qty: 1, amount: '₹10' });
+
+    document.getElementById('invoiceItems').innerHTML = rows
+      .map(r => `<tr><td>${r.desc}</td><td>${r.qty}</td><td>${r.amount}</td></tr>`)
+      .join('');
+
+    document.getElementById('invTotal').textContent   = document.getElementById('totalPrice').textContent;
+    document.getElementById('invOrderId').textContent = '#' + currentOrderId;
+    document.getElementById('invCollege').textContent = isDelivery
+      ? document.getElementById('collegeName').value
+      : 'Self-Pickup / Counter';
+    document.getElementById('invDate').textContent = new Date().toLocaleDateString('en-IN', {
+      day: '2-digit', month: 'short', year: 'numeric'
+    });
+
+    window.print();
+  }
+
+  /* ── Init ── */
+  toggleInputs();
+  updatePrice();
+</script>
+</body>
+</html>
